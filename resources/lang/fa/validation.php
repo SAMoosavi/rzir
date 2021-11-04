@@ -31,6 +31,7 @@ return [
     ],
     "boolean"          => "فیلد :attribute فقط میتواند صحیح و یا غلط باشد",
     "confirmed"        => ":attribute با تاییدیه مطابقت ندارد.",
+    "current_password" => " رمز وارد شده اشتباه است",
     "date"             => ":attribute یک تاریخ معتبر نیست.",
     'date_equals'      => ':attribute باید برابر تاریخ :date باشد.',
     "date_format"      => ":attribute با الگوی :format مطاقبت ندارد.",
@@ -42,7 +43,7 @@ return [
     "email"            => "فرمت :attribute معتبر نیست.",
     'ends_with'        => ':attribute باید با این مقدار تمام شود: :values.',
     "exists"           => ":attribute انتخاب شده، معتبر نیست.",
-    'file' 	       => 'فیلد :attribute باید فایل باشد.',
+    'file'             => 'فیلد :attribute باید فایل باشد.',
     "filled"           => "فیلد :attribute الزامی است",
     'gt' => [
         'numeric' => ':attribute باید بیشتر از :value باشد.',
@@ -172,7 +173,8 @@ return [
         "time" => "زمان",
         "available" => "موجود",
         "size" => "اندازه",
-		"file" => "فایل",
-		"fullname" => "نام کامل"
+        "file" => "فایل",
+        "fullname" => "نام کامل",
+        "current_password"=>"رمز عبور فعلی",
     ],
 ];

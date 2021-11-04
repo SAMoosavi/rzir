@@ -20,7 +20,7 @@
           @change="updatePhotoPreview"
         />
 
-        <jet-label for="photo" value="Photo" />
+        <jet-label for="photo" value="تصویر" />
 
         <!-- Current Profile Photo -->
         <div class="mt-2" v-show="!photoPreview">
@@ -62,7 +62,7 @@
 
       <!-- Name -->
       <div class="col-span-6 sm:col-span-4">
-        <jet-label for="name" value="Name" />
+        <jet-label for="name" value="نام" />
         <jet-input
           id="name"
           type="text"
@@ -75,7 +75,7 @@
 
       <!-- Email -->
       <div class="col-span-6 sm:col-span-4">
-        <jet-label for="email" value="Email" />
+        <jet-label for="email" value="ایمیل" />
         <jet-input
           id="email"
           type="email"

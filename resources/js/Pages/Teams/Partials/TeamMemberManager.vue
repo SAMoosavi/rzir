@@ -22,7 +22,7 @@
 
           <!-- Member Email -->
           <div class="col-span-6 sm:col-span-4">
-            <jet-label for="email" value="Email" />
+            <jet-label for="email" value="ایمیل" />
             <jet-input
               id="email"
               type="email"
@@ -40,7 +40,7 @@
             class="col-span-6 lg:col-span-4"
             v-if="availableRoles.length > 0"
           >
-            <jet-label for="roles" value="Role" />
+            <jet-label for="roles" value="نقش" />
             <jet-input-error
               :message="addTeamMemberForm.errors.role"
               class="mt-2"

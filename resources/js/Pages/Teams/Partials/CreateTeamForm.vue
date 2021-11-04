@@ -1,11 +1,11 @@
 <template>
     <jet-form-section @submitted="createTeam">
         <template #title>
-            Team Details
+            جزئیات تیم
         </template>
 
         <template #description>
-            Create a new team to collaborate with others on projects.
+            یک گروه جدید برای مکان های خود ایجاد کنید.
         </template>
 
         <template #form>
@@ -31,7 +31,7 @@
 
         <template #actions>
             <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Create
+                ساخت
             </jet-button>
         </template>
     </jet-form-section>

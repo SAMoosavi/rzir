@@ -3,11 +3,11 @@
         <!-- Generate API Token -->
         <jet-form-section @submitted="createApiToken">
             <template #title>
-                Create API Token
+                ساخت API Token
             </template>
 
             <template #description>
-                API tokens allow third-party services to authenticate with our application on your behalf.
+                Token API به سرویس‌های شخص ثالث اجازه می‌دهند تا با برنامه ما از طرف شما احراز هویت شوند.
             </template>
 
             <template #form>
@@ -35,11 +35,11 @@
 
             <template #actions>
                 <jet-action-message :on="createApiTokenForm.recentlySuccessful" class="mr-3">
-                    Created.
+                    ساخته شد
                 </jet-action-message>
 
                 <jet-button :class="{ 'opacity-25': createApiTokenForm.processing }" :disabled="createApiTokenForm.processing">
-                    Create
+                    ساخت
                 </jet-button>
             </template>
         </jet-form-section>
@@ -51,11 +51,11 @@
             <div class="mt-10 sm:mt-0">
                 <jet-action-section>
                     <template #title>
-                        Manage API Tokens
+                        مدیریت API Tokens
                     </template>
 
                     <template #description>
-                        You may delete any of your existing tokens if they are no longer needed.
+                        شما می توانید هر یک از نشانه های موجود خود را در صورتی که دیگر مورد نیاز نیستند حذف کنید.
                     </template>
 
                     <!-- API Token List -->
@@ -68,18 +68,18 @@
 
                                 <div class="flex items-center">
                                     <div class="text-sm text-gray-400" v-if="token.last_used_ago">
-                                        Last used {{ token.last_used_ago }}
+                                        آخرین استفاده {{ token.last_used_ago }}
                                     </div>
 
                                     <button class="cursor-pointer ml-6 text-sm text-gray-400 underline"
                                         @click="manageApiTokenPermissions(token)"
                                         v-if="availablePermissions.length > 0"
                                     >
-                                        Permissions
+                                        مجوزها
                                     </button>
 
                                     <button class="cursor-pointer ml-6 text-sm text-red-500" @click="confirmApiTokenDeletion(token)">
-                                        Delete
+                                        حذف
                                     </button>
                                 </div>
                             </div>
@@ -97,7 +97,7 @@
 
             <template #content>
                 <div>
-                    Please copy your new API token. For your security, it won't be shown again.
+                    لطفاً token API جدید خود را کپی کنید. برای امنیت شما، دیگر نشان داده نخواهد شد.
                 </div>
 
                 <div class="mt-4 bg-gray-100 px-4 py-2 rounded font-mono text-sm text-gray-500" v-if="$page.props.jetstream.flash.token">
@@ -107,7 +107,7 @@
 
             <template #footer>
                 <jet-secondary-button @click="displayingToken = false">
-                    Close
+                    بستن
                 </jet-secondary-button>
             </template>
         </jet-dialog-modal>
@@ -115,7 +115,7 @@
         <!-- API Token Permissions Modal -->
         <jet-dialog-modal :show="managingPermissionsFor" @close="managingPermissionsFor = null">
             <template #title>
-                API Token Permissions
+                API Token مجوز ها
             </template>
 
             <template #content>
@@ -131,11 +131,11 @@
 
             <template #footer>
                 <jet-secondary-button @click="managingPermissionsFor = null">
-                    Cancel
+                    لغو
                 </jet-secondary-button>
 
                 <jet-button class="ml-2" @click="updateApiToken" :class="{ 'opacity-25': updateApiTokenForm.processing }" :disabled="updateApiTokenForm.processing">
-                    Save
+                    دخیره
                 </jet-button>
             </template>
         </jet-dialog-modal>
@@ -143,20 +143,20 @@
         <!-- Delete Token Confirmation Modal -->
         <jet-confirmation-modal :show="apiTokenBeingDeleted" @close="apiTokenBeingDeleted = null">
             <template #title>
-                Delete API Token
+                جذف API Token
             </template>
 
             <template #content>
-                Are you sure you would like to delete this API token?
+                آیا مطمئن هستید که می خواهید این Token API را حذف کنید؟
             </template>
 
             <template #footer>
                 <jet-secondary-button @click="apiTokenBeingDeleted = null">
-                    Cancel
+                    لغو
                 </jet-secondary-button>
 
                 <jet-danger-button class="ml-2" @click="deleteApiToken" :class="{ 'opacity-25': deleteApiTokenForm.processing }" :disabled="deleteApiTokenForm.processing">
-                    Delete
+                    حذف
                 </jet-danger-button>
             </template>
         </jet-confirmation-modal>

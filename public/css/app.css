@@ -1668,6 +1668,10 @@ select {
 	font-size: 1.25rem;
 	line-height: 1.75rem;
 }
+ .text-4xl {
+	font-size: 2.25rem;
+	line-height: 2.5rem;
+}
  .font-medium {
 	font-weight: 500;
 }
@@ -1751,6 +1755,10 @@ select {
  .text-green-500 {
 	--tw-text-opacity: 1;
 	color: rgba(16, 185, 129, var(--tw-text-opacity));
+}
+ .text-blue-100 {
+	--tw-text-opacity: 1;
+	color: rgba(219, 234, 254, var(--tw-text-opacity));
 }
  .underline {
 	text-decoration: underline;

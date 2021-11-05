@@ -7,6 +7,7 @@ use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\Team as JetstreamTeam;
+use phpDocumentor\Reflection\Location;
 
 class Team extends JetstreamTeam
 {
@@ -41,4 +42,13 @@ class Team extends JetstreamTeam
         'updated' => TeamUpdated::class,
         'deleted' => TeamDeleted::class,
     ];
+
+    public function locations()
+    {
+        return $this->hasMany(Location::class);
+    }
+
+    public function devices(){
+        return $this->hasManyThrough(Device::class,Location::class);
+    }
 }

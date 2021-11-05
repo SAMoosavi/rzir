@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Location;
 use Illuminate\Database\Eloquent\Model;
-use phpDocumentor\Reflection\Location;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class Device extends Model
 {

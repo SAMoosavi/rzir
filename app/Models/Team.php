@@ -48,7 +48,8 @@ class Team extends JetstreamTeam
         return $this->hasMany(Location::class);
     }
 
-    public function devices(){
-        return $this->hasManyThrough(Device::class,Location::class);
+    public function devices()
+    {
+        return $this->hasManyThrough(Device::class, Location::class);
     }
 }

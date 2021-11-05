@@ -20,15 +20,19 @@ class Loction extends Model
         'id',
         'hidden',
     ];
-    public function user(){
+    
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function team(){
+    public function team()
+    {
         return $this->belongsTo(Team::class);
     }
 
-    public function devices(){
+    public function devices()
+    {
         return $this->hasMany(Device::class);
     }
 }

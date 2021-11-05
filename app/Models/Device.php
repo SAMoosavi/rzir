@@ -30,6 +30,6 @@ class Device extends Model
 
     public function team()
     {
-        return $this->hasManyThrough(Team::class,Location::class);
+        return $this->hasManyThrough(Team::class, Location::class);
     }
 }

@@ -29,5 +29,5 @@ Route::get('/dashboard', function () {
 // });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
-    return Inertia::render('Dashboard');
+    return view('Layouts.master');
 })->name('dashboard');

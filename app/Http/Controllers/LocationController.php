@@ -10,11 +10,9 @@ use Illuminate\Support\Facades\Auth;
 
 class LocationController extends Controller
 {
-    public function show(Request $request)
+    public function show(Location $id)
     {
-        $request = json_decode($request->getContent());
-
-        return response()->json(['itemDescendant' => Location::whereDescendantOf($request->id)->get(), 200]);
+        return response()->json(['itemDescendant' => Location::whereDescendantOf($id->id)->get(), 200]);
     }
 
     public function create(Request $request)
@@ -42,16 +40,16 @@ class LocationController extends Controller
         return response()->json([200]);
     }
 
-    public function delete(Request $request)
+    public function delete(Location $id)
     {
-        $request = json_decode($request->getContent());
+        $Location = $id;
 
-        Location::find($request->id)->delete();
+        $Location->delete();
 
         return response()->json([200]);
     }
 
-    public function edit(Request $request)
+    public function edit(Request $request, Location $id)
     {
         $request = json_decode($request->getContent());
 
@@ -61,7 +59,9 @@ class LocationController extends Controller
             'name' => "required|string|unique:locations,name,$request->id,id,team_id,$user->current_team_id,parent_id,$request->parent_id",
         ]);
 
-        Location::find($request->id)->update([
+        $Location = $id;
+
+        $Location->update([
             'name' => $request->name,
             'hidden' => $request->hidden,
         ]);

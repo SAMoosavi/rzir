@@ -16,11 +16,10 @@ class DeviceController extends Controller
         return Inertia::render('Dashboard');
     }
 
-    public function show(Request $request)
+    public function show(Location $id)
     {
-        $request = json_decode($request->getContent());
 
-        $locations = Location::whereDescendantAndSelf($request->id);
+        $locations = Location::whereDescendantAndSelf($id->id);
         $Devices = collect([]);
         foreach ($locations as $location) {
             $d = Device::where('location_id', '=', $location->id);
@@ -53,16 +52,16 @@ class DeviceController extends Controller
         return response()->json([200]);
     }
 
-    public function delete(Request $request)
+    public function delete($id)
     {
-        $request = json_decode($request->getContent());
+        $device = $id;
 
-        Device::find($request->id)->delete();
+        $device->delete();
 
         return response()->json([200]);
     }
 
-    public function edit(Request $request)
+    public function edit(Request $request,Device $id)
     {
         $request = json_decode($request->getContent());
 
@@ -71,7 +70,9 @@ class DeviceController extends Controller
             'body' => "nullable|string",
         ]);
 
-        Device::find($request->id)->update([
+        $device = $id;
+
+        $device->update([
             'name' => $request->name,
             'body' => $request->body,
             'hidden' => $request->hidden,

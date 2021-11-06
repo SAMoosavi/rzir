@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DeviceController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -28,6 +29,4 @@ Route::get('/dashboard', function () {
 //     ]);
 // });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
-    return view('Layouts.master');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/', [DeviceController::class,'index'])->name('dashboard');

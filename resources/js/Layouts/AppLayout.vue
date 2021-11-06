@@ -7,13 +7,13 @@
     <div class="min-h-screen bg-gray-100">
       <nav class="bg-white border-b border-gray-100">
         <!-- Primary Navigation Menu -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div class="flex justify-between h-16">
             <div class="flex">
               <!-- Logo -->
-              <div class="flex-shrink-0 flex items-center">
+              <div class="flex items-center flex-shrink-0">
                 <Link :href="route('dashboard')">
-                  <jet-application-mark class="block h-9 w-auto" />
+                  <jet-application-mark class="block w-auto h-9" />
                 </Link>
               </div>
 
@@ -29,7 +29,7 @@
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-              <div class="ml-3 relative">
+              <div class="relative ml-3">
                 <!-- Teams Dropdown -->
                 <jet-dropdown
                   align="right"
@@ -40,23 +40,7 @@
                     <span class="inline-flex rounded-md">
                       <button
                         type="button"
-                        class="
-                          inline-flex
-                          items-center
-                          px-3
-                          py-2
-                          border border-transparent
-                          text-sm
-                          leading-4
-                          font-medium
-                          rounded-md
-                          text-gray-500
-                          bg-white
-                          hover:bg-gray-50 hover:text-gray-700
-                          focus:outline-none focus:bg-gray-50
-                          active:bg-gray-50
-                          transition
-                        "
+                        class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition bg-white border border-transparent rounded-md hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50"
                       >
                         {{ $page.props.user.current_team.name }}
 
@@ -118,7 +102,7 @@
                                   v-if="
                                     team.id == $page.props.user.current_team_id
                                   "
-                                  class="mr-2 h-5 w-5 text-green-400"
+                                  class="w-5 h-5 mr-2 text-green-400"
                                   fill="none"
                                   stroke-linecap="round"
                                   stroke-linejoin="round"
@@ -142,22 +126,15 @@
               </div>
 
               <!-- Settings Dropdown -->
-              <div class="ml-3 relative">
+              <div class="relative ml-3">
                 <jet-dropdown align="right" width="48">
                   <template #trigger>
                     <button
                       v-if="$page.props.jetstream.managesProfilePhotos"
-                      class="
-                        flex
-                        text-sm
-                        border-2 border-transparent
-                        rounded-full
-                        focus:outline-none focus:border-gray-300
-                        transition
-                      "
+                      class="flex text-sm transition border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300"
                     >
                       <img
-                        class="h-8 w-8 rounded-full object-cover"
+                        class="object-cover w-8 h-8 rounded-full"
                         :src="$page.props.user.profile_photo_url"
                         :alt="$page.props.user.name"
                       />
@@ -166,22 +143,7 @@
                     <span v-else class="inline-flex rounded-md">
                       <button
                         type="button"
-                        class="
-                          inline-flex
-                          items-center
-                          px-3
-                          py-2
-                          border border-transparent
-                          text-sm
-                          leading-4
-                          font-medium
-                          rounded-md
-                          text-gray-500
-                          bg-white
-                          hover:text-gray-700
-                          focus:outline-none
-                          transition
-                        "
+                        class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none"
                       >
                         {{ $page.props.user.name }}
 
@@ -230,23 +192,13 @@
             </div>
 
             <!-- Hamburger -->
-            <div class="-mr-2 flex items-center sm:hidden">
+            <div class="flex items-center -mr-2 sm:hidden">
               <button
                 @click="showingNavigationDropdown = !showingNavigationDropdown"
-                class="
-                  inline-flex
-                  items-center
-                  justify-center
-                  p-2
-                  rounded-md
-                  text-gray-400
-                  hover:text-gray-500 hover:bg-gray-100
-                  focus:outline-none focus:bg-gray-100 focus:text-gray-500
-                  transition
-                "
+                class="inline-flex items-center justify-center p-2 text-gray-400 transition rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500"
               >
                 <svg
-                  class="h-6 w-6"
+                  class="w-6 h-6"
                   stroke="currentColor"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -302,17 +254,17 @@
                 class="flex-shrink-0 mr-3"
               >
                 <img
-                  class="h-10 w-10 rounded-full object-cover"
+                  class="object-cover w-10 h-10 rounded-full"
                   :src="$page.props.user.profile_photo_url"
                   :alt="$page.props.user.name"
                 />
               </div>
 
               <div>
-                <div class="font-medium text-base text-gray-800">
+                <div class="text-base font-medium text-gray-800">
                   {{ $page.props.user.name }}
                 </div>
-                <div class="font-medium text-sm text-gray-500">
+                <div class="text-sm font-medium text-gray-500">
                   {{ $page.props.user.email }}
                 </div>
               </div>
@@ -381,7 +333,7 @@
                       <div class="flex items-center">
                         <svg
                           v-if="team.id == $page.props.user.current_team_id"
-                          class="mr-2 h-5 w-5 text-green-400"
+                          class="w-5 h-5 mr-2 text-green-400"
                           fill="none"
                           stroke-linecap="round"
                           stroke-linejoin="round"
@@ -406,7 +358,7 @@
 
       <!-- Page Heading -->
       <header class="bg-white shadow" v-if="$slots.header">
-        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <slot name="header"></slot>
         </div>
       </header>

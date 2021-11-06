@@ -23,7 +23,7 @@
                   :href="route('dashboard')"
                   :active="route().current('dashboard')"
                 >
-                  داشبورد
+                  وسایل
                 </jet-nav-link>
               </div>
             </div>
@@ -88,7 +88,7 @@
 
                         <!-- Team Switcher -->
                         <div class="block px-4 py-2 text-xs text-gray-400">
-                          تعویض تیم
+                          تعویض گروه
                         </div>
 
                         <template
@@ -242,7 +242,7 @@
               :href="route('dashboard')"
               :active="route().current('dashboard')"
             >
-              داشبورد
+              وسایل
             </jet-responsive-nav-link>
           </div>
 

@@ -1,15 +1,19 @@
 <template>
-    <app-layout title="داشبورد">
+    <app-layout title="وسایل">
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                داشبورد
+                وسایل
             </h2>
         </template>
 
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
-                    <welcome />
+                    <ul>
+                        <li v-for="device in devices" :key="device.id">
+                            {{device.name}}
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -17,15 +21,22 @@
 </template>
 
 <script>
-    import { defineComponent } from 'vue'
+    import { defineComponent, reactive } from 'vue'
     import AppLayout from '@/Layouts/AppLayout.vue'
-    import Welcome from '@/Jetstream/Welcome.vue'
 
     export default defineComponent({
-        name:'Dashboard',
         components: {
             AppLayout,
-            Welcome,
         },
+        props:{
+            devices:Object,
+        },
+        setup(props){
+            const devices = reactive(props.devices);
+
+            return {
+                devices
+            }
+        }
     })
 </script>

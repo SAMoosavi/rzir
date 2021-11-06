@@ -13,7 +13,11 @@ class DeviceController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Dashboard');
+        $devices = Device::paginate(20);
+        
+        return Inertia::render('Dashboard', [
+            'devices' => $devices,
+        ]);
     }
 
     public function show(Location $id)
@@ -61,7 +65,7 @@ class DeviceController extends Controller
         return response()->json([200]);
     }
 
-    public function edit(Request $request,Device $id)
+    public function edit(Request $request, Device $id)
     {
         $request = json_decode($request->getContent());
 

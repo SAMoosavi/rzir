@@ -1,3 +1,10 @@
- @import 'tailwindcss/base';
- @import 'tailwindcss/components';
- @import 'tailwindcss/utilities';
+@import "./bootstrap-grid.rtl.css";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+
+
+.max-w-s {
+    max-width: 15rem;
+}

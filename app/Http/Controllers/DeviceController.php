@@ -13,10 +13,12 @@ class DeviceController extends Controller
 {
     public function index()
     {
-        $devices = Device::paginate(20);
-        
+        $devices = Device::paginate(10)->toArray();
+        $locations = Location::where('parent_id', '=', NULL)->get();
+
         return Inertia::render('Dashboard', [
             'devices' => $devices,
+            'locations' => $locations,
         ]);
     }
 

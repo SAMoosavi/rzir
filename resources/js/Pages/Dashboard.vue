@@ -6,11 +6,16 @@
 
     <div class="py-12 row g-2">
       <div class="p-4 mr-4 bg-white shadow-xl col-2 sm:rounded-lg">
-        <div v-for="location in locations" :key="location.id"  class="flex border-b-2 border-gray-200" @click="showDescendantof(location.id)">
-          <div  class="me-auto" style="cursor: Pointer">
+        <div
+          v-for="location in locations"
+          :key="location.id"
+          class="flex border-b-2 border-gray-200"
+          @click="showDescendantof(location.id)"
+        >
+          <div class="me-auto" style="cursor: Pointer">
             <p style="cursor: Pointer">{{ location.name }}</p>
           </div>
-          <div @click="oppenCreateLocation(location.id)" >
+          <div @click="oppenCreateLocation(location.id)">
             <i
               class="text-gray-300 fas fa-plus-circle"
               style="cursor: Pointer"
@@ -77,15 +82,55 @@
 import { defineComponent, reactive, ref } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { Link } from "@inertiajs/inertia-vue3";
+import Swal from "sweetalert2";
 
 export default defineComponent({
   components: {
     AppLayout,
     Link,
+    Swal,
   },
   props: {
     devices: Object,
     locations: Object,
+  },
+  methods: {
+    showAlert() {
+      Swal.fire({
+        title: "نام مکان را وارد کنید",
+        input: "text",
+        inputAttributes: {
+          autocapitalize: "off",
+        },
+        showCancelButton: true,
+        confirmButtonText: "افزودن",
+        cancelButtonText: "لغو",
+        showLoaderOnConfirm: true,
+        preConfirm: (name) => {
+          return axios
+            .post("/location/create", {
+              name:name,
+              parent_id: this.showId,
+            })
+            .then((response) => {
+              console.log(response);
+
+            //   return response.json();
+            })
+            .catch((error) => {
+              Swal.showValidationMessage(`Request failed: ${error}`);
+            });
+        },
+        allowOutsideClick: () => !Swal.isLoading(),
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: `${result.value.login}'s avatar`,
+            imageUrl: result.value.avatar_url,
+          });
+        }
+      });
+    },
   },
   setup(props) {
     const devices = reactive(props.devices);
@@ -97,6 +142,7 @@ export default defineComponent({
     });
 
     let createLocation = ref(false);
+    let showId = ref(null);
 
     function oppenCreateLocation(id) {
       createLocation.value = true;
@@ -110,7 +156,21 @@ export default defineComponent({
     }
 
     function showDescendantof(id) {
-      console.log(2);
+      showId.value = id;
+      axios
+        .get(`/location/show/${id}`)
+        .then(function (response) {
+          // handle success
+          console.log(response);
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+        .then(function () {
+          // always executed
+        });
+      this.showAlert();
     }
 
     return {
@@ -119,7 +179,8 @@ export default defineComponent({
       oppenCreateLocation,
       clossCreateLocation,
       showDescendantof,
-      createLocation
+      createLocation,
+      showId,
     };
   },
 });

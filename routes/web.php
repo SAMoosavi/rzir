@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\DeviceController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\LocationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +41,7 @@ Route::get('/location/show/{id}',[LocationController::class,'show'])->name('Loca
 Route::post('/location/create',[LocationController::class,'create'])->name('Location.creat');
 Route::delete('/location/delete/{id}',[LocationController::class,'delete'])->name('Location.delete');
 Route::put('/location/update/{id}',[LocationController::class,'update'])->name('Location.update');
+
+Route::get('/test',function(){
+    return view('test');
+});

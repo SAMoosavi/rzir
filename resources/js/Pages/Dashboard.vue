@@ -6,8 +6,8 @@
 
     <div class="py-12 row g-2">
       <div class="p-4 mr-4 bg-white shadow-xl col-2 sm:rounded-lg">
-        <div v-for="location in locations" :key="location.id" class="flex border-b-2 border-gray-200">
-          <div @click="showDescendantof(location.id)" class="me-auto" style="cursor: Pointer">
+        <div v-for="location in locations" :key="location.id"  class="flex border-b-2 border-gray-200" @click="showDescendantof(location.id)">
+          <div  class="me-auto" style="cursor: Pointer">
             <p style="cursor: Pointer">{{ location.name }}</p>
           </div>
           <div @click="oppenCreateLocation(location.id)" >
@@ -99,17 +99,18 @@ export default defineComponent({
     let createLocation = ref(false);
 
     function oppenCreateLocation(id) {
-      createLocation.ref = true;
+      createLocation.value = true;
       formLocation.parent_id = id;
+      console.log(createLocation.value);
     }
 
     function clossCreateLocation() {
-      createLocation.ref = false;
+      createLocation.value = false;
       formLocation.parent_id = null;
     }
 
     function showDescendantof(id) {
-      console.log(id);
+      console.log(2);
     }
 
     return {
@@ -118,6 +119,7 @@ export default defineComponent({
       oppenCreateLocation,
       clossCreateLocation,
       showDescendantof,
+      createLocation
     };
   },
 });

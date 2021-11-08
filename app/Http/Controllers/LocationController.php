@@ -18,7 +18,6 @@ class LocationController extends Controller
     public function create(Request $request)
     {
 
-        $request = json_decode($request->getContent());
         $user = Auth::user();
         $request->validate([
             'name' => "required|string|unique:locations,name,NULL,id,team_id,$user->current_team_id,parent_id,$request->parent_id",
@@ -35,7 +34,8 @@ class LocationController extends Controller
             ],
             $parent
         );
-        return response()->json(['request' => $request,'parent'=>$parent],200);
+
+        return redirect()->route('dashboard');
     }
 
 

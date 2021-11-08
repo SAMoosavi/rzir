@@ -9,9 +9,10 @@
 <body>
 <form action="{{ route('Location.creat') }}" method="post">
     @csrf
-<input type="text" name="name">name<br>
-<input type="text" name="parent_id">parent_id<br>
-<button type="submit">send</button>
+    <label for="name">نام مکان</label>
+<input type="text" id="name" name="name"><br>
+
+<button type="submit">ارسال</button>
 </form>
 </body>
 </html>

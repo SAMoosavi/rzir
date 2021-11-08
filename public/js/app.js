@@ -20607,6 +20607,15 @@ __webpack_require__.r(__webpack_exports__);
     devices: Object,
     locations: Object
   },
+  data: function data() {
+    return {
+      formLocation: this.$inertia.form({
+        name: "",
+        parent_id: ""
+      }),
+      result: true
+    };
+  },
   methods: {
     showAlert: function showAlert() {
       var _this = this;
@@ -20622,24 +20631,32 @@ __webpack_require__.r(__webpack_exports__);
         cancelButtonText: "لغو",
         showLoaderOnConfirm: true,
         preConfirm: function preConfirm(name) {
-          return axios.post("/location/create", {
-            name: name,
-            parent_id: _this.showId
-          }).then(function (response) {
-            console.log(response); //   return response.json();
-          })["catch"](function (error) {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().showValidationMessage("Request failed: ".concat(error));
-          });
+          return _this.sendCreatLoction(name);
         },
         allowOutsideClick: function allowOutsideClick() {
           return !sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().isLoading();
         }
-      }).then(function (result) {
-        if (result.isConfirmed) {
+      });
+    },
+    sendCreatLoction: function sendCreatLoction(name) {
+      var _this2 = this;
+
+      this.formLocation.name = name;
+      this.formLocation.post(this.route("Location.create"), {
+        onError: function onError(errors) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
-            title: "".concat(result.value.login, "'s avatar"),
-            imageUrl: result.value.avatar_url
+            icon: "error",
+            title: "خطاا!!!",
+            text: "نام انتخاب شده برای این شاخه موجود است نام دیگری انتخاب کنید!"
           });
+        },
+        onSuccess: function onSuccess() {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+            icon: "success",
+            title: "با موفقیت افزوده شد."
+          });
+
+          _this2.showDescendantof(_this2.formLocation.parent_id);
         }
       });
     }
@@ -20647,17 +20664,13 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup(props) {
     var devices = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)(props.devices);
     var locations = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)(props.locations);
-    var formLocation = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
-      name: null,
-      parent_id: null
-    });
     var createLocation = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     var showId = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
 
     function oppenCreateLocation(id) {
       createLocation.value = true;
-      formLocation.parent_id = id;
-      console.log(createLocation.value);
+      this.formLocation.parent_id = id;
+      this.showAlert();
     }
 
     function clossCreateLocation() {
@@ -20675,7 +20688,6 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       }).then(function () {// always executed
       });
-      this.showAlert();
     }
 
     return {

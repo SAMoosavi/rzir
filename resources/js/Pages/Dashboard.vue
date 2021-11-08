@@ -94,6 +94,15 @@ export default defineComponent({
     devices: Object,
     locations: Object,
   },
+  data() {
+    return {
+      formLocation: this.$inertia.form({
+        name: "",
+        parent_id: "",
+      }),
+      result: true,
+    };
+  },
   methods: {
     showAlert() {
       Swal.fire({
@@ -107,28 +116,28 @@ export default defineComponent({
         cancelButtonText: "لغو",
         showLoaderOnConfirm: true,
         preConfirm: (name) => {
-          return axios
-            .post("/location/create", {
-              name:name,
-              parent_id: this.showId,
-            })
-            .then((response) => {
-              console.log(response);
-
-            //   return response.json();
-            })
-            .catch((error) => {
-              Swal.showValidationMessage(`Request failed: ${error}`);
-            });
+          return this.sendCreatLoction(name);
         },
         allowOutsideClick: () => !Swal.isLoading(),
-      }).then((result) => {
-        if (result.isConfirmed) {
+      });
+    },
+    sendCreatLoction(name) {
+      this.formLocation.name = name;
+      this.formLocation.post(this.route("Location.create"), {
+        onError: (errors) => {
           Swal.fire({
-            title: `${result.value.login}'s avatar`,
-            imageUrl: result.value.avatar_url,
+            icon: "error",
+            title: "خطاا!!!",
+            text: "نام انتخاب شده برای این شاخه موجود است نام دیگری انتخاب کنید!",
           });
-        }
+        },
+        onSuccess: () => {
+          Swal.fire({
+            icon: "success",
+            title: "با موفقیت افزوده شد.",
+          });
+          this.showDescendantof(this.formLocation.parent_id);
+        },
       });
     },
   },
@@ -136,18 +145,13 @@ export default defineComponent({
     const devices = reactive(props.devices);
     const locations = reactive(props.locations);
 
-    const formLocation = reactive({
-      name: null,
-      parent_id: null,
-    });
-
     let createLocation = ref(false);
     let showId = ref(null);
 
     function oppenCreateLocation(id) {
       createLocation.value = true;
-      formLocation.parent_id = id;
-      console.log(createLocation.value);
+      this.formLocation.parent_id = id;
+      this.showAlert();
     }
 
     function clossCreateLocation() {
@@ -170,7 +174,6 @@ export default defineComponent({
         .then(function () {
           // always executed
         });
-      this.showAlert();
     }
 
     return {

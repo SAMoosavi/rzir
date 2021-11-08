@@ -10,14 +10,22 @@
           v-for="location in locations"
           :key="location.id"
           class="flex border-b-2 border-gray-200"
-          @click="showDescendantof(location.id)"
         >
-          <div class="me-auto" style="cursor: Pointer">
+          <div
+            @click="showDescendantof(location.id)"
+            class="me-auto"
+            style="cursor: Pointer"
+          >
             <p style="cursor: Pointer">{{ location.name }}</p>
+          </div>
+          <div class="mx-2">
+            <i class="text-gray-300 fas fa-shopping-basket"
+            style="cursor: Pointer"
+            ></i>
           </div>
           <div @click="oppenCreateLocation(location.id)">
             <i
-              class="text-gray-300 fas fa-plus-circle"
+              class="text-gray-300 fas fa-map-marker-alt"
               style="cursor: Pointer"
             ></i>
           </div>
@@ -104,7 +112,7 @@ export default defineComponent({
     };
   },
   methods: {
-    showAlert() {
+    alertCreateLocation() {
       Swal.fire({
         title: "نام مکان را وارد کنید",
         input: "text",
@@ -128,13 +136,22 @@ export default defineComponent({
           Swal.fire({
             icon: "error",
             title: "خطاا!!!",
-            text: "نام انتخاب شده برای این شاخه موجود است نام دیگری انتخاب کنید!",
+            text: errors.name,
+            showConfirmButton:true,
+            showCancelButton: true,
+            cancelButtonText: "باشد",
+            confirmButtonText: "برگشت",
+            preConfirm: () => {
+          return this.alertCreateLocation();
+        },
           });
         },
         onSuccess: () => {
           Swal.fire({
             icon: "success",
             title: "با موفقیت افزوده شد.",
+            showConfirmButton:true,
+            confirmButtonText: "باشد",
           });
           this.showDescendantof(this.formLocation.parent_id);
         },
@@ -151,7 +168,7 @@ export default defineComponent({
     function oppenCreateLocation(id) {
       createLocation.value = true;
       this.formLocation.parent_id = id;
-      this.showAlert();
+      this.alertCreateLocation();
     }
 
     function clossCreateLocation() {

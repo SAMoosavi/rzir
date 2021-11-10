@@ -43,13 +43,11 @@ class DeviceController extends Controller
 
         $request->validate([
             'name' => "required|string|unique:devices,name,NULL,id,location_id,$request->location_id",
-            'body' => "nullable|string",
             'location_id' => 'required,numeric',
         ]);
 
         Device::create([
             'name' => $request->name,
-            'body' => $request->body,
             'user' => $user->id,
             'location_id' => $request->location_id,
             'hidden' => $request->hidden,

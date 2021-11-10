@@ -30,7 +30,7 @@ class LocationController extends Controller
                 'name' => $request->name,
                 'team_id' => $user->current_team_id,
                 'user_id' => $user->id,
-                'hidden' => 1,
+                'hidden' => 0,
             ],
             $parent
         );

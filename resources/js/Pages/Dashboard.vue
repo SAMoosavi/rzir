@@ -6,21 +6,30 @@
 
     <div class="py-12 row g-2">
       <div class="p-4 mr-4 bg-white shadow-xl col-2 sm:rounded-lg">
+        <div>
+          <div @click="oppenCreateLocation(null)">
+            <i
+              class="text-gray-300 fas fa-map-marker-alt"
+              style="cursor: Pointer"
+            ></i>
+          </div>
+        </div>
         <div
           v-for="location in locations"
           :key="location.id"
           class="flex border-b-2 border-gray-200"
         >
           <div
-            @click="showDescendantof(location.id)"
+            @click="getOfThis(location.id)"
             class="me-auto"
             style="cursor: Pointer"
           >
             <p style="cursor: Pointer">{{ location.name }}</p>
           </div>
-          <div class="mx-2">
-            <i class="text-gray-300 fas fa-shopping-basket"
-            style="cursor: Pointer"
+          <div class="mx-2" @click="oppenCreateDevice(location.id)">
+            <i
+              class="text-gray-300 fas fa-shopping-basket"
+              style="cursor: Pointer"
             ></i>
           </div>
           <div @click="oppenCreateLocation(location.id)">
@@ -104,14 +113,21 @@ export default defineComponent({
   },
   data() {
     return {
+      // ---------------Form Of Create Location---------------
       formLocation: this.$inertia.form({
         name: "",
         parent_id: "",
       }),
-      result: true,
+
+      // ----------------Form Of Create Device------------------
+      formDevice: this.$inertia.form({
+        name: "",
+        location_id: "",
+      }),
     };
   },
   methods: {
+    // -----------------Creat Loction-----------
     alertCreateLocation() {
       Swal.fire({
         title: "نام مکان را وارد کنید",
@@ -137,23 +153,70 @@ export default defineComponent({
             icon: "error",
             title: "خطاا!!!",
             text: errors.name,
-            showConfirmButton:true,
+            showConfirmButton: true,
             showCancelButton: true,
             cancelButtonText: "باشد",
             confirmButtonText: "برگشت",
             preConfirm: () => {
-          return this.alertCreateLocation();
-        },
+              return this.alertCreateLocation();
+            },
           });
         },
         onSuccess: () => {
           Swal.fire({
             icon: "success",
             title: "با موفقیت افزوده شد.",
-            showConfirmButton:true,
+            showConfirmButton: true,
             confirmButtonText: "باشد",
           });
-          this.showDescendantof(this.formLocation.parent_id);
+          this.getDescendantOf(this.formLocation.parent_id);
+        },
+      });
+    },
+
+    // -----------------Creat Device-----------
+    alertCreateDevice() {
+      Swal.fire({
+        title: "نام وسیله را وارد کنید",
+        input: "text",
+        inputAttributes: {
+          autocapitalize: "off",
+        },
+        showCancelButton: true,
+        confirmButtonText: "افزودن",
+        cancelButtonText: "لغو",
+        showLoaderOnConfirm: true,
+        preConfirm: (name) => {
+          return this.sendCreatDevice(name);
+        },
+        allowOutsideClick: () => !Swal.isLoading(),
+      });
+    },
+    sendCreatDevice(name) {
+      this.formDevice.name = name;
+      this.formDevice.post(this.route("Device.create"), {
+        onError: (errors) => {
+          Swal.fire({
+            icon: "error",
+            title: "خطاا!!!",
+            text: errors.name,
+            showConfirmButton: true,
+            showCancelButton: true,
+            cancelButtonText: "باشد",
+            confirmButtonText: "برگشت",
+            preConfirm: () => {
+              return this.alertCreateDevice();
+            },
+          });
+        },
+        onSuccess: () => {
+          Swal.fire({
+            icon: "success",
+            title: "با موفقیت افزوده شد.",
+            showConfirmButton: true,
+            confirmButtonText: "باشد",
+          });
+          this.getDeviceOf(this.formDevice.location_id);
         },
       });
     },
@@ -162,21 +225,20 @@ export default defineComponent({
     const devices = reactive(props.devices);
     const locations = reactive(props.locations);
 
+    // ------------------Location----------------------
+
     let createLocation = ref(false);
     let showId = ref(null);
 
+    // ------------------Creat Location---------------------
     function oppenCreateLocation(id) {
       createLocation.value = true;
       this.formLocation.parent_id = id;
       this.alertCreateLocation();
     }
 
-    function clossCreateLocation() {
-      createLocation.value = false;
-      formLocation.parent_id = null;
-    }
-
-    function showDescendantof(id) {
+    // ------------------Get Descenedantof---------------------
+    function getDescendantOf(id) {
       showId.value = id;
       axios
         .get(`/location/show/${id}`)
@@ -193,14 +255,45 @@ export default defineComponent({
         });
     }
 
+    // --------------------Device--------------------
+
+    // -------------------Create Device ---------------
+    function oppenCreateDevice(id) {
+      this.formDevice.location_id = id;
+      this.alertCreateDevice();
+    }
+    // -------------------Get Device ------------------
+    function getDeviceOf(id) {
+      axios
+        .get(`/device/show/${id}`)
+        .then(function (response) {
+          // handle success
+          console.log('device:',response);
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+        .then(function () {
+          // always executed
+        });
+    }
+
+    function getOfThis(id) {
+      getDescendantOf(id);
+      getDeviceOf(id);
+    }
+
     return {
       devices,
       locations,
       oppenCreateLocation,
-      clossCreateLocation,
-      showDescendantof,
+      oppenCreateDevice,
+      getDescendantOf,
+      getDeviceOf,
       createLocation,
       showId,
+      getOfThis,
     };
   },
 });

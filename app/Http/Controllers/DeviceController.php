@@ -24,16 +24,20 @@ class DeviceController extends Controller
 
     public function show(Location $id)
     {
-
-        $locations = Location::whereDescendantAndSelf($id->id);
+        $locations = Location::whereDescendantOrSelf($id)->get();
         $Devices = collect([]);
         foreach ($locations as $location) {
-            $d = Device::where('location_id', '=', $location->id);
-            $Devices->push($d);
+            $d = Device::where('location_id', '=', $location->id)->get();
+            if ($d->count() != 0) {
+                $Devices->push($d);
+            }
         }
         $devices = $Devices->toArray();
-
-        return response()->json(['devices' => $devices, 200]);
+        if ($Devices->count() != 0) {
+            $devices = $devices[0];
+        }
+        
+        return response()->json(['devices' => $devices], 200);
     }
 
     public function create(Request $request)
@@ -42,14 +46,14 @@ class DeviceController extends Controller
 
         $request->validate([
             'name' => "required|string|unique:devices,name,NULL,id,location_id,$request->location_id",
-            'location_id' => 'required,numeric',
+            'location_id' => 'required',
         ]);
 
         Device::create([
             'name' => $request->name,
-            'user' => $user->id,
+            'user_id' => $user->id,
             'location_id' => $request->location_id,
-            'hidden' => $request->hidden,
+            'hidden' => 0,
         ]);
 
 

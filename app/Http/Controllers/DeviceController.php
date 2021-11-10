@@ -38,7 +38,6 @@ class DeviceController extends Controller
 
     public function create(Request $request)
     {
-        $request = json_decode($request->getContent());
         $user = Auth::user();
 
         $request->validate([
@@ -53,7 +52,8 @@ class DeviceController extends Controller
             'hidden' => $request->hidden,
         ]);
 
-        return response()->json([200]);
+
+        return redirect()->route('dashboard');
     }
 
     public function delete($id)

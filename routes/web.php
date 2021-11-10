@@ -36,11 +36,13 @@ Route::get('/device/show/{id}',[DeviceController::class,'show'])->name('Device.s
 Route::post('/device/create',[DeviceController::class,'create'])->name('Device.create');
 Route::delete('/device/delete/{id}',[DeviceController::class,'delete'])->name('Device.delete');
 Route::put('/device/update/{id}',[DeviceController::class,'update'])->name('Device.update');
+Route::put('/device/hidden/{id}',[DeviceController::class,'hidden'])->name('Device.hidden');
 
 Route::get('/location/show/{id}',[LocationController::class,'show'])->name('Location.show');
 Route::post('/location/create',[LocationController::class,'create'])->name('Location.create');
 Route::delete('/location/delete/{id}',[LocationController::class,'delete'])->name('Location.delete');
 Route::put('/location/update/{id}',[LocationController::class,'update'])->name('Location.update');
+Route::put('/location/hidden/{id}',[LocationController::class,'hidden'])->name('Location.hidden');
 
 Route::get('/test',function(){
     return view('test');

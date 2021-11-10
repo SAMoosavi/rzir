@@ -13,12 +13,14 @@ class DeviceController extends Controller
 {
     public function index()
     {
-        $devices = Device::paginate(10)->toArray();
+        $devices = Device::all()->toArray();
         $locations = Location::where('parent_id', '=', NULL)->get();
+        $userId = Auth::user()->id;
 
         return Inertia::render('Dashboard', [
             'devices' => $devices,
             'locations' => $locations,
+            'userId' => $userId,
         ]);
     }
 
@@ -36,7 +38,7 @@ class DeviceController extends Controller
         if ($Devices->count() != 0) {
             $devices = $devices[0];
         }
-        
+
         return response()->json(['devices' => $devices], 200);
     }
 

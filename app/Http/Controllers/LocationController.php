@@ -62,9 +62,24 @@ class LocationController extends Controller
 
         $Location->update([
             'name' => $request->name,
-            'hidden' => $request->hidden,
         ]);
 
         return response()->json([200]);
+    }
+
+    public function hidden(Location $id)
+    {
+
+        if ($id->hidden == 0) {
+            $hidden = 1;
+        } else {
+            $hidden = 0;
+        }
+
+        $id->update([
+            'hidden' => $hidden
+        ]);
+
+        return redirect('/');
     }
 }

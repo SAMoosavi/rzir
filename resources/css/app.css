@@ -8,3 +8,7 @@
 .max-w-s {
     max-width: 15rem;
 }
+
+.Pointer{
+    cursor: Pointer;
+}

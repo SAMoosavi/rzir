@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Device;
 use App\Models\Location;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -13,8 +14,10 @@ class DeviceController extends Controller
 {
     public function index()
     {
-        $devices = Device::all()->toArray();
-        $locations = Location::where('parent_id', '=', NULL)->get();
+        $teamId = Auth::user()->current_team_id;
+        $devices = Team::find($teamId)->devices->toArray();
+        $locations = Team::find($teamId)->locations->where('parent_id', '=', NULL)->toArray();
+
         $userId = Auth::user()->id;
 
         return Inertia::render('Dashboard', [

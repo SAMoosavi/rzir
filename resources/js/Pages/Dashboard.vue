@@ -6,7 +6,7 @@
     </template>
 
     <!------------------------section---------------------->
-    <div class="py-12 row g-2">
+    <div class="py-12 ml-0 row g-2">
       <!---------------------Locations------------------->
       <div class="py-4 mr-2 bg-white shadow-xl col-2 sm:rounded-lg">
         <div class="flex bg-gray-100 border-b-2 border-gray-200" id="parent0">
@@ -14,7 +14,9 @@
             <p class="Pointer">کلیه ی مکان ها</p>
           </div>
           <div @click="oppenCreateLocation(null)">
-            <i class="mx-2 text-gray-300 fas fa-map-marker-alt Pointer"></i>
+            <i
+              class="mx-2 text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
+            ></i>
           </div>
         </div>
         <div
@@ -33,28 +35,34 @@
             >
               <div v-if="location.hidden == 0">
                 <i
-                  class="text-gray-300 fas fa-eye Pointer"
+                  class="text-gray-300 fas fa-eye Pointer hover:text-blue-500"
                   :id="`element${location.id}`"
                 ></i>
               </div>
               <div v-if="location.hidden == 1">
                 <i
                   :id="`element${location.id}`"
-                  class="text-gray-300 fas fa-eye-slash Pointer"
+                  class="text-gray-300 fas fa-eye-slash Pointer hover:text-blue-500"
                 ></i>
               </div>
             </div>
             <div class="mx-2" @click="oppenCreateDevice(location.id)">
-              <i class="text-gray-300 fas fa-shopping-basket Pointer"></i>
+              <i
+                class="text-gray-300 fas fa-tshirt Pointer hover:text-yellow-500"
+              ></i>
             </div>
             <div @click="oppenCreateLocation(location.id)">
-              <i class="text-gray-300 fas fa-map-marker-alt Pointer"></i>
+              <i
+                class="text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
+              ></i>
             </div>
             <div
               class="mx-2"
               @click="alertDeleteLocation(location.id, location.name)"
             >
-              <i class="text-gray-300 fas fa-trash-alt Pointer"></i>
+              <i
+                class="text-gray-300 fas fa-trash-alt Pointer hover:text-red-600"
+              ></i>
             </div>
           </div>
           <div class="pr-4" :id="`descendant${location.id}`"></div>
@@ -149,6 +157,8 @@ export default defineComponent({
         confirmButtonText: "افزودن",
         cancelButtonText: "لغو",
         showLoaderOnConfirm: true,
+        confirmButtonColor: "#28a745",
+        cancelButtonColor: "#6e7d88",
         preConfirm: (name) => {
           return this.sendCreatLoction(name);
         },
@@ -167,6 +177,8 @@ export default defineComponent({
             showCancelButton: true,
             cancelButtonText: "باشد",
             confirmButtonText: "برگشت",
+            confirmButtonColor: "#7367f0",
+            cancelButtonColor: "#6e7d88",
             preConfirm: () => {
               return this.alertCreateLocation();
             },
@@ -178,6 +190,7 @@ export default defineComponent({
             title: "با موفقیت افزوده شد.",
             showConfirmButton: true,
             confirmButtonText: "باشد",
+            confirmButtonColor: "#28a745",
           });
           this.getDescendantOf(this.formLocation.parent_id);
         },
@@ -194,6 +207,8 @@ export default defineComponent({
         confirmButtonText: "حذف",
         cancelButtonText: "لغو",
         showLoaderOnConfirm: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#6e7d88",
         preConfirm: () => {
           return this.sendDeleteLoction(id);
         },
@@ -261,6 +276,8 @@ export default defineComponent({
         confirmButtonText: "افزودن",
         cancelButtonText: "لغو",
         showLoaderOnConfirm: true,
+        confirmButtonColor: "#28a745",
+        cancelButtonColor: "#6e7d88",
         preConfirm: (name) => {
           return this.sendCreatDevice(name);
         },
@@ -279,6 +296,8 @@ export default defineComponent({
             showCancelButton: true,
             cancelButtonText: "باشد",
             confirmButtonText: "برگشت",
+            confirmButtonColor: "#7367f0",
+            cancelButtonColor: "#6e7d88",
             preConfirm: () => {
               return this.alertCreateDevice();
             },
@@ -290,6 +309,7 @@ export default defineComponent({
             title: "با موفقیت افزوده شد.",
             showConfirmButton: true,
             confirmButtonText: "باشد",
+            confirmButtonColor: "#28a745",
           });
           this.getDeviceOf(this.formDevice.location_id);
         },
@@ -347,7 +367,7 @@ export default defineComponent({
       //           `</div>` +
       //           show +
       //           `<div class="mx-2" v-on:click="oppenCreateDevice(${element.id})">` +
-      //           `<i class="text-gray-300 fas fa-shopping-basket Pointer"></i>` +
+      //           `<i class="text-gray-300 fas fa-tshirt Pointer"></i>` +
       //           `</div>` +
       //           `<div v-on:click="oppenCreateLocation(${element.id})">` +
       //           `<i class="text-gray-300 fas fa-map-marker-alt Pointer"></i>` +

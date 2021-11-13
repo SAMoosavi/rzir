@@ -20641,6 +20641,8 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: "افزودن",
         cancelButtonText: "لغو",
         showLoaderOnConfirm: true,
+        confirmButtonColor: "#28a745",
+        cancelButtonColor: "#6e7d88",
         preConfirm: function preConfirm(name) {
           return _this.sendCreatLoction(name);
         },
@@ -20663,6 +20665,8 @@ __webpack_require__.r(__webpack_exports__);
             showCancelButton: true,
             cancelButtonText: "باشد",
             confirmButtonText: "برگشت",
+            confirmButtonColor: "#7367f0",
+            cancelButtonColor: "#6e7d88",
             preConfirm: function preConfirm() {
               return _this2.alertCreateLocation();
             }
@@ -20673,7 +20677,8 @@ __webpack_require__.r(__webpack_exports__);
             icon: "success",
             title: "با موفقیت افزوده شد.",
             showConfirmButton: true,
-            confirmButtonText: "باشد"
+            confirmButtonText: "باشد",
+            confirmButtonColor: "#28a745"
           });
 
           _this2.getDescendantOf(_this2.formLocation.parent_id);
@@ -20692,6 +20697,8 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: "حذف",
         cancelButtonText: "لغو",
         showLoaderOnConfirm: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#6e7d88",
         preConfirm: function preConfirm() {
           return _this3.sendDeleteLoction(id);
         }
@@ -20767,6 +20774,8 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: "افزودن",
         cancelButtonText: "لغو",
         showLoaderOnConfirm: true,
+        confirmButtonColor: "#28a745",
+        cancelButtonColor: "#6e7d88",
         preConfirm: function preConfirm(name) {
           return _this5.sendCreatDevice(name);
         },
@@ -20789,6 +20798,8 @@ __webpack_require__.r(__webpack_exports__);
             showCancelButton: true,
             cancelButtonText: "باشد",
             confirmButtonText: "برگشت",
+            confirmButtonColor: "#7367f0",
+            cancelButtonColor: "#6e7d88",
             preConfirm: function preConfirm() {
               return _this6.alertCreateDevice();
             }
@@ -20799,7 +20810,8 @@ __webpack_require__.r(__webpack_exports__);
             icon: "success",
             title: "با موفقیت افزوده شد.",
             showConfirmButton: true,
-            confirmButtonText: "باشد"
+            confirmButtonText: "باشد",
+            confirmButtonColor: "#28a745"
           });
 
           _this6.getDeviceOf(_this6.formDevice.location_id);
@@ -20854,7 +20866,7 @@ __webpack_require__.r(__webpack_exports__);
       //           `</div>` +
       //           show +
       //           `<div class="mx-2" v-on:click="oppenCreateDevice(${element.id})">` +
-      //           `<i class="text-gray-300 fas fa-shopping-basket Pointer"></i>` +
+      //           `<i class="text-gray-300 fas fa-tshirt Pointer"></i>` +
       //           `</div>` +
       //           `<div v-on:click="oppenCreateLocation(${element.id})">` +
       //           `<i class="text-gray-300 fas fa-map-marker-alt Pointer"></i>` +
@@ -24960,7 +24972,7 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_2 = {
-  "class": "py-12 row g-2"
+  "class": "py-12 ml-0 row g-2"
 };
 var _hoisted_3 = {
   "class": "py-4 mr-2 bg-white shadow-xl col-2 sm:rounded-lg"
@@ -24979,7 +24991,7 @@ var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_6 = [_hoisted_5];
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "mx-2 text-gray-300 fas fa-map-marker-alt Pointer"
+  "class": "mx-2 text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
 }, null, -1
 /* HOISTED */
 );
@@ -25005,7 +25017,7 @@ var _hoisted_17 = ["id"];
 var _hoisted_18 = ["onClick"];
 
 var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "text-gray-300 fas fa-shopping-basket Pointer"
+  "class": "text-gray-300 fas fa-tshirt Pointer hover:text-yellow-500"
 }, null, -1
 /* HOISTED */
 );
@@ -25014,7 +25026,7 @@ var _hoisted_20 = [_hoisted_19];
 var _hoisted_21 = ["onClick"];
 
 var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "text-gray-300 fas fa-map-marker-alt Pointer"
+  "class": "text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
 }, null, -1
 /* HOISTED */
 );
@@ -25023,7 +25035,7 @@ var _hoisted_23 = [_hoisted_22];
 var _hoisted_24 = ["onClick"];
 
 var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "text-gray-300 fas fa-trash-alt Pointer"
+  "class": "text-gray-300 fas fa-trash-alt Pointer hover:text-red-600"
 }, null, -1
 /* HOISTED */
 );
@@ -25113,13 +25125,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             return _ctx.hiddenLocation(location.id);
           }
         }, [location.hidden == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-          "class": "text-gray-300 fas fa-eye Pointer",
+          "class": "text-gray-300 fas fa-eye Pointer hover:text-blue-500",
           id: "element".concat(location.id)
         }, null, 8
         /* PROPS */
         , _hoisted_15)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), location.hidden == 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
           id: "element".concat(location.id),
-          "class": "text-gray-300 fas fa-eye-slash Pointer"
+          "class": "text-gray-300 fas fa-eye-slash Pointer hover:text-blue-500"
         }, null, 8
         /* PROPS */
         , _hoisted_17)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 8

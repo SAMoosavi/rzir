@@ -5,72 +5,90 @@
       <h2 class="text-xl font-semibold leading-tight text-gray-800">وسایل</h2>
     </template>
 
+    <!------------------------section---------------------->
     <div class="py-12 row g-2">
       <!---------------------Locations------------------->
-      <div class="p-4 mr-4 bg-white shadow-xl col-2 sm:rounded-lg">
-        <div>
+      <div class="py-4 mr-2 bg-white shadow-xl col-2 sm:rounded-lg">
+        <div class="flex bg-gray-100 border-b-2 border-gray-200" id="parent0">
+          <div @click="getOfThis(0)" class="me-auto Pointer">
+            <p class="Pointer">کلیه ی مکان ها</p>
+          </div>
           <div @click="oppenCreateLocation(null)">
-            <i
-              class="text-gray-300 fas fa-map-marker-alt"
-              style="cursor: Pointer"
-            ></i>
+            <i class="text-gray-300 fas fa-map-marker-alt Pointer"></i>
           </div>
         </div>
         <div
           v-for="(location, key) in locations"
           :key="key"
-          class="flex border-b-2 border-gray-200"
+          class="border-b-2 border-gray-200"
+          :id="`parent${location.id}`"
         >
-          <div
-            @click="getOfThis(location.id)"
-            class="me-auto"
-            style="cursor: Pointer"
-          >
-            <p style="cursor: Pointer">{{ location.name }}</p>
-          </div>
-          <div
-            v-if="location.user_id == userId"
-            @click="hiddenLocation(location.id, key)"
-          >
-            <div v-if="location.hidden == 0">
-              <i
-                class="text-gray-300 fas fa-eye"
-                :id="`element${location.id}`"
-                style="cursor: Pointer"
-              ></i>
+          <div class="flex">
+            <div @click="getOfThis(location.id)" class="me-auto Pointer">
+              <p class="Pointer">{{ location.name }}</p>
             </div>
-            <div v-if="location.hidden == 1">
-              <i
-                :id="`element${location.id}`"
-                class="text-gray-300 fas fa-eye-slash"
-                style="cursor: Pointer"
-              ></i>
+            <div
+              v-if="location.user_id == userId"
+              @click="hiddenLocation(location.id)"
+            >
+              <div v-if="location.hidden == 0">
+                <i
+                  class="text-gray-300 fas fa-eye Pointer"
+                  :id="`element${location.id}`"
+                ></i>
+              </div>
+              <div v-if="location.hidden == 1">
+                <i
+                  :id="`element${location.id}`"
+                  class="text-gray-300 fas fa-eye-slash Pointer"
+                ></i>
+              </div>
+            </div>
+            <div class="mx-2" @click="oppenCreateDevice(location.id)">
+              <i class="text-gray-300 fas fa-shopping-basket Pointer"></i>
+            </div>
+            <div @click="oppenCreateLocation(location.id)">
+              <i class="text-gray-300 fas fa-map-marker-alt Pointer"></i>
             </div>
           </div>
-          <div class="mx-2" @click="oppenCreateDevice(location.id)">
-            <i
-              class="text-gray-300 fas fa-shopping-basket"
-              style="cursor: Pointer"
-            ></i>
-          </div>
-          <div @click="oppenCreateLocation(location.id)">
-            <i
-              class="text-gray-300 fas fa-map-marker-alt"
-              style="cursor: Pointer"
-            ></i>
-          </div>
-          <div :id="location.id"></div>
+          <div class="pr-4" :id="`descendant${location.id}`"></div>
         </div>
       </div>
-
       <!---------------------Devices----------------------->
       <div class="col-9 sm:px-6 lg:px-8">
         <div class="mx-auto bg-white shadow-xl sm:rounded-lg">
-          <ul>
-            <li v-for="device in devices" :key="device.id">
-              {{ device.name }}
-            </li>
-          </ul>
+          <div v-if="loaderDevices" class="flex justify-center py-8">
+            <svg
+              class="w-5 h-5 mr-3 text-gray-900 animate-spin"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+          </div>
+          <div v-if="!loaderDevices">
+            <div v-if="devices.length == 0">
+              <h3>وسیله ای وجود ندارد</h3>
+            </div>
+            <ul>
+              <li v-for="device in devices" :key="device.id">
+                {{ device.name }}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -161,7 +179,7 @@ export default defineComponent({
 
     //---------------------Hidden & Unhidden-----------------
 
-    hiddenLocation(id, key) {
+    hiddenLocation(id) {
       let hidden = this.$inertia.form({
         id: id,
       });
@@ -230,14 +248,16 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const loaderDevices = ref(false);
+    let focus = ref("parent0");
+
     const userId = props.userId;
     const devices = ref(props.devices);
-    const locations = ref(props.locations);
+    const locations = ref();
 
     // ------------------Location----------------------
 
     let createLocation = ref(false);
-    let showId = ref(null);
 
     // ------------------Creat Location---------------------
     function oppenCreateLocation(id) {
@@ -248,22 +268,59 @@ export default defineComponent({
 
     // ------------------Get Descenedantof---------------------
     function getDescendantOf(id) {
-      showId.value = id;
-      axios
-        .get(`/location/show/${id}`)
-        .then(function (response) {
-          // handle success
-          console.log(response);
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-        .then(function () {
-          // always executed
-        });
+      //   axios
+      //     .get(`/location/show/${id}`)
+      //     .then(function (response) {
+      //       // handle success
+      //       console.log(response.data.itemDescendant);
+      //       console.log(id);
+      //       let locations = response.data.itemDescendant;
+      //       var a = '';
+      //       for (let i = 0; i < locations.length; i++) {
+      //         const element = locations[i];
+      //         var show = "";
+      //         if (element.hidden == 0) {
+      //           var eye = "fa-eye";
+      //         } else {
+      //           var eye = "fa-eye-slash";
+      //         }
+      //         if (element.user_id == userId) {
+      //           show =
+      //             ` <div v-on:click="hiddenLocation(element.id)">` +
+      //             `<i class="text-gray-300 fas ${eye} Pointer" id="element${element.id}"></i>` +
+      //             `</div>`;
+      //         }
+      //         a +=
+      //           `<div class="border-b-2 border-gray-200">` +
+      //           `<div class="flex">` +
+      //           `<div v-on:click="getOfThis(${element.id})" class="me-auto Pointer">` +
+      //           `<p class="Pointer">${element.name}</p>` +
+      //           `</div>` +
+      //           show +
+      //           `<div class="mx-2" v-on:click="oppenCreateDevice(${element.id})">` +
+      //           `<i class="text-gray-300 fas fa-shopping-basket Pointer"></i>` +
+      //           `</div>` +
+      //           `<div v-on:click="oppenCreateLocation(${element.id})">` +
+      //           `<i class="text-gray-300 fas fa-map-marker-alt Pointer"></i>` +
+      //           `</div>` +
+      //           `</div>` +
+      //           `<div class="pr-4" id="descendant${element.id}"></div>` +
+      //           `</div>`;
+      //       }
+      //       document.getElementById(`descendant${id}`).innerHTML = a;
+      //     })
+      //     .catch(function (error) {
+      //       // handle error
+      //       console.log(error);
+      //     })
+      //     .then(function () {
+      //       // always executed
+      //     });
+      axios.get("/location/show").then(function (response) {
+        locations.value = response.data.itemDescendant;
+      });
     }
-
+    getDescendantOf("a");
     // --------------------Device--------------------
 
     // -------------------Create Device ---------------
@@ -273,43 +330,41 @@ export default defineComponent({
     }
     // -------------------Get Device ------------------
     function getDeviceOf(id) {
+      loaderDevices.value = true;
       axios
         .get(`/device/show/${id}`)
         .then(function (response) {
           // handle success
-          console.log("device:", response.data);
+          devices.value = response.data.devices;
         })
         .catch(function (error) {
           // handle error
           console.log(error);
         })
         .then(function () {
-          // always executed
+          loaderDevices.value = false;
         });
     }
 
     function getOfThis(id) {
+      document.getElementById(focus.value).classList.remove("bg-gray-100");
+      document.getElementById(`parent${id}`).classList.toggle("bg-gray-100");
       getDescendantOf(id);
       getDeviceOf(id);
+      focus.value = `parent${id}`;
     }
     return {
       userId,
       locations,
+      devices,
       oppenCreateLocation,
       oppenCreateDevice,
       getDescendantOf,
       getDeviceOf,
       createLocation,
-      showId,
       getOfThis,
+      loaderDevices,
     };
   },
 });
 </script>
-
-
-
-
-
-//کخفی کردن چجور نمایش بدم؟
-

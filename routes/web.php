@@ -38,7 +38,7 @@ Route::delete('/device/delete/{id}',[DeviceController::class,'delete'])->name('D
 Route::put('/device/update/{id}',[DeviceController::class,'update'])->name('Device.update');
 Route::put('/device/hidden/{id}',[DeviceController::class,'hidden'])->name('Device.hidden');
 
-Route::get('/location/show/{id}',[LocationController::class,'show'])->name('Location.show');
+Route::get('/location/show',[LocationController::class,'show'])->name('Location.show');
 Route::post('/location/create',[LocationController::class,'create'])->name('Location.create');
 Route::delete('/location/delete/{id}',[LocationController::class,'delete'])->name('Location.delete');
 Route::put('/location/update/{id}',[LocationController::class,'update'])->name('Location.update');

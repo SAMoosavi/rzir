@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Team;
 use App\Models\Device;
 use App\Models\Location;
 use Illuminate\Http\Request;
@@ -10,9 +11,38 @@ use Illuminate\Support\Facades\Auth;
 
 class LocationController extends Controller
 {
-    public function show(Location $id)
+    public function show()
     {
-        return response()->json(['itemDescendant' => Location::whereDescendantOf($id->id)->get()], 200);
+        $user = Auth::user();
+        $teamId = $user->current_team_id;
+        $locations = Team::find($teamId)->locations->toTree();
+
+        $list = collect([]);
+        $traverse = function ($locations, $list, $prefix = '') use (&$traverse) {
+            foreach ($locations as $location) {
+                if (!($location->hidden == 1 && $location->user_id != Auth::user()->id)) {
+                    $name = $prefix . ' ' . $location->name;
+                    $id = $location->id;
+                    $hidden = $location->hidden;
+                    $user_id = $location->user_id;
+
+                    $l = [
+                        'name' => $name,
+                        'id' => $id,
+                        'hidden' => $hidden,
+                        'user_id' => $user_id,
+                    ];
+                    $list->push($l);
+
+                    $traverse($location->children, $list, $prefix . '-');
+                }
+            }
+            return $list;
+        };
+        $list = $traverse($locations, $list);
+        $locations = $list;
+        return response()->json(['itemDescendant'=>$locations],200);
+        // return response()->json(['itemDescendant' => Location::whereDescendantOf($id->id)->get()], 200);
     }
 
     public function create(Request $request)

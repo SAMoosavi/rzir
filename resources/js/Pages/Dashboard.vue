@@ -1,10 +1,12 @@
 <template>
+  <!---------------------Heder-------------------->
   <app-layout title="وسایل">
     <template #header>
       <h2 class="text-xl font-semibold leading-tight text-gray-800">وسایل</h2>
     </template>
 
     <div class="py-12 row g-2">
+      <!---------------------Locations------------------->
       <div class="p-4 mr-4 bg-white shadow-xl col-2 sm:rounded-lg">
         <div>
           <div @click="oppenCreateLocation(null)">
@@ -15,8 +17,8 @@
           </div>
         </div>
         <div
-          v-for="location in locations"
-          :key="location.id"
+          v-for="(location, key) in locations"
+          :key="key"
           class="flex border-b-2 border-gray-200"
         >
           <div
@@ -25,6 +27,25 @@
             style="cursor: Pointer"
           >
             <p style="cursor: Pointer">{{ location.name }}</p>
+          </div>
+          <div
+            v-if="location.user_id == userId"
+            @click="hiddenLocation(location.id, key)"
+          >
+            <div v-if="location.hidden == 0">
+              <i
+                class="text-gray-300 fas fa-eye"
+                :id="`element${location.id}`"
+                style="cursor: Pointer"
+              ></i>
+            </div>
+            <div v-if="location.hidden == 1">
+              <i
+                :id="`element${location.id}`"
+                class="text-gray-300 fas fa-eye-slash"
+                style="cursor: Pointer"
+              ></i>
+            </div>
           </div>
           <div class="mx-2" @click="oppenCreateDevice(location.id)">
             <i
@@ -38,57 +59,18 @@
               style="cursor: Pointer"
             ></i>
           </div>
+          <div :id="location.id"></div>
         </div>
       </div>
+
+      <!---------------------Devices----------------------->
       <div class="col-9 sm:px-6 lg:px-8">
         <div class="mx-auto bg-white shadow-xl sm:rounded-lg">
           <ul>
-            <li v-for="device in devices.data" :key="device.id">
+            <li v-for="device in devices" :key="device.id">
               {{ device.name }}
             </li>
           </ul>
-          <div
-            v-if="devices.links.length > 3"
-            class="flex flex-row justify-center"
-          >
-            <p
-              v-for="(link, key) in devices.links"
-              :key="key"
-              class="flex p-0 m-0"
-            >
-              <Link
-                v-if="key == 0"
-                :href="link.url"
-                class="p-3 text-white bg-red-500 border border-gray-400 rounded-r-lg hover:text-yellow-100 hover:bg-red-700 hover:border-double focus:text-red-300 focus:bg-red-900"
-              >
-                &laquo;
-              </Link>
-              <Link
-                v-if="
-                  key != 0 && key != devices.links.length - 1 && !link.active
-                "
-                :href="link.url"
-                class="p-3 text-white bg-red-500 border border-gray-400 hover:text-yellow-100 hover:bg-red-700 hover:border-double focus:text-red-300 focus:bg-red-900"
-              >
-                {{ link.label }}
-              </Link>
-              <Link
-                v-if="link.active"
-                :href="link.url"
-                class="p-3 text-red-300 bg-red-900 border border-gray-400"
-                isabled
-              >
-                {{ link.label }}
-              </Link>
-              <Link
-                v-if="key == devices.links.length - 1"
-                :href="link.url"
-                class="p-3 text-white bg-red-500 border border-gray-400 rounded-l-lg hover:text-yellow-100 hover:bg-red-700 hover:border-double focus:text-red-300 focus:bg-red-900"
-              >
-                &raquo;
-              </Link>
-            </p>
-          </div>
         </div>
       </div>
     </div>
@@ -96,10 +78,11 @@
 </template>
 
 <script>
-import { defineComponent, reactive, ref } from "vue";
+import { defineComponent, ref } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { Link } from "@inertiajs/inertia-vue3";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 export default defineComponent({
   components: {
@@ -110,6 +93,7 @@ export default defineComponent({
   props: {
     devices: Object,
     locations: Object,
+    userId: Number,
   },
   data() {
     return {
@@ -124,6 +108,7 @@ export default defineComponent({
         name: "",
         location_id: "",
       }),
+      locations: {},
     };
   },
   methods: {
@@ -170,6 +155,29 @@ export default defineComponent({
             confirmButtonText: "باشد",
           });
           this.getDescendantOf(this.formLocation.parent_id);
+        },
+      });
+    },
+
+    //---------------------Hidden & Unhidden-----------------
+
+    hiddenLocation(id, key) {
+      let hidden = this.$inertia.form({
+        id: id,
+      });
+      hidden.put(this.route("Location.hidden", { id: id }), {
+        onSuccess: () => {
+          var element = document.getElementById(`element${id}`);
+          if (element.classList[1] == "fa-eye") {
+            element.classList.toggle("fa-eye-slash");
+            element.classList.remove("fa-eye");
+          } else {
+            element.classList.toggle("fa-eye");
+            element.classList.remove("fa-eye-slash");
+          }
+        },
+        onError: (errors) => {
+          console.log(errors);
         },
       });
     },
@@ -222,8 +230,9 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const devices = reactive(props.devices);
-    const locations = reactive(props.locations);
+    const userId = props.userId;
+    const devices = ref(props.devices);
+    const locations = ref(props.locations);
 
     // ------------------Location----------------------
 
@@ -268,7 +277,7 @@ export default defineComponent({
         .get(`/device/show/${id}`)
         .then(function (response) {
           // handle success
-          console.log('device:',response);
+          console.log("device:", response.data);
         })
         .catch(function (error) {
           // handle error
@@ -283,9 +292,8 @@ export default defineComponent({
       getDescendantOf(id);
       getDeviceOf(id);
     }
-
     return {
-      devices,
+      userId,
       locations,
       oppenCreateLocation,
       oppenCreateDevice,
@@ -298,3 +306,10 @@ export default defineComponent({
   },
 });
 </script>
+
+
+
+
+
+//کخفی کردن چجور نمایش بدم؟
+

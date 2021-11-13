@@ -75,7 +75,7 @@ class LocationController extends Controller
 
         $Location->delete();
 
-        return response()->json([200]);
+        return redirect()->route('dashboard');
     }
 
     public function edit(Request $request, Location $id)

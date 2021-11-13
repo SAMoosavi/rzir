@@ -50,6 +50,12 @@
             <div @click="oppenCreateLocation(location.id)">
               <i class="text-gray-300 fas fa-map-marker-alt Pointer"></i>
             </div>
+            <div
+              class="mx-2"
+              @click="alertDeleteLocation(location.id, location.name)"
+            >
+              <i class="text-gray-300 fas fa-trash-alt Pointer"></i>
+            </div>
           </div>
           <div class="pr-4" :id="`descendant${location.id}`"></div>
         </div>
@@ -126,7 +132,8 @@ export default defineComponent({
         name: "",
         location_id: "",
       }),
-      locations: {},
+
+      deleteLoocation: this.$inertia.form({}),
     };
   },
   methods: {
@@ -177,6 +184,48 @@ export default defineComponent({
       });
     },
 
+    //-------------------Delete Location----------
+    alertDeleteLocation(id, name) {
+      Swal.fire({
+        title: "توجه!",
+        icon: "warning",
+        text: `با جذف مکان  ${name}  تمامی زیر شاخه ها و وسایل درون آن ها حذف می شود!`,
+        showCancelButton: true,
+        confirmButtonText: "حذف",
+        cancelButtonText: "لغو",
+        showLoaderOnConfirm: true,
+        preConfirm: () => {
+          return this.sendDeleteLoction(id);
+        },
+      });
+    },
+    sendDeleteLoction(id, name) {
+      this.deleteLoocation.delete(this.route("Location.delete", { id }), {
+        onError: (errors) => {
+          Swal.fire({
+            icon: "error",
+            title: "خطاا!!!",
+            text: errors.name,
+            showConfirmButton: true,
+            showCancelButton: true,
+            cancelButtonText: "باشد",
+            confirmButtonText: "برگشت",
+            preConfirm: () => {
+              return this.alertDeleteLocation(id, name);
+            },
+          });
+        },
+        onSuccess: () => {
+          Swal.fire({
+            icon: "success",
+            title: "با موفقیت حذف شد.",
+            showConfirmButton: true,
+            confirmButtonText: "باشد",
+          });
+          this.getOfThis(0);
+        },
+      });
+    },
     //---------------------Hidden & Unhidden-----------------
 
     hiddenLocation(id) {

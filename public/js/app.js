@@ -20623,7 +20623,7 @@ __webpack_require__.r(__webpack_exports__);
         name: "",
         location_id: ""
       }),
-      locations: {}
+      deleteLoocation: this.$inertia.form({})
     };
   },
   methods: {
@@ -20680,6 +20680,55 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
+    //-------------------Delete Location----------
+    alertDeleteLocation: function alertDeleteLocation(id, name) {
+      var _this3 = this;
+
+      sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+        title: "توجه!",
+        icon: "warning",
+        text: "\u0628\u0627 \u062C\u0630\u0641 \u0645\u06A9\u0627\u0646  ".concat(name, "  \u062A\u0645\u0627\u0645\u06CC \u0632\u06CC\u0631 \u0634\u0627\u062E\u0647 \u0647\u0627 \u0648 \u0648\u0633\u0627\u06CC\u0644 \u062F\u0631\u0648\u0646 \u0622\u0646 \u0647\u0627 \u062D\u0630\u0641 \u0645\u06CC \u0634\u0648\u062F!"),
+        showCancelButton: true,
+        confirmButtonText: "حذف",
+        cancelButtonText: "لغو",
+        showLoaderOnConfirm: true,
+        preConfirm: function preConfirm() {
+          return _this3.sendDeleteLoction(id);
+        }
+      });
+    },
+    sendDeleteLoction: function sendDeleteLoction(id, name) {
+      var _this4 = this;
+
+      this.deleteLoocation["delete"](this.route("Location.delete", {
+        id: id
+      }), {
+        onError: function onError(errors) {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+            icon: "error",
+            title: "خطاا!!!",
+            text: errors.name,
+            showConfirmButton: true,
+            showCancelButton: true,
+            cancelButtonText: "باشد",
+            confirmButtonText: "برگشت",
+            preConfirm: function preConfirm() {
+              return _this4.alertDeleteLocation(id, name);
+            }
+          });
+        },
+        onSuccess: function onSuccess() {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+            icon: "success",
+            title: "با موفقیت حذف شد.",
+            showConfirmButton: true,
+            confirmButtonText: "باشد"
+          });
+
+          _this4.getOfThis(0);
+        }
+      });
+    },
     //---------------------Hidden & Unhidden-----------------
     hiddenLocation: function hiddenLocation(id) {
       var hidden = this.$inertia.form({
@@ -20706,7 +20755,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     // -----------------Creat Device-----------
     alertCreateDevice: function alertCreateDevice() {
-      var _this3 = this;
+      var _this5 = this;
 
       sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
         title: "نام وسیله را وارد کنید",
@@ -20719,7 +20768,7 @@ __webpack_require__.r(__webpack_exports__);
         cancelButtonText: "لغو",
         showLoaderOnConfirm: true,
         preConfirm: function preConfirm(name) {
-          return _this3.sendCreatDevice(name);
+          return _this5.sendCreatDevice(name);
         },
         allowOutsideClick: function allowOutsideClick() {
           return !sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().isLoading();
@@ -20727,7 +20776,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     sendCreatDevice: function sendCreatDevice(name) {
-      var _this4 = this;
+      var _this6 = this;
 
       this.formDevice.name = name;
       this.formDevice.post(this.route("Device.create"), {
@@ -20741,7 +20790,7 @@ __webpack_require__.r(__webpack_exports__);
             cancelButtonText: "باشد",
             confirmButtonText: "برگشت",
             preConfirm: function preConfirm() {
-              return _this4.alertCreateDevice();
+              return _this6.alertCreateDevice();
             }
           });
         },
@@ -20753,7 +20802,7 @@ __webpack_require__.r(__webpack_exports__);
             confirmButtonText: "باشد"
           });
 
-          _this4.getDeviceOf(_this4.formDevice.location_id);
+          _this6.getDeviceOf(_this6.formDevice.location_id);
         }
       });
     }
@@ -24971,19 +25020,28 @@ var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_23 = [_hoisted_22];
-var _hoisted_24 = ["id"];
-var _hoisted_25 = {
+var _hoisted_24 = ["onClick"];
+
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "text-gray-300 fas fa-trash-alt Pointer"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_26 = [_hoisted_25];
+var _hoisted_27 = ["id"];
+var _hoisted_28 = {
   "class": "col-9 sm:px-6 lg:px-8"
 };
-var _hoisted_26 = {
+var _hoisted_29 = {
   "class": "mx-auto bg-white shadow-xl sm:rounded-lg"
 };
-var _hoisted_27 = {
+var _hoisted_30 = {
   key: 0,
   "class": "flex justify-center py-8"
 };
 
-var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   "class": "w-5 h-5 mr-3 text-gray-900 animate-spin",
   xmlns: "http://www.w3.org/2000/svg",
   fill: "none",
@@ -25003,19 +25061,19 @@ var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_29 = [_hoisted_28];
-var _hoisted_30 = {
+var _hoisted_32 = [_hoisted_31];
+var _hoisted_33 = {
   key: 1
 };
-var _hoisted_31 = {
+var _hoisted_34 = {
   key: 0
 };
 
-var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, "وسیله ای وجود ندارد", -1
+var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, "وسیله ای وجود ندارد", -1
 /* HOISTED */
 );
 
-var _hoisted_33 = [_hoisted_32];
+var _hoisted_36 = [_hoisted_35];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_app_layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("app-layout");
 
@@ -25079,17 +25137,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }
         }, _hoisted_23, 8
         /* PROPS */
-        , _hoisted_21)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+        , _hoisted_21), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+          "class": "mx-2",
+          onClick: function onClick($event) {
+            return _ctx.alertDeleteLocation(location.id, location.name);
+          }
+        }, _hoisted_26, 8
+        /* PROPS */
+        , _hoisted_24)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
           "class": "pr-4",
           id: "descendant".concat(location.id)
         }, null, 8
         /* PROPS */
-        , _hoisted_24)], 8
+        , _hoisted_27)], 8
         /* PROPS */
         , _hoisted_9);
       }), 128
       /* KEYED_FRAGMENT */
-      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("-------------------Devices---------------------"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [_ctx.loaderDevices ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_27, _hoisted_29)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !_ctx.loaderDevices ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_30, [_ctx.devices.length == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_31, _hoisted_33)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.devices, function (device) {
+      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("-------------------Devices---------------------"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [_ctx.loaderDevices ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_30, _hoisted_32)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !_ctx.loaderDevices ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_33, [_ctx.devices.length == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_34, _hoisted_36)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.devices, function (device) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
           key: device.id
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.name), 1

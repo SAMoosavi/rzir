@@ -41,7 +41,7 @@ class LocationController extends Controller
         };
         $list = $traverse($locations, $list);
         $locations = $list;
-        return response()->json(['itemDescendant'=>$locations],200);
+        return response()->json(['itemDescendant' => $locations], 200);
         // return response()->json(['itemDescendant' => Location::whereDescendantOf($id->id)->get()], 200);
     }
 
@@ -52,6 +52,16 @@ class LocationController extends Controller
         $request->validate([
             'name' => "required|string|unique:locations,name,NULL,id,team_id,$user->current_team_id,parent_id,$request->parent_id",
         ]);
+        if ($request->parent_id == null) {
+            $locations = Location::where('parent_id', '=', null)->get();
+            foreach ($locations as $location) {
+                if ($location->name == $request->name) {
+                    $request->validate([
+                        'parent_id' => "required",
+                    ]);
+                }
+            }
+        }
 
         $parent = Location::find($request->parent_id);
 

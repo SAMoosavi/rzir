@@ -8,7 +8,6 @@ use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 class DeviceController extends Controller
 {
@@ -16,7 +15,31 @@ class DeviceController extends Controller
     {
         $teamId = Auth::user()->current_team_id;
         $devices = Team::find($teamId)->devices->toArray();
-        $locations = Team::find($teamId)->locations->where('parent_id', '=', NULL)->toArray();
+        // $locations = Team::find($teamId)->locations->where('parent_id', '=', NULL)->toArray();
+        $locations = Team::find($teamId)->locations->toTree();
+
+        $list = collect([]);
+        $traverse = function ($locations, $list, $prefix = '') use (&$traverse) {
+            foreach ($locations as $location) {
+                $name = $prefix . ' ' . $location->name;
+                $id = $location->id;
+                $hidden = $location->hidden;
+                $user_id = $location->user_id;
+
+                $l = [
+                    'name' => $name,
+                    'id' => $id,
+                    'hidden' => $hidden,
+                    'user_id' => $user_id,
+                ];
+                $list->push($l);
+
+                $traverse($location->children, $list, $prefix . '-');
+            }
+            return $list;
+        };
+        $list = $traverse($locations, $list);
+        $locations = $list;
 
         $userId = Auth::user()->id;
 

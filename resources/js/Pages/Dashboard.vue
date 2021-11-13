@@ -14,7 +14,7 @@
             <p class="Pointer">کلیه ی مکان ها</p>
           </div>
           <div @click="oppenCreateLocation(null)">
-            <i class="text-gray-300 fas fa-map-marker-alt Pointer"></i>
+            <i class="mx-2 text-gray-300 fas fa-map-marker-alt Pointer"></i>
           </div>
         </div>
         <div
@@ -189,7 +189,7 @@ export default defineComponent({
       Swal.fire({
         title: "توجه!",
         icon: "warning",
-        text: `با جذف مکان  ${name}  تمامی زیر شاخه ها و وسایل درون آن ها حذف می شود!`,
+        text: `با حذف مکان  ${name}  تمامی زیر شاخه ها و وسایل درون آن ها حذف می شود!`,
         showCancelButton: true,
         confirmButtonText: "حذف",
         cancelButtonText: "لغو",

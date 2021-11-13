@@ -20687,7 +20687,7 @@ __webpack_require__.r(__webpack_exports__);
       sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
         title: "توجه!",
         icon: "warning",
-        text: "\u0628\u0627 \u062C\u0630\u0641 \u0645\u06A9\u0627\u0646  ".concat(name, "  \u062A\u0645\u0627\u0645\u06CC \u0632\u06CC\u0631 \u0634\u0627\u062E\u0647 \u0647\u0627 \u0648 \u0648\u0633\u0627\u06CC\u0644 \u062F\u0631\u0648\u0646 \u0622\u0646 \u0647\u0627 \u062D\u0630\u0641 \u0645\u06CC \u0634\u0648\u062F!"),
+        text: "\u0628\u0627 \u062D\u0630\u0641 \u0645\u06A9\u0627\u0646  ".concat(name, "  \u062A\u0645\u0627\u0645\u06CC \u0632\u06CC\u0631 \u0634\u0627\u062E\u0647 \u0647\u0627 \u0648 \u0648\u0633\u0627\u06CC\u0644 \u062F\u0631\u0648\u0646 \u0622\u0646 \u0647\u0627 \u062D\u0630\u0641 \u0645\u06CC \u0634\u0648\u062F!"),
         showCancelButton: true,
         confirmButtonText: "حذف",
         cancelButtonText: "لغو",
@@ -24979,7 +24979,7 @@ var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_6 = [_hoisted_5];
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "text-gray-300 fas fa-map-marker-alt Pointer"
+  "class": "mx-2 text-gray-300 fas fa-map-marker-alt Pointer"
 }, null, -1
 /* HOISTED */
 );

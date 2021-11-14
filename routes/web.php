@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\LocationController;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,20 +31,20 @@ Route::get('/dashboard', function () {
 //     ]);
 // });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/', [DeviceController::class,'index'])->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/', [DeviceController::class, 'index'])->name('dashboard');
 
-Route::get('/device/show/{id}',[DeviceController::class,'show'])->name('Device.show');
-Route::post('/device/create',[DeviceController::class,'create'])->name('Device.create');
-Route::delete('/device/delete/{id}',[DeviceController::class,'delete'])->name('Device.delete');
-Route::put('/device/update/{id}',[DeviceController::class,'update'])->name('Device.update');
-Route::put('/device/hidden/{id}',[DeviceController::class,'hidden'])->name('Device.hidden');
+Route::get('/device/show/{id}', [DeviceController::class, 'show'])->name('Device.show');
+Route::post('/device/create', [DeviceController::class, 'create'])->name('Device.create');
+Route::delete('/device/delete/{id}', [DeviceController::class, 'delete'])->name('Device.delete');
+Route::put('/device/update/{id}', [DeviceController::class, 'update'])->name('Device.update');
+Route::put('/device/hidden/{id}', [DeviceController::class, 'hidden'])->name('Device.hidden');
 
-Route::get('/location/show',[LocationController::class,'show'])->name('Location.show');
-Route::post('/location/create',[LocationController::class,'create'])->name('Location.create');
-Route::delete('/location/delete/{id}',[LocationController::class,'delete'])->name('Location.delete');
-Route::put('/location/update/{id}',[LocationController::class,'update'])->name('Location.update');
-Route::put('/location/hidden/{id}',[LocationController::class,'hidden'])->name('Location.hidden');
+Route::get('/location/show', [LocationController::class, 'show'])->name('Location.show');
+Route::post('/location/create', [LocationController::class, 'create'])->name('Location.create');
+Route::delete('/location/delete/{id}', [LocationController::class, 'delete'])->name('Location.delete');
+Route::put('/location/update/{id}', [LocationController::class, 'update'])->name('Location.update');
+Route::put('/location/hidden/{id}', [LocationController::class, 'hidden'])->name('Location.hidden');
 
-Route::get('/test',function(){
-    return view('test');
+Route::get('art/migrate', function () {
+    Artisan::call('php artisan migrate');
 });

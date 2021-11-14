@@ -20867,6 +20867,30 @@ __webpack_require__.r(__webpack_exports__);
           _this8.getOfThis(location_id);
         }
       });
+    },
+    //---------------------Hidden & Unhidden-----------------
+    hiddenDevice: function hiddenDevice(id) {
+      var hidden = this.$inertia.form({
+        id: id
+      });
+      hidden.put(this.route("Device.hidden", {
+        id: id
+      }), {
+        onSuccess: function onSuccess() {
+          var element = document.getElementById("deviceElement".concat(id));
+
+          if (element.classList[1] == "fa-eye") {
+            element.classList.toggle("fa-eye-slash");
+            element.classList.remove("fa-eye");
+          } else {
+            element.classList.toggle("fa-eye");
+            element.classList.remove("fa-eye-slash");
+          }
+        },
+        onError: function onError(errors) {
+          console.log(errors);
+        }
+      });
     }
   },
   setup: function setup(props) {

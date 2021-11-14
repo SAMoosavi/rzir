@@ -274,8 +274,8 @@ export default defineComponent({
         },
       });
     },
-    //---------------------Hidden & Unhidden-----------------
 
+    //---------------------Hidden & Unhidden-----------------
     hiddenLocation(id) {
       let hidden = this.$inertia.form({
         id: id,
@@ -390,6 +390,28 @@ export default defineComponent({
             confirmButtonText: "باشد",
           });
           this.getOfThis(location_id);
+        },
+      });
+    },
+
+    //---------------------Hidden & Unhidden-----------------
+    hiddenDevice(id) {
+      let hidden = this.$inertia.form({
+        id: id,
+      });
+      hidden.put(this.route("Device.hidden", { id: id }), {
+        onSuccess: () => {
+          var element = document.getElementById(`deviceElement${id}`);
+          if (element.classList[1] == "fa-eye") {
+            element.classList.toggle("fa-eye-slash");
+            element.classList.remove("fa-eye");
+          } else {
+            element.classList.toggle("fa-eye");
+            element.classList.remove("fa-eye-slash");
+          }
+        },
+        onError: (errors) => {
+          console.log(errors);
         },
       });
     },

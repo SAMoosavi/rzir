@@ -25,6 +25,30 @@ class DeviceController extends Controller
         ]);
     }
 
+    public function showDevice($devices)
+    {
+        $d = collect([]);
+        foreach ($devices as $device) {
+            //get location of device
+            $loctions = Location::whereAncestorOrSelf($device->location_id)->get();
+
+            $l = '';
+            foreach ($loctions as $loction) {
+                $l = "$l $loction->name";
+            }
+
+            $d->push([
+                'id' => $device->id,
+                'name' => $device->name,
+                'location' => $l,
+                'location_id' => $device->location_id,
+                'hidden' => $device->hidden,
+                'user_id' => $device->user_id,
+            ]);
+        }
+        return $d;
+    }
+
     public function show($id)
     {
         if ($id) {
@@ -33,17 +57,17 @@ class DeviceController extends Controller
             foreach ($locations as $location) {
                 $d = Device::where('location_id', '=', $location->id)->get();
                 if ($d->count() != 0) {
-                    $Devices->push($d);
+                    foreach($this->showDevice($d) as $de){
+                        $Devices->push($de);
+                    }
                 }
             }
-            $devices = $Devices->toArray();
-            if ($Devices->count() != 0) {
-                $devices = $devices[0];
-            }
+            $devices = $Devices->sortBy('name')->values()->all();
         } else {
             $user = Auth::user();
             $teamId = $user->current_team_id;
-            $devices = Team::find($teamId)->devices->toArray();
+            $devices = Team::find($teamId)->devices->sortBy('name')->values()->all();
+            $devices = $this->showDevice($devices)->toArray();
         }
 
         return response()->json(['devices' => $devices], 200);

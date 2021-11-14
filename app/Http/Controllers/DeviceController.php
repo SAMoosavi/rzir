@@ -30,21 +30,30 @@ class DeviceController extends Controller
         $d = collect([]);
         foreach ($devices as $device) {
             //get location of device
-            $loctions = Location::whereAncestorOrSelf($device->location_id)->get();
+            if (!($device->hidden == 1 && $device->user_id != Auth::user()->id)) {
+                $loctions = Location::whereAncestorOrSelf($device->location_id)->get();
 
-            $l = '';
-            foreach ($loctions as $loction) {
-                $l = "$l $loction->name";
+                $l = '';
+                $hidden = false;
+                foreach ($loctions as $location) {
+                    if ($location->user_id != Auth::user()->id) {
+                        if ($location->hidden) {
+                            $hidden = true;
+                        }
+                    }
+                    $l = "$l $location->name";
+                }
+                if (!$hidden) {
+                    $d->push([
+                        'id' => $device->id,
+                        'name' => $device->name,
+                        'location' => $l,
+                        'location_id' => $device->location_id,
+                        'hidden' => $device->hidden,
+                        'user_id' => $device->user_id,
+                    ]);
+                }
             }
-
-            $d->push([
-                'id' => $device->id,
-                'name' => $device->name,
-                'location' => $l,
-                'location_id' => $device->location_id,
-                'hidden' => $device->hidden,
-                'user_id' => $device->user_id,
-            ]);
         }
         return $d;
     }
@@ -57,7 +66,7 @@ class DeviceController extends Controller
             foreach ($locations as $location) {
                 $d = Device::where('location_id', '=', $location->id)->get();
                 if ($d->count() != 0) {
-                    foreach($this->showDevice($d) as $de){
+                    foreach ($this->showDevice($d) as $de) {
                         $Devices->push($de);
                     }
                 }

@@ -20607,8 +20607,6 @@ __webpack_require__.r(__webpack_exports__);
     Swal: (sweetalert2__WEBPACK_IMPORTED_MODULE_3___default())
   },
   props: {
-    devices: Object,
-    locations: Object,
     userId: Number
   },
   data: function data() {
@@ -20820,10 +20818,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   setup: function setup(props) {
-    var loaderDevices = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
+    var loaderDevices = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
     var focus = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)("parent0");
     var userId = props.userId;
-    var devices = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(props.devices);
+    var devices = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
     var locations = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(); // ------------------Location----------------------
 
     var createLocation = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false); // ------------------Creat Location---------------------
@@ -20887,10 +20885,9 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_4___default().get("/location/show").then(function (response) {
         locations.value = response.data.itemDescendant;
       });
-    }
-
-    getDescendantOf("a"); // --------------------Device--------------------
+    } // --------------------Device--------------------
     // -------------------Create Device ---------------
+
 
     function oppenCreateDevice(id) {
       this.formDevice.location_id = id;
@@ -20919,6 +20916,8 @@ __webpack_require__.r(__webpack_exports__);
       focus.value = "parent".concat(id);
     }
 
+    getDescendantOf(0);
+    getDeviceOf(0);
     return {
       userId: userId,
       locations: locations,

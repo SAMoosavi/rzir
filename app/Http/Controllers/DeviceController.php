@@ -14,14 +14,13 @@ class DeviceController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $teamId = $user->current_team_id;
-        $devices = Team::find($teamId)->devices->toArray();
+        // $teamId = $user->current_team_id;
+        // $devices = Team::find($teamId)->devices->toArray();
         // $locations = Team::find($teamId)->locations->where('parent_id', '=', NULL)->toArray();
 
-        $userId = Auth::user()->id;
+        $userId = $user->id;
 
         return Inertia::render('Dashboard', [
-            'devices' => $devices,
             'userId' => $userId,
         ]);
     }

@@ -15,7 +15,7 @@
           </div>
           <div @click="oppenCreateLocation(null)">
             <i
-              class="mx-2 text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
+              class="mx-2 text-gray-300  fas fa-map-marker-alt Pointer hover:text-green-400"
             ></i>
           </div>
         </div>
@@ -42,18 +42,18 @@
               <div v-if="location.hidden == 1">
                 <i
                   :id="`element${location.id}`"
-                  class="text-gray-300 fas fa-eye-slash Pointer hover:text-blue-500"
+                  class="text-gray-300  fas fa-eye-slash Pointer hover:text-blue-500"
                 ></i>
               </div>
             </div>
             <div class="mx-2" @click="oppenCreateDevice(location.id)">
               <i
-                class="text-gray-300 fas fa-tshirt Pointer hover:text-yellow-500"
+                class="text-gray-300  fas fa-tshirt Pointer hover:text-yellow-500"
               ></i>
             </div>
             <div @click="oppenCreateLocation(location.id)">
               <i
-                class="text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
+                class="text-gray-300  fas fa-map-marker-alt Pointer hover:text-green-400"
               ></i>
             </div>
             <div
@@ -61,7 +61,7 @@
               @click="alertDeleteLocation(location.id, location.name)"
             >
               <i
-                class="text-gray-300 fas fa-trash-alt Pointer hover:text-red-600"
+                class="text-gray-300  fas fa-trash-alt Pointer hover:text-red-600"
               ></i>
             </div>
           </div>
@@ -123,8 +123,6 @@ export default defineComponent({
     Swal,
   },
   props: {
-    devices: Object,
-    locations: Object,
     userId: Number,
   },
   data() {
@@ -317,11 +315,11 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const loaderDevices = ref(false);
+    const loaderDevices = ref(true);
     let focus = ref("parent0");
 
     const userId = props.userId;
-    const devices = ref(props.devices);
+    const devices = ref();
     const locations = ref();
 
     // ------------------Location----------------------
@@ -389,7 +387,6 @@ export default defineComponent({
         locations.value = response.data.itemDescendant;
       });
     }
-    getDescendantOf("a");
     // --------------------Device--------------------
 
     // -------------------Create Device ---------------
@@ -422,6 +419,10 @@ export default defineComponent({
       getDeviceOf(id);
       focus.value = `parent${id}`;
     }
+
+    getDescendantOf(0);
+    getDeviceOf(0);
+
     return {
       userId,
       locations,

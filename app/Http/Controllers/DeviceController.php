@@ -93,13 +93,13 @@ class DeviceController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function delete($id)
+    public function delete(Device $id)
     {
         $device = $id;
 
         $device->delete();
 
-        return response()->json([200]);
+        return redirect()->route('dashboard');
     }
 
     public function edit(Request $request, Device $id)

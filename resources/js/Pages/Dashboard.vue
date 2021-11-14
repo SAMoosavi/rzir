@@ -15,7 +15,7 @@
           </div>
           <div @click="oppenCreateLocation(null)">
             <i
-              class="mx-2 text-gray-300  fas fa-map-marker-alt Pointer hover:text-green-400"
+              class="mx-2 text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
             ></i>
           </div>
         </div>
@@ -42,18 +42,18 @@
               <div v-if="location.hidden == 1">
                 <i
                   :id="`element${location.id}`"
-                  class="text-gray-300  fas fa-eye-slash Pointer hover:text-blue-500"
+                  class="text-gray-300 fas fa-eye-slash Pointer hover:text-blue-500"
                 ></i>
               </div>
             </div>
             <div class="mx-2" @click="oppenCreateDevice(location.id)">
               <i
-                class="text-gray-300  fas fa-tshirt Pointer hover:text-yellow-500"
+                class="text-gray-300 fas fa-tshirt Pointer hover:text-yellow-500"
               ></i>
             </div>
             <div @click="oppenCreateLocation(location.id)">
               <i
-                class="text-gray-300  fas fa-map-marker-alt Pointer hover:text-green-400"
+                class="text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
               ></i>
             </div>
             <div
@@ -61,7 +61,7 @@
               @click="alertDeleteLocation(location.id, location.name)"
             >
               <i
-                class="text-gray-300  fas fa-trash-alt Pointer hover:text-red-600"
+                class="text-gray-300 fas fa-trash-alt Pointer hover:text-red-600"
               ></i>
             </div>
           </div>
@@ -94,14 +94,48 @@
             </svg>
           </div>
           <div v-if="!loaderDevices">
-            <div v-if="devices.length == 0">
-              <h3>وسیله ای وجود ندارد</h3>
+            <div v-if="devices.length == 0" class="py-8">
+              <h3 class="text-3xl text-center text-black">
+                وسیله ای وجود ندارد
+              </h3>
             </div>
-            <ul>
-              <li v-for="device in devices" :key="device.id">
-                {{ device.name }}
-              </li>
-            </ul>
+            <div v-if="devices.length > 0" class="p-4">
+              <div
+                v-for="device in devices"
+                :key="device.id"
+                class="border-b-2 border-gray-200 row"
+              >
+                <p class="col-4">{{ device.name }}</p>
+                <p class="col-4">{{ device.location }}</p>
+                <div class="flex justify-end col-4">
+                  <div
+                    v-if="device.user_id == userId"
+                    @click="hiddenDevice(device.id)"
+                  >
+                    <div v-if="device.hidden == 0">
+                      <i
+                        class="text-gray-300 fas fa-eye Pointer hover:text-blue-500"
+                        :id="`deviceElement${device.id}`"
+                      ></i>
+                    </div>
+                    <div v-if="device.hidden == 1">
+                      <i
+                        :id="`deviceElement${device.id}`"
+                        class="text-gray-300 fas fa-eye-slash Pointer hover:text-blue-500"
+                      ></i>
+                    </div>
+                  </div>
+                  <div
+                    class="mx-2"
+                    @click="alertDeleteDevice(device.id, device.name,device.location_id)"
+                  >
+                    <i
+                      class="text-gray-300 fas fa-trash-alt Pointer hover:text-red-600"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -140,6 +174,7 @@ export default defineComponent({
       }),
 
       deleteLoocation: this.$inertia.form({}),
+      deleteDevice: this.$inertia.form({}),
     };
   },
   methods: {
@@ -309,7 +344,52 @@ export default defineComponent({
             confirmButtonText: "باشد",
             confirmButtonColor: "#28a745",
           });
-          this.getDeviceOf(this.formDevice.location_id);
+          this.getOfThis(this.formDevice.location_id);
+        },
+      });
+    },
+
+    //------------------ِDelet Device-------------
+    alertDeleteDevice(id, name,location_id) {
+      Swal.fire({
+        title: "توجه!",
+        icon: "warning",
+        text: `از حذف ${name} مطمئنید!`,
+        showCancelButton: true,
+        confirmButtonText: "حذف",
+        cancelButtonText: "لغو",
+        showLoaderOnConfirm: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#6e7d88",
+        preConfirm: () => {
+          return this.sendDeleteDevice(id,name,location_id);
+        },
+      });
+    },
+    sendDeleteDevice(id, name,location_id) {
+      this.deleteDevice.delete(this.route("Device.delete", { id }), {
+        onError: (errors) => {
+          Swal.fire({
+            icon: "error",
+            title: "خطاا!!!",
+            text: errors.name,
+            showConfirmButton: true,
+            showCancelButton: true,
+            cancelButtonText: "باشد",
+            confirmButtonText: "برگشت",
+            preConfirm: () => {
+              return this.alertDeleteDevice(id, name,location_id);
+            },
+          });
+        },
+        onSuccess: () => {
+          Swal.fire({
+            icon: "success",
+            title: "با موفقیت حذف شد.",
+            showConfirmButton: true,
+            confirmButtonText: "باشد",
+          });
+          this.getOfThis(location_id);
         },
       });
     },
@@ -402,6 +482,7 @@ export default defineComponent({
         .then(function (response) {
           // handle success
           devices.value = response.data.devices;
+          console.log(devices.value);
         })
         .catch(function (error) {
           // handle error

@@ -119,4 +119,20 @@ class DeviceController extends Controller
             'hidden' => $request->hidden,
         ]);
     }
+
+    public function hidden(Device $id)
+    {
+
+        if ($id->hidden == 0) {
+            $hidden = 1;
+        } else {
+            $hidden = 0;
+        }
+
+        $id->update([
+            'hidden' => $hidden
+        ]);
+
+        return redirect('/');
+    }
 }

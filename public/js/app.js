@@ -21012,10 +21012,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   setup: function setup(props) {
     var loaderDevices = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
-    var focus = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)("parent0");
     var userId = props.userId;
-    var devices = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
-    var locations = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
+    var devices = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(); //------------------search Device------------
+
     var searchDevices = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(searchDevices, function () {
       loaderDevices.value = true;
@@ -21028,6 +21027,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     }); // ------------------Location----------------------
 
+    var locations = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
     var createLocation = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false); // ------------------Creat Location---------------------
 
     function oppenCreateLocation(id) {
@@ -21111,6 +21111,8 @@ __webpack_require__.r(__webpack_exports__);
         loaderDevices.value = false;
       });
     }
+
+    var focus = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)("parent0");
 
     function getOfThis(id) {
       document.getElementById(focus.value).classList.remove("bg-gray-100");

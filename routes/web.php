@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\SearchController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -36,15 +37,19 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/', [DeviceController::cla
 Route::get('/device/show/{id}', [DeviceController::class, 'show'])->name('Device.show');
 Route::post('/device/create', [DeviceController::class, 'create'])->name('Device.create');
 Route::delete('/device/delete/{id}', [DeviceController::class, 'delete'])->name('Device.delete');
-Route::put('/device/update/{id}', [DeviceController::class, 'update'])->name('Device.update');
+Route::put('/device/rename/{id}', [DeviceController::class, 'rename'])->name('Device.rename');
 Route::put('/device/hidden/{id}', [DeviceController::class, 'hidden'])->name('Device.hidden');
 
 Route::get('/location/show', [LocationController::class, 'show'])->name('Location.show');
 Route::post('/location/create', [LocationController::class, 'create'])->name('Location.create');
 Route::delete('/location/delete/{id}', [LocationController::class, 'delete'])->name('Location.delete');
-Route::put('/location/update/{id}', [LocationController::class, 'update'])->name('Location.update');
+Route::put('/location/rename/{id}', [LocationController::class, 'rename'])->name('Location.rename');
 Route::put('/location/hidden/{id}', [LocationController::class, 'hidden'])->name('Location.hidden');
 
+Route::get('/search-devices/{searchDevices}',[SearchController::class,'searchDevices'])->name('searchDevices');
+
+
+// Artisan
 Route::get('art/migrate', function () {
     Artisan::call('php artisan migrate');
 });

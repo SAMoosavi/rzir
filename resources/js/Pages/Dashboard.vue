@@ -7,7 +7,22 @@
 
     <!------------------------section---------------------->
     <div class="py-12 ml-0 row g-2">
-      <!---------------------Locations------------------->
+      <!----------------------Search----------------------->
+      <div class="col-12">
+        <div class="flex justify-start mr-2 col-2">
+          <span class="p-2 m-0 text-center text-white bg-black rounded-r-lg"
+            ><i class="fas fa-search"></i
+          ></span>
+          <input
+            type="search"
+            name="searchDevices"
+            id="searchDevices"
+            v-model="searchDevices"
+            class="m-0 bg-white border-2 border-black rounded-l-lg w-96 focus:border-black focus:border-2"
+          />
+        </div>
+      </div>
+      <!----------------------Locations------------------->
       <div class="py-4 mr-2 bg-white shadow-xl col-2 sm:rounded-lg">
         <div class="flex bg-gray-100 border-b-2 border-gray-200" id="parent0">
           <div @click="getOfThis(0)" class="me-auto Pointer">
@@ -15,7 +30,7 @@
           </div>
           <div @click="oppenCreateLocation(null)">
             <i
-              class="mx-2 text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
+              class="mx-1 text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
             ></i>
           </div>
         </div>
@@ -46,18 +61,23 @@
                 ></i>
               </div>
             </div>
-            <div class="mx-2" @click="oppenCreateDevice(location.id)">
+            <div class="mx-1" @click="oppenCreateDevice(location.id)">
               <i
                 class="text-gray-300 fas fa-tshirt Pointer hover:text-yellow-500"
               ></i>
             </div>
-            <div @click="oppenCreateLocation(location.id)">
+            <div class="mx-1" @click="oppenCreateLocation(location.id)">
               <i
                 class="text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
               ></i>
             </div>
+            <div class="mx-1" @click="alertEditLocation(location.id, location.name)">
+              <i
+                class="text-gray-300 fas fa-pen Pointer hover:text-black"
+              ></i>
+            </div>
             <div
-              class="mx-2"
+              class="mx-1"
               @click="alertDeleteLocation(location.id, location.name)"
             >
               <i
@@ -126,8 +146,14 @@
                     </div>
                   </div>
                   <div
-                    class="mx-2"
-                    @click="alertDeleteDevice(device.id, device.name,device.location_id)"
+                    class="mx-1"
+                    @click="
+                      alertDeleteDevice(
+                        device.id,
+                        device.name,
+                        device.location_id
+                      )
+                    "
                   >
                     <i
                       class="text-gray-300 fas fa-trash-alt Pointer hover:text-red-600"
@@ -144,7 +170,7 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { Link } from "@inertiajs/inertia-vue3";
 import Swal from "sweetalert2";
@@ -226,6 +252,56 @@ export default defineComponent({
             confirmButtonColor: "#28a745",
           });
           this.getDescendantOf(this.formLocation.parent_id);
+        },
+      });
+    },
+
+    //-----------------Edite Location----------
+    alertEditLocation(id, name) {
+      Swal.fire({
+        title: "ویرایش نام",
+        input: "text",
+        inputValue: name,
+        confirmButtonText: "ویرایش",
+        cancelButtonText: "لغو",
+        showLoaderOnConfirm: true,
+        confirmButtonColor: "#28a745",
+        cancelButtonColor: "#6e7d88",
+        preConfirm: (newName) => {
+          return this.sendEditLoction(id, newName);
+        },
+        allowOutsideClick: () => !Swal.isLoading(),
+      });
+    },
+    sendEditLoction(id, newName) {
+      let editLocation = this.$inertia.form({ name: newName });
+      console.log(newName);
+      editLocation.put(this.route("Location.rename", { id }), {
+        onError: (errors) => {
+          Swal.fire({
+            icon: "error",
+            title: "خطاا!!!",
+            text: errors.name,
+            showConfirmButton: true,
+            showCancelButton: true,
+            cancelButtonText: "باشد",
+            confirmButtonText: "برگشت",
+            confirmButtonColor: "#7367f0",
+            cancelButtonColor: "#6e7d88",
+            preConfirm: () => {
+              return this.alertEditeLocation(id, newName);
+            },
+          });
+        },
+        onSuccess: () => {
+          Swal.fire({
+            icon: "success",
+            title: "با موفقیت افزوده شد.",
+            showConfirmButton: true,
+            confirmButtonText: "باشد",
+            confirmButtonColor: "#28a745",
+          });
+          this.getDescendantOf(id);
         },
       });
     },
@@ -350,7 +426,7 @@ export default defineComponent({
     },
 
     //------------------ِDelet Device-------------
-    alertDeleteDevice(id, name,location_id) {
+    alertDeleteDevice(id, name, location_id) {
       Swal.fire({
         title: "توجه!",
         icon: "warning",
@@ -362,11 +438,11 @@ export default defineComponent({
         confirmButtonColor: "#d33",
         cancelButtonColor: "#6e7d88",
         preConfirm: () => {
-          return this.sendDeleteDevice(id,name,location_id);
+          return this.sendDeleteDevice(id, name, location_id);
         },
       });
     },
-    sendDeleteDevice(id, name,location_id) {
+    sendDeleteDevice(id, name, location_id) {
       this.deleteDevice.delete(this.route("Device.delete", { id }), {
         onError: (errors) => {
           Swal.fire({
@@ -378,7 +454,7 @@ export default defineComponent({
             cancelButtonText: "باشد",
             confirmButtonText: "برگشت",
             preConfirm: () => {
-              return this.alertDeleteDevice(id, name,location_id);
+              return this.alertDeleteDevice(id, name, location_id);
             },
           });
         },
@@ -424,6 +500,21 @@ export default defineComponent({
     const devices = ref();
     const locations = ref();
 
+    const searchDevices = ref();
+    watch(searchDevices, () => {
+      loaderDevices.value = true;
+      axios
+        .get(`/search-devices/${searchDevices.value}`)
+        .then(function (response) {
+          devices.value = response.data.devices;
+        })
+        .catch(function (response) {
+          console.log(response);
+        })
+        .then(() => {
+          loaderDevices.value = false;
+        });
+    });
     // ------------------Location----------------------
 
     let createLocation = ref(false);
@@ -466,7 +557,7 @@ export default defineComponent({
       //           `<p class="Pointer">${element.name}</p>` +
       //           `</div>` +
       //           show +
-      //           `<div class="mx-2" v-on:click="oppenCreateDevice(${element.id})">` +
+      //           `<div class="mx-1" v-on:click="oppenCreateDevice(${element.id})">` +
       //           `<i class="text-gray-300 fas fa-tshirt Pointer"></i>` +
       //           `</div>` +
       //           `<div v-on:click="oppenCreateLocation(${element.id})">` +
@@ -504,7 +595,6 @@ export default defineComponent({
         .then(function (response) {
           // handle success
           devices.value = response.data.devices;
-          console.log(devices.value);
         })
         .catch(function (error) {
           // handle error
@@ -537,6 +627,7 @@ export default defineComponent({
       createLocation,
       getOfThis,
       loaderDevices,
+      searchDevices,
     };
   },
 });

@@ -12,7 +12,7 @@ class Device extends Model
 {
     use HasFactory;
 
-    use Searchable;
+    // use Searchable;
 
     protected $fillable = [
         'name',

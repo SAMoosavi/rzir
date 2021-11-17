@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Location extends Model
 {
     use HasFactory;
-    use Searchable;
+    // use Searchable;
     use NodeTrait;
 
     protected $guarded = [];

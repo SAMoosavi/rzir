@@ -88,10 +88,8 @@ class LocationController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function edit(Request $request, Location $id)
+    public function rename(Request $request, Location $id)
     {
-        $request = json_decode($request->getContent());
-
         $user = Auth::user();
 
         $request->validate([
@@ -104,7 +102,7 @@ class LocationController extends Controller
             'name' => $request->name,
         ]);
 
-        return response()->json([200]);
+        return redirect('/');
     }
 
     public function hidden(Location $id)

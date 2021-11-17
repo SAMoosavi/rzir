@@ -20684,9 +20684,69 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
+    //-----------------Edite Location----------
+    alertEditLocation: function alertEditLocation(id, name) {
+      var _this3 = this;
+
+      sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+        title: "ویرایش نام",
+        input: "text",
+        inputValue: name,
+        confirmButtonText: "ویرایش",
+        cancelButtonText: "لغو",
+        showLoaderOnConfirm: true,
+        confirmButtonColor: "#28a745",
+        cancelButtonColor: "#6e7d88",
+        preConfirm: function preConfirm(newName) {
+          return _this3.sendEditLoction(id, newName);
+        },
+        allowOutsideClick: function allowOutsideClick() {
+          return !sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().isLoading();
+        }
+      });
+    },
+    sendEditLoction: function sendEditLoction(id, newName) {
+      var _this4 = this;
+
+      var editLocation = this.$inertia.form({
+        name: newName
+      });
+      console.log(newName);
+      editLocation.put(this.route("Location.rename", {
+        id: id
+      }), {
+        onError: function onError(errors) {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+            icon: "error",
+            title: "خطاا!!!",
+            text: errors.name,
+            showConfirmButton: true,
+            showCancelButton: true,
+            cancelButtonText: "باشد",
+            confirmButtonText: "برگشت",
+            confirmButtonColor: "#7367f0",
+            cancelButtonColor: "#6e7d88",
+            preConfirm: function preConfirm() {
+              return _this4.alertEditeLocation(id, newName);
+            }
+          });
+        },
+        onSuccess: function onSuccess() {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+            icon: "success",
+            title: "با موفقیت افزوده شد.",
+            showConfirmButton: true,
+            confirmButtonText: "باشد",
+            confirmButtonColor: "#28a745"
+          });
+
+          _this4.getDescendantOf(id);
+        }
+      });
+    },
     //-------------------Delete Location----------
     alertDeleteLocation: function alertDeleteLocation(id, name) {
-      var _this3 = this;
+      var _this5 = this;
 
       sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
         title: "توجه!",
@@ -20699,12 +20759,12 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonColor: "#d33",
         cancelButtonColor: "#6e7d88",
         preConfirm: function preConfirm() {
-          return _this3.sendDeleteLoction(id);
+          return _this5.sendDeleteLoction(id);
         }
       });
     },
     sendDeleteLoction: function sendDeleteLoction(id, name) {
-      var _this4 = this;
+      var _this6 = this;
 
       this.deleteLoocation["delete"](this.route("Location.delete", {
         id: id
@@ -20719,7 +20779,7 @@ __webpack_require__.r(__webpack_exports__);
             cancelButtonText: "باشد",
             confirmButtonText: "برگشت",
             preConfirm: function preConfirm() {
-              return _this4.alertDeleteLocation(id, name);
+              return _this6.alertDeleteLocation(id, name);
             }
           });
         },
@@ -20731,7 +20791,7 @@ __webpack_require__.r(__webpack_exports__);
             confirmButtonText: "باشد"
           });
 
-          _this4.getOfThis(0);
+          _this6.getOfThis(0);
         }
       });
     },
@@ -20761,7 +20821,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     // -----------------Creat Device-----------
     alertCreateDevice: function alertCreateDevice() {
-      var _this5 = this;
+      var _this7 = this;
 
       sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
         title: "نام وسیله را وارد کنید",
@@ -20776,7 +20836,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonColor: "#28a745",
         cancelButtonColor: "#6e7d88",
         preConfirm: function preConfirm(name) {
-          return _this5.sendCreatDevice(name);
+          return _this7.sendCreatDevice(name);
         },
         allowOutsideClick: function allowOutsideClick() {
           return !sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().isLoading();
@@ -20784,7 +20844,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     sendCreatDevice: function sendCreatDevice(name) {
-      var _this6 = this;
+      var _this8 = this;
 
       this.formDevice.name = name;
       this.formDevice.post(this.route("Device.create"), {
@@ -20800,7 +20860,7 @@ __webpack_require__.r(__webpack_exports__);
             confirmButtonColor: "#7367f0",
             cancelButtonColor: "#6e7d88",
             preConfirm: function preConfirm() {
-              return _this6.alertCreateDevice();
+              return _this8.alertCreateDevice();
             }
           });
         },
@@ -20813,13 +20873,13 @@ __webpack_require__.r(__webpack_exports__);
             confirmButtonColor: "#28a745"
           });
 
-          _this6.getOfThis(_this6.formDevice.location_id);
+          _this8.getOfThis(_this8.formDevice.location_id);
         }
       });
     },
     //------------------ِDelet Device-------------
     alertDeleteDevice: function alertDeleteDevice(id, name, location_id) {
-      var _this7 = this;
+      var _this9 = this;
 
       sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
         title: "توجه!",
@@ -20832,12 +20892,12 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonColor: "#d33",
         cancelButtonColor: "#6e7d88",
         preConfirm: function preConfirm() {
-          return _this7.sendDeleteDevice(id, name, location_id);
+          return _this9.sendDeleteDevice(id, name, location_id);
         }
       });
     },
     sendDeleteDevice: function sendDeleteDevice(id, name, location_id) {
-      var _this8 = this;
+      var _this10 = this;
 
       this.deleteDevice["delete"](this.route("Device.delete", {
         id: id
@@ -20852,7 +20912,7 @@ __webpack_require__.r(__webpack_exports__);
             cancelButtonText: "باشد",
             confirmButtonText: "برگشت",
             preConfirm: function preConfirm() {
-              return _this8.alertDeleteDevice(id, name, location_id);
+              return _this10.alertDeleteDevice(id, name, location_id);
             }
           });
         },
@@ -20864,7 +20924,7 @@ __webpack_require__.r(__webpack_exports__);
             confirmButtonText: "باشد"
           });
 
-          _this8.getOfThis(location_id);
+          _this10.getOfThis(location_id);
         }
       });
     },
@@ -20898,7 +20958,18 @@ __webpack_require__.r(__webpack_exports__);
     var focus = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)("parent0");
     var userId = props.userId;
     var devices = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
-    var locations = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(); // ------------------Location----------------------
+    var locations = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
+    var searchDevices = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(searchDevices, function () {
+      loaderDevices.value = true;
+      axios__WEBPACK_IMPORTED_MODULE_4___default().get("/search-devices/".concat(searchDevices.value)).then(function (response) {
+        devices.value = response.data.devices;
+      })["catch"](function (response) {
+        console.log(response);
+      }).then(function () {
+        loaderDevices.value = false;
+      });
+    }); // ------------------Location----------------------
 
     var createLocation = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false); // ------------------Creat Location---------------------
 
@@ -20939,7 +21010,7 @@ __webpack_require__.r(__webpack_exports__);
       //           `<p class="Pointer">${element.name}</p>` +
       //           `</div>` +
       //           show +
-      //           `<div class="mx-2" v-on:click="oppenCreateDevice(${element.id})">` +
+      //           `<div class="mx-1" v-on:click="oppenCreateDevice(${element.id})">` +
       //           `<i class="text-gray-300 fas fa-tshirt Pointer"></i>` +
       //           `</div>` +
       //           `<div v-on:click="oppenCreateLocation(${element.id})">` +
@@ -20976,7 +21047,6 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_4___default().get("/device/show/".concat(id)).then(function (response) {
         // handle success
         devices.value = response.data.devices;
-        console.log(devices.value);
       })["catch"](function (error) {
         // handle error
         console.log(error);
@@ -21005,7 +21075,8 @@ __webpack_require__.r(__webpack_exports__);
       getDeviceOf: getDeviceOf,
       createLocation: createLocation,
       getOfThis: getOfThis,
-      loaderDevices: loaderDevices
+      loaderDevices: loaderDevices,
+      searchDevices: searchDevices
     };
   }
 }));
@@ -25036,58 +25107,64 @@ var _hoisted_2 = {
   "class": "py-12 ml-0 row g-2"
 };
 var _hoisted_3 = {
-  "class": "py-4 mr-2 bg-white shadow-xl col-2 sm:rounded-lg"
+  "class": "col-12"
 };
 var _hoisted_4 = {
+  "class": "flex justify-start mr-2 col-2"
+};
+
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "p-2 m-0 text-center text-white bg-black rounded-r-lg"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "fas fa-search"
+})], -1
+/* HOISTED */
+);
+
+var _hoisted_6 = {
+  "class": "py-4 mr-2 bg-white shadow-xl col-2 sm:rounded-lg"
+};
+var _hoisted_7 = {
   "class": "flex bg-gray-100 border-b-2 border-gray-200",
   id: "parent0"
 };
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "Pointer"
 }, "کلیه ی مکان ها", -1
 /* HOISTED */
 );
 
-var _hoisted_6 = [_hoisted_5];
+var _hoisted_9 = [_hoisted_8];
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "mx-2 text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "mx-1 text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_8 = [_hoisted_7];
-var _hoisted_9 = ["id"];
-var _hoisted_10 = {
+var _hoisted_11 = [_hoisted_10];
+var _hoisted_12 = ["id"];
+var _hoisted_13 = {
   "class": "flex"
 };
-var _hoisted_11 = ["onClick"];
-var _hoisted_12 = {
+var _hoisted_14 = ["onClick"];
+var _hoisted_15 = {
   "class": "Pointer"
 };
-var _hoisted_13 = ["onClick"];
-var _hoisted_14 = {
+var _hoisted_16 = ["onClick"];
+var _hoisted_17 = {
   key: 0
 };
-var _hoisted_15 = ["id"];
-var _hoisted_16 = {
+var _hoisted_18 = ["id"];
+var _hoisted_19 = {
   key: 1
 };
-var _hoisted_17 = ["id"];
-var _hoisted_18 = ["onClick"];
-
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "text-gray-300 fas fa-tshirt Pointer hover:text-yellow-500"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_20 = [_hoisted_19];
+var _hoisted_20 = ["id"];
 var _hoisted_21 = ["onClick"];
 
 var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
+  "class": "text-gray-300 fas fa-tshirt Pointer hover:text-yellow-500"
 }, null, -1
 /* HOISTED */
 );
@@ -25096,25 +25173,43 @@ var _hoisted_23 = [_hoisted_22];
 var _hoisted_24 = ["onClick"];
 
 var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "text-gray-300 fas fa-trash-alt Pointer hover:text-red-600"
+  "class": "text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
 }, null, -1
 /* HOISTED */
 );
 
 var _hoisted_26 = [_hoisted_25];
-var _hoisted_27 = ["id"];
-var _hoisted_28 = {
+var _hoisted_27 = ["onClick"];
+
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "text-gray-300 fas fa-pen Pointer hover:text-black"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_29 = [_hoisted_28];
+var _hoisted_30 = ["onClick"];
+
+var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "text-gray-300 fas fa-trash-alt Pointer hover:text-red-600"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_32 = [_hoisted_31];
+var _hoisted_33 = ["id"];
+var _hoisted_34 = {
   "class": "col-9 sm:px-6 lg:px-8"
 };
-var _hoisted_29 = {
+var _hoisted_35 = {
   "class": "mx-auto bg-white shadow-xl sm:rounded-lg"
 };
-var _hoisted_30 = {
+var _hoisted_36 = {
   key: 0,
   "class": "flex justify-center py-8"
 };
 
-var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   "class": "w-5 h-5 mr-3 text-gray-900 animate-spin",
   xmlns: "http://www.w3.org/2000/svg",
   fill: "none",
@@ -25134,53 +25229,53 @@ var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_32 = [_hoisted_31];
-var _hoisted_33 = {
+var _hoisted_38 = [_hoisted_37];
+var _hoisted_39 = {
   key: 1
 };
-var _hoisted_34 = {
+var _hoisted_40 = {
   key: 0,
   "class": "py-8"
 };
 
-var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
   "class": "text-3xl text-center text-black"
 }, " وسیله ای وجود ندارد ", -1
 /* HOISTED */
 );
 
-var _hoisted_36 = [_hoisted_35];
-var _hoisted_37 = {
+var _hoisted_42 = [_hoisted_41];
+var _hoisted_43 = {
   key: 1,
   "class": "p-4"
 };
-var _hoisted_38 = {
+var _hoisted_44 = {
   "class": "col-4"
 };
-var _hoisted_39 = {
+var _hoisted_45 = {
   "class": "col-4"
 };
-var _hoisted_40 = {
+var _hoisted_46 = {
   "class": "flex justify-end col-4"
 };
-var _hoisted_41 = ["onClick"];
-var _hoisted_42 = {
+var _hoisted_47 = ["onClick"];
+var _hoisted_48 = {
   key: 0
 };
-var _hoisted_43 = ["id"];
-var _hoisted_44 = {
+var _hoisted_49 = ["id"];
+var _hoisted_50 = {
   key: 1
 };
-var _hoisted_45 = ["id"];
-var _hoisted_46 = ["onClick"];
+var _hoisted_51 = ["id"];
+var _hoisted_52 = ["onClick"];
 
-var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_53 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "text-gray-300 fas fa-trash-alt Pointer hover:text-red-600"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_48 = [_hoisted_47];
+var _hoisted_54 = [_hoisted_53];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_app_layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("app-layout");
 
@@ -25191,109 +25286,127 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [_hoisted_1];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("-------------------Locations-----------------"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-        onClick: _cache[0] || (_cache[0] = function ($event) {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("--------------------Search---------------------"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        type: "search",
+        name: "searchDevices",
+        id: "searchDevices",
+        "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+          return _ctx.searchDevices = $event;
+        }),
+        "class": "m-0 bg-white border-2 border-black rounded-l-lg w-96 focus:border-black focus:border-2"
+      }, null, 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.searchDevices]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("--------------------Locations-----------------"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+        onClick: _cache[1] || (_cache[1] = function ($event) {
           return _ctx.getOfThis(0);
         }),
         "class": "me-auto Pointer"
-      }, _hoisted_6), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-        onClick: _cache[1] || (_cache[1] = function ($event) {
+      }, _hoisted_9), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+        onClick: _cache[2] || (_cache[2] = function ($event) {
           return _ctx.oppenCreateLocation(null);
         })
-      }, _hoisted_8)]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.locations, function (location, key) {
+      }, _hoisted_11)]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.locations, function (location, key) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           key: key,
           "class": "border-b-2 border-gray-200",
           id: "parent".concat(location.id)
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
           onClick: function onClick($event) {
             return _ctx.getOfThis(location.id);
           },
           "class": "me-auto Pointer"
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(location.name), 1
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(location.name), 1
         /* TEXT */
         )], 8
         /* PROPS */
-        , _hoisted_11), location.user_id == _ctx.userId ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+        , _hoisted_14), location.user_id == _ctx.userId ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           key: 0,
           onClick: function onClick($event) {
             return _ctx.hiddenLocation(location.id);
           }
-        }, [location.hidden == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+        }, [location.hidden == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
           "class": "text-gray-300 fas fa-eye Pointer hover:text-blue-500",
           id: "element".concat(location.id)
         }, null, 8
         /* PROPS */
-        , _hoisted_15)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), location.hidden == 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+        , _hoisted_18)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), location.hidden == 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
           id: "element".concat(location.id),
           "class": "text-gray-300 fas fa-eye-slash Pointer hover:text-blue-500"
         }, null, 8
         /* PROPS */
-        , _hoisted_17)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 8
+        , _hoisted_20)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 8
         /* PROPS */
-        , _hoisted_13)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-          "class": "mx-2",
+        , _hoisted_16)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+          "class": "mx-1",
           onClick: function onClick($event) {
             return _ctx.oppenCreateDevice(location.id);
-          }
-        }, _hoisted_20, 8
-        /* PROPS */
-        , _hoisted_18), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-          onClick: function onClick($event) {
-            return _ctx.oppenCreateLocation(location.id);
           }
         }, _hoisted_23, 8
         /* PROPS */
         , _hoisted_21), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-          "class": "mx-2",
+          "class": "mx-1",
           onClick: function onClick($event) {
-            return _ctx.alertDeleteLocation(location.id, location.name);
+            return _ctx.oppenCreateLocation(location.id);
           }
         }, _hoisted_26, 8
         /* PROPS */
-        , _hoisted_24)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+        , _hoisted_24), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+          "class": "mx-1",
+          onClick: function onClick($event) {
+            return _ctx.alertEditLocation(location.id, location.name);
+          }
+        }, _hoisted_29, 8
+        /* PROPS */
+        , _hoisted_27), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+          "class": "mx-1",
+          onClick: function onClick($event) {
+            return _ctx.alertDeleteLocation(location.id, location.name);
+          }
+        }, _hoisted_32, 8
+        /* PROPS */
+        , _hoisted_30)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
           "class": "pr-4",
           id: "descendant".concat(location.id)
         }, null, 8
         /* PROPS */
-        , _hoisted_27)], 8
+        , _hoisted_33)], 8
         /* PROPS */
-        , _hoisted_9);
+        , _hoisted_12);
       }), 128
       /* KEYED_FRAGMENT */
-      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("-------------------Devices---------------------"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [_ctx.loaderDevices ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_30, _hoisted_32)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !_ctx.loaderDevices ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_33, [_ctx.devices.length == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_34, _hoisted_36)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.devices.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_37, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.devices, function (device) {
+      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("-------------------Devices---------------------"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [_ctx.loaderDevices ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_36, _hoisted_38)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !_ctx.loaderDevices ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_39, [_ctx.devices.length == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_40, _hoisted_42)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.devices.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_43, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.devices, function (device) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           key: device.id,
           "class": "border-b-2 border-gray-200 row"
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_38, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.name), 1
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_44, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.name), 1
         /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_39, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.location), 1
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_45, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.location), 1
         /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [device.user_id == _ctx.userId ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [device.user_id == _ctx.userId ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           key: 0,
           onClick: function onClick($event) {
             return _ctx.hiddenDevice(device.id);
           }
-        }, [device.hidden == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+        }, [device.hidden == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
           "class": "text-gray-300 fas fa-eye Pointer hover:text-blue-500",
           id: "deviceElement".concat(device.id)
         }, null, 8
         /* PROPS */
-        , _hoisted_43)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), device.hidden == 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+        , _hoisted_49)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), device.hidden == 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_50, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
           id: "deviceElement".concat(device.id),
           "class": "text-gray-300 fas fa-eye-slash Pointer hover:text-blue-500"
         }, null, 8
         /* PROPS */
-        , _hoisted_45)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 8
+        , _hoisted_51)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 8
         /* PROPS */
-        , _hoisted_41)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-          "class": "mx-2",
+        , _hoisted_47)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+          "class": "mx-1",
           onClick: function onClick($event) {
             return _ctx.alertDeleteDevice(device.id, device.name, device.location_id);
           }
-        }, _hoisted_48, 8
+        }, _hoisted_54, 8
         /* PROPS */
-        , _hoisted_46)])]);
+        , _hoisted_52)])]);
       }), 128
       /* KEYED_FRAGMENT */
       ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])];

@@ -18,23 +18,24 @@ class LocationController extends Controller
         $locations = Team::find($teamId)->locations->toTree();
 
         $list = collect([]);
-        $traverse = function ($locations, $list, $prefix = '') use (&$traverse) {
+        $traverse = function ($locations, $list, $level = '') use (&$traverse) {
             foreach ($locations as $location) {
                 if (!($location->hidden == 1 && $location->user_id != Auth::user()->id)) {
-                    $name = $prefix . ' ' . $location->name;
+                    $level = $level . ' ' ;
                     $id = $location->id;
                     $hidden = $location->hidden;
                     $user_id = $location->user_id;
 
                     $l = [
-                        'name' => $name,
+                        'name' => $location->name,
                         'id' => $id,
                         'hidden' => $hidden,
                         'user_id' => $user_id,
+                        'level'=>$level,
                     ];
                     $list->push($l);
 
-                    $traverse($location->children, $list, $prefix . '-');
+                    $traverse($location->children, $list, $level . '-');
                 }
             }
             return $list;
@@ -92,11 +93,12 @@ class LocationController extends Controller
     {
         $user = Auth::user();
 
+        $Location = $id;
+
         $request->validate([
-            'name' => "required|string|unique:locations,name,$request->id,id,team_id,$user->current_team_id,parent_id,$request->parent_id",
+            'name' => "required|string|unique:locations,name,$Location->id,id,team_id,$user->current_team_id,parent_id,$Location->parent_id",
         ]);
 
-        $Location = $id;
 
         $Location->update([
             'name' => $request->name,

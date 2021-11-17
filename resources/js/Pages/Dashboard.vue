@@ -42,7 +42,7 @@
         >
           <div class="flex">
             <div @click="getOfThis(location.id)" class="me-auto Pointer">
-              <p class="Pointer">{{ location.name }}</p>
+              <p class="Pointer"> {{location.level}} {{ location.name }}</p>
             </div>
             <div
               v-if="location.user_id == userId"

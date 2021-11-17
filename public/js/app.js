@@ -20685,7 +20685,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     //-----------------Edite Location----------
-    alertEditLocation: function alertEditLocation(id, name) {
+    alertRenameLocation: function alertRenameLocation(id, name) {
       var _this3 = this;
 
       sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
@@ -20698,21 +20698,20 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonColor: "#28a745",
         cancelButtonColor: "#6e7d88",
         preConfirm: function preConfirm(newName) {
-          return _this3.sendEditLoction(id, newName);
+          return _this3.sendRenameLoction(id, newName);
         },
         allowOutsideClick: function allowOutsideClick() {
           return !sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().isLoading();
         }
       });
     },
-    sendEditLoction: function sendEditLoction(id, newName) {
+    sendRenameLoction: function sendRenameLoction(id, newName) {
       var _this4 = this;
 
-      var editLocation = this.$inertia.form({
+      var renameLocation = this.$inertia.form({
         name: newName
       });
-      console.log(newName);
-      editLocation.put(this.route("Location.rename", {
+      renameLocation.put(this.route("Location.rename", {
         id: id
       }), {
         onError: function onError(errors) {
@@ -20740,7 +20739,7 @@ __webpack_require__.r(__webpack_exports__);
             confirmButtonColor: "#28a745"
           });
 
-          _this4.getDescendantOf(id);
+          _this4.getOfThis(id);
         }
       });
     },
@@ -20877,9 +20876,67 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
+    //-----------------Edite Device----------
+    alertRenameDevice: function alertRenameDevice(id, name) {
+      var _this9 = this;
+
+      sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+        title: "ویرایش نام",
+        input: "text",
+        inputValue: name,
+        confirmButtonText: "ویرایش",
+        cancelButtonText: "لغو",
+        showLoaderOnConfirm: true,
+        confirmButtonColor: "#28a745",
+        cancelButtonColor: "#6e7d88",
+        preConfirm: function preConfirm(newName) {
+          return _this9.sendRenameDevice(id, newName);
+        },
+        allowOutsideClick: function allowOutsideClick() {
+          return !sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().isLoading();
+        }
+      });
+    },
+    sendRenameDevice: function sendRenameDevice(id, newName) {
+      var _this10 = this;
+
+      var renameDevice = this.$inertia.form({
+        name: newName
+      });
+      renameDevice.put(this.route("Device.rename", {
+        id: id
+      }), {
+        onError: function onError(errors) {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+            icon: "error",
+            title: "خطاا!!!",
+            text: errors.name,
+            showConfirmButton: true,
+            showCancelButton: true,
+            cancelButtonText: "باشد",
+            confirmButtonText: "برگشت",
+            confirmButtonColor: "#7367f0",
+            cancelButtonColor: "#6e7d88",
+            preConfirm: function preConfirm() {
+              return _this10.alertRenameDevice(id, newName);
+            }
+          });
+        },
+        onSuccess: function onSuccess() {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+            icon: "success",
+            title: "با موفقیت افزوده شد.",
+            showConfirmButton: true,
+            confirmButtonText: "باشد",
+            confirmButtonColor: "#28a745"
+          });
+          document.getElementById("name".concat(id)).textContent = newName;
+        }
+      });
+    },
     //------------------ِDelet Device-------------
     alertDeleteDevice: function alertDeleteDevice(id, name, location_id) {
-      var _this9 = this;
+      var _this11 = this;
 
       sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
         title: "توجه!",
@@ -20892,12 +20949,12 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonColor: "#d33",
         cancelButtonColor: "#6e7d88",
         preConfirm: function preConfirm() {
-          return _this9.sendDeleteDevice(id, name, location_id);
+          return _this11.sendDeleteDevice(id, name, location_id);
         }
       });
     },
     sendDeleteDevice: function sendDeleteDevice(id, name, location_id) {
-      var _this10 = this;
+      var _this12 = this;
 
       this.deleteDevice["delete"](this.route("Device.delete", {
         id: id
@@ -20912,7 +20969,7 @@ __webpack_require__.r(__webpack_exports__);
             cancelButtonText: "باشد",
             confirmButtonText: "برگشت",
             preConfirm: function preConfirm() {
-              return _this10.alertDeleteDevice(id, name, location_id);
+              return _this12.alertDeleteDevice(id, name, location_id);
             }
           });
         },
@@ -20924,7 +20981,7 @@ __webpack_require__.r(__webpack_exports__);
             confirmButtonText: "باشد"
           });
 
-          _this10.getOfThis(location_id);
+          _this12.getOfThis(location_id);
         }
       });
     },
@@ -25249,9 +25306,7 @@ var _hoisted_43 = {
   key: 1,
   "class": "p-4"
 };
-var _hoisted_44 = {
-  "class": "col-4"
-};
+var _hoisted_44 = ["id"];
 var _hoisted_45 = {
   "class": "col-4"
 };
@@ -25270,12 +25325,21 @@ var _hoisted_51 = ["id"];
 var _hoisted_52 = ["onClick"];
 
 var _hoisted_53 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "text-gray-300 fas fa-trash-alt Pointer hover:text-red-600"
+  "class": "text-gray-300 fas fa-pen Pointer hover:text-black"
 }, null, -1
 /* HOISTED */
 );
 
 var _hoisted_54 = [_hoisted_53];
+var _hoisted_55 = ["onClick"];
+
+var _hoisted_56 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "text-gray-300 fas fa-trash-alt Pointer hover:text-red-600"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_57 = [_hoisted_56];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_app_layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("app-layout");
 
@@ -25315,7 +25379,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             return _ctx.getOfThis(location.id);
           },
           "class": "me-auto Pointer"
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(location.name), 1
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(location.level) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(location.name), 1
         /* TEXT */
         )], 8
         /* PROPS */
@@ -25353,7 +25417,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         , _hoisted_24), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
           "class": "mx-1",
           onClick: function onClick($event) {
-            return _ctx.alertEditLocation(location.id, location.name);
+            return _ctx.alertRenameLocation(location.id, location.name);
           }
         }, _hoisted_29, 8
         /* PROPS */
@@ -25378,9 +25442,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           key: device.id,
           "class": "border-b-2 border-gray-200 row"
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_44, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.name), 1
-        /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_45, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.location), 1
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+          "class": "col-4",
+          id: "name".concat(device.id)
+        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.name), 9
+        /* TEXT, PROPS */
+        , _hoisted_44), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_45, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.location), 1
         /* TEXT */
         ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [device.user_id == _ctx.userId ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           key: 0,
@@ -25402,11 +25469,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         , _hoisted_47)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
           "class": "mx-1",
           onClick: function onClick($event) {
-            return _ctx.alertDeleteDevice(device.id, device.name, device.location_id);
+            return _ctx.alertRenameDevice(device.id, device.name);
           }
         }, _hoisted_54, 8
         /* PROPS */
-        , _hoisted_52)])]);
+        , _hoisted_52), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+          "class": "mx-1",
+          onClick: function onClick($event) {
+            return _ctx.alertDeleteDevice(device.id, device.name, device.location_id);
+          }
+        }, _hoisted_57, 8
+        /* PROPS */
+        , _hoisted_55)])]);
       }), 128
       /* KEYED_FRAGMENT */
       ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])];

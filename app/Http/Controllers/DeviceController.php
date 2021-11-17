@@ -111,22 +111,20 @@ class DeviceController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function edit(Request $request, Device $id)
+    public function rename(Request $request, Device $id)
     {
-        $request = json_decode($request->getContent());
+        $device = $id;
 
         $request->validate([
-            'name' => "required|string|unique:devices,name,$request->id,id,location_id,$request->location_id",
-            'body' => "nullable|string",
+            'name' => "required|string|unique:devices,name,$device->id,id,location_id,$device->location_id",
         ]);
 
-        $device = $id;
 
         $device->update([
             'name' => $request->name,
-            'body' => $request->body,
-            'hidden' => $request->hidden,
         ]);
+
+        return redirect('/');
     }
 
     public function hidden(Device $id)

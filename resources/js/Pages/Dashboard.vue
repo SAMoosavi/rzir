@@ -42,7 +42,7 @@
         >
           <div class="flex">
             <div @click="getOfThis(location.id)" class="me-auto Pointer">
-              <p class="Pointer"> {{location.level}} {{ location.name }}</p>
+              <p class="Pointer">{{ location.level }} {{ location.name }}</p>
             </div>
             <div
               v-if="location.user_id == userId"
@@ -71,10 +71,11 @@
                 class="text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
               ></i>
             </div>
-            <div class="mx-1" @click="alertEditLocation(location.id, location.name)">
-              <i
-                class="text-gray-300 fas fa-pen Pointer hover:text-black"
-              ></i>
+            <div
+              class="mx-1"
+              @click="alertRenameLocation(location.id, location.name)"
+            >
+              <i class="text-gray-300 fas fa-pen Pointer hover:text-black"></i>
             </div>
             <div
               class="mx-1"
@@ -125,7 +126,7 @@
                 :key="device.id"
                 class="border-b-2 border-gray-200 row"
               >
-                <p class="col-4">{{ device.name }}</p>
+                <p class="col-4" :id="`name${device.id}`">{{ device.name }}</p>
                 <p class="col-4">{{ device.location }}</p>
                 <div class="flex justify-end col-4">
                   <div
@@ -144,6 +145,14 @@
                         class="text-gray-300 fas fa-eye-slash Pointer hover:text-blue-500"
                       ></i>
                     </div>
+                  </div>
+                  <div
+                    class="mx-1"
+                    @click="alertRenameDevice(device.id, device.name)"
+                  >
+                    <i
+                      class="text-gray-300 fas fa-pen Pointer hover:text-black"
+                    ></i>
                   </div>
                   <div
                     class="mx-1"
@@ -257,7 +266,7 @@ export default defineComponent({
     },
 
     //-----------------Edite Location----------
-    alertEditLocation(id, name) {
+    alertRenameLocation(id, name) {
       Swal.fire({
         title: "ویرایش نام",
         input: "text",
@@ -268,15 +277,14 @@ export default defineComponent({
         confirmButtonColor: "#28a745",
         cancelButtonColor: "#6e7d88",
         preConfirm: (newName) => {
-          return this.sendEditLoction(id, newName);
+          return this.sendRenameLoction(id, newName);
         },
         allowOutsideClick: () => !Swal.isLoading(),
       });
     },
-    sendEditLoction(id, newName) {
-      let editLocation = this.$inertia.form({ name: newName });
-      console.log(newName);
-      editLocation.put(this.route("Location.rename", { id }), {
+    sendRenameLoction(id, newName) {
+      let renameLocation = this.$inertia.form({ name: newName });
+      renameLocation.put(this.route("Location.rename", { id }), {
         onError: (errors) => {
           Swal.fire({
             icon: "error",
@@ -301,7 +309,7 @@ export default defineComponent({
             confirmButtonText: "باشد",
             confirmButtonColor: "#28a745",
           });
-          this.getDescendantOf(id);
+          this.getOfThis(id);
         },
       });
     },
@@ -421,6 +429,55 @@ export default defineComponent({
             confirmButtonColor: "#28a745",
           });
           this.getOfThis(this.formDevice.location_id);
+        },
+      });
+    },
+
+    //-----------------Edite Device----------
+    alertRenameDevice(id, name) {
+      Swal.fire({
+        title: "ویرایش نام",
+        input: "text",
+        inputValue: name,
+        confirmButtonText: "ویرایش",
+        cancelButtonText: "لغو",
+        showLoaderOnConfirm: true,
+        confirmButtonColor: "#28a745",
+        cancelButtonColor: "#6e7d88",
+        preConfirm: (newName) => {
+          return this.sendRenameDevice(id, newName);
+        },
+        allowOutsideClick: () => !Swal.isLoading(),
+      });
+    },
+    sendRenameDevice(id, newName) {
+      let renameDevice = this.$inertia.form({ name: newName });
+      renameDevice.put(this.route("Device.rename", { id }), {
+        onError: (errors) => {
+          Swal.fire({
+            icon: "error",
+            title: "خطاا!!!",
+            text: errors.name,
+            showConfirmButton: true,
+            showCancelButton: true,
+            cancelButtonText: "باشد",
+            confirmButtonText: "برگشت",
+            confirmButtonColor: "#7367f0",
+            cancelButtonColor: "#6e7d88",
+            preConfirm: () => {
+              return this.alertRenameDevice(id, newName);
+            },
+          });
+        },
+        onSuccess: () => {
+          Swal.fire({
+            icon: "success",
+            title: "با موفقیت افزوده شد.",
+            showConfirmButton: true,
+            confirmButtonText: "باشد",
+            confirmButtonColor: "#28a745",
+          });
+          document.getElementById(`name${id}`).textContent = newName;
         },
       });
     },

@@ -2,7 +2,7 @@
   <jet-action-section>
     <template #title> حذف حساب کاربری </template>
 
-    <template #description> .حذف دائمی حساب کاربری </template>
+    <template #description> حذف دائمی حساب کاربری </template>
 
     <template #content>
       <div class="max-w-xl text-sm text-gray-600">
@@ -14,7 +14,8 @@
           حذف حساب کاربری
         </jet-danger-button>
       </div>
-      <!-- Delete Account Confirmation Modal
+
+      <!-- Delete Account Confirmation Modal -->
       <jet-dialog-modal :show="confirmingUserDeletion" @close="closeModal">
         <template #title> حذف حساب کاربری </template>
 
@@ -50,7 +51,7 @@
           </jet-danger-button>
         </template>
       </jet-dialog-modal>
-    </template> -->
+    </template>
   </jet-action-section>
 </template>
 
@@ -59,10 +60,10 @@ import { defineComponent } from "vue";
 import JetActionSection from "@/Jetstream/ActionSection.vue";
 import JetDangerButton from "@/Jetstream/DangerButton.vue";
 import Swal from "sweetalert2";
-// import JetDialogModal from "@/Jetstream/DialogModal.vue";
-// import JetInput from "@/Jetstream/Input.vue";
-// import JetInputError from "@/Jetstream/InputError.vue";
-// import JetSecondaryButton from "@/Jetstream/SecondaryButton.vue";
+import JetDialogModal from "@/Jetstream/DialogModal.vue";
+import JetInput from "@/Jetstream/Input.vue";
+import JetInputError from "@/Jetstream/InputError.vue";
+import JetSecondaryButton from "@/Jetstream/SecondaryButton.vue";
 
 export default defineComponent({
   components: {

@@ -2,9 +2,13 @@
     <Head title="منطقه امن" />
 
     <jet-authentication-card>
-        <template #logo>
-            <jet-authentication-card-logo />
-        </template>
+        <template #image>
+      <img
+        :src="'../image/confirm-password.png'"
+        class="h-screen p-0 m-0"
+        alt="تصویر صفحه منطقه امن"
+      />
+    </template>
 
         <div class="mb-4 text-sm text-gray-600">
             این یک منطقه امن برنامه است. لطفاً قبل از ادامه رمز عبور خود را تأیید کنید.
@@ -15,7 +19,7 @@
         <form @submit.prevent="submit">
             <div>
                 <jet-label for="password" value="رمز عبور" />
-                <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" autofocus />
+                <jet-input id="password" type="password" class="block w-full mt-1 text-left" v-model="form.password" required autocomplete="current-password" autofocus />
             </div>
 
             <div class="flex justify-end mt-4">

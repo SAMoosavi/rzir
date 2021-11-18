@@ -16,17 +16,17 @@
 
             <div class="mt-4">
                 <jet-label for="email" value="ایمیل" />
-                <jet-input id="email" type="email" class="block w-full mt-1" v-model="form.email"  />
+                <jet-input id="email" type="email" class="block w-full mt-1 text-left" v-model="form.email"  />
             </div>
 
             <div class="mt-4">
                 <jet-label for="password" value="رمز عبور" />
-                <jet-input id="password" type="password" class="block w-full mt-1" v-model="form.password"  autocomplete="new-password" />
+                <jet-input id="password" type="password" class="block w-full mt-1 text-left" v-model="form.password"  autocomplete="new-password" />
             </div>
 
             <div class="mt-4">
                 <jet-label for="password_confirmation" value="تکرار رمز عبور" />
-                <jet-input id="password_confirmation" type="password" class="block w-full mt-1" v-model="form.password_confirmation"  autocomplete="new-password" />
+                <jet-input id="password_confirmation" type="password" class="block w-full mt-1 text-left" v-model="form.password_confirmation"  autocomplete="new-password" />
             </div>
 
             <div class="mt-4" v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature">

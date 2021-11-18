@@ -7,7 +7,7 @@
         </template>
 
         <jet-validation-errors class="mb-4" />
-        
+
         <div class="mb-4 text-lg text-justify text-gray-600">
             رمز عبور خود را فراموش کرده اید؟ مشکلی نیست فقط آدرس ایمیل خود را به ما اطلاع دهید و ما یک پیوند بازنشانی رمز عبور را برای شما ایمیل می کنیم که به شما امکان می دهد رمز جدیدی را انتخاب کنید.       </div>
 
@@ -19,7 +19,7 @@
         <form @submit.prevent="submit">
             <div>
                 <jet-label for="email" value="ایمیل" />
-                <jet-input id="email" type="email" class="block w-full mt-1" v-model="form.email" />
+                <jet-input id="email" type="email" class="block w-full mt-1 text-left" v-model="form.email" />
             </div>
 
             <div class="flex items-center justify-end mt-4">

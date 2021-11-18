@@ -2,23 +2,24 @@
     <Head title="فراموش رمز عبور" />
 
     <jet-authentication-card>
-        <template #logo>
-            <jet-authentication-card-logo />
+        <template #image>
+            <img :src="'../image/Forgot-Password.png'" alt="تصویر صفحه فراموشی رمز ورود" class="h-screen p-0 m-0">
         </template>
 
-        <div class="mb-4 text-sm text-gray-600">
+        <jet-validation-errors class="mb-4" />
+        
+        <div class="mb-4 text-lg text-justify text-gray-600">
             رمز عبور خود را فراموش کرده اید؟ مشکلی نیست فقط آدرس ایمیل خود را به ما اطلاع دهید و ما یک پیوند بازنشانی رمز عبور را برای شما ایمیل می کنیم که به شما امکان می دهد رمز جدیدی را انتخاب کنید.       </div>
 
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+        <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
             {{ status }}
         </div>
 
-        <jet-validation-errors class="mb-4" />
 
         <form @submit.prevent="submit">
             <div>
                 <jet-label for="email" value="ایمیل" />
-                <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus />
+                <jet-input id="email" type="email" class="block w-full mt-1" v-model="form.email" />
             </div>
 
             <div class="flex items-center justify-end mt-4">

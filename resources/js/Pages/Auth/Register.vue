@@ -2,31 +2,31 @@
     <Head title="ثبتنام" />
 
     <jet-authentication-card>
-        <template #logo>
-            <jet-authentication-card-logo />
-        </template>
+        <template #image>
+      <img :src="'../image/register.png'" class="h-screen p-0 m-0" alt="تصویر صفحه ثبتنام" />
+    </template>
 
         <jet-validation-errors class="mb-4" />
 
         <form @submit.prevent="submit">
             <div>
                 <jet-label for="name" value="نام" />
-                <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="name" />
+                <jet-input id="name" type="text" class="block w-full mt-1" v-model="form.name"  autocomplete="name" />
             </div>
 
             <div class="mt-4">
                 <jet-label for="email" value="ایمیل" />
-                <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required />
+                <jet-input id="email" type="email" class="block w-full mt-1" v-model="form.email"  />
             </div>
 
             <div class="mt-4">
                 <jet-label for="password" value="رمز عبور" />
-                <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
+                <jet-input id="password" type="password" class="block w-full mt-1" v-model="form.password"  autocomplete="new-password" />
             </div>
 
             <div class="mt-4">
                 <jet-label for="password_confirmation" value="تکرار رمز عبور" />
-                <jet-input id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
+                <jet-input id="password_confirmation" type="password" class="block w-full mt-1" v-model="form.password_confirmation"  autocomplete="new-password" />
             </div>
 
             <div class="mt-4" v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature">
@@ -35,15 +35,15 @@
                         <jet-checkbox name="terms" id="terms" v-model:checked="form.terms" />
 
                         <div class="ml-2">
-                            من موافقم <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900">شرایط استفاده از خدمات</a> and <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900">سیاست حفظ حریم خصوصی</a>
+                            من موافقم <a target="_blank" :href="route('terms.show')" class="text-sm text-gray-600 underline hover:text-gray-900">شرایط استفاده از خدمات</a> and <a target="_blank" :href="route('policy.show')" class="text-sm text-gray-600 underline hover:text-gray-900">سیاست حفظ حریم خصوصی</a>
                         </div>
                     </div>
                 </jet-label>
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    قبلا ثبت نام کرده اید؟
+                <Link :href="route('login')" class="ml-auto text-sm text-gray-500 underline hover:text-black">
+                    قبلا ثبت نام کرده ام
                 </Link>
 
                 <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">

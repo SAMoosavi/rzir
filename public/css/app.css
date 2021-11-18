@@ -5959,6 +5959,9 @@ select {
 .mr-0 {
   margin-right: 0px;
 }
+.ml-auto {
+  margin-left: auto;
+}
 .block {
   display: block;
 }

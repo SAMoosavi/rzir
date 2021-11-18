@@ -3,7 +3,7 @@
 
   <jet-authentication-card>
     <template #image>
-      <img :src="'../image/login.png'" class="p-0 m-0" alt="تصویر صفحه ورود" />
+      <img :src="'../image/login.png'" class="h-screen p-0 m-0" alt="تصویر صفحه ورود" />
     </template>
 
     <jet-validation-errors class="mb-4" />

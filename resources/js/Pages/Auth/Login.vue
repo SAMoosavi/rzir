@@ -51,7 +51,7 @@
         </Link>
 
         <jet-button
-          class="ml-4 bg-black hover:bg-gray-600"
+          class="ml-4 "
           :class="{ 'opacity-25': form.processing }"
           :disabled="form.processing"
         >

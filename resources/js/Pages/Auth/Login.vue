@@ -45,13 +45,12 @@
         <Link
           v-if="canResetPassword"
           :href="route('password.request')"
-          class="mx-2 text-sm text-gray-500 underline hover:text-black"
+          class="ml-auto text-sm text-gray-500 underline hover:text-black"
         >
           رمز عبور خود را فراموش کرده اید؟
         </Link>
 
         <jet-button
-          class="ml-4 "
           :class="{ 'opacity-25': form.processing }"
           :disabled="form.processing"
         >

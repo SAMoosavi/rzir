@@ -21824,6 +21824,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_Label_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Jetstream/Label.vue */ "./resources/js/Jetstream/Label.vue");
 /* harmony import */ var _Jetstream_SecondaryButton_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Jetstream/SecondaryButton.vue */ "./resources/js/Jetstream/SecondaryButton.vue");
 /* harmony import */ var _Jetstream_SectionBorder_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/Jetstream/SectionBorder.vue */ "./resources/js/Jetstream/SectionBorder.vue");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_13__);
+
 
 
 
@@ -21850,14 +21853,15 @@ __webpack_require__.r(__webpack_exports__);
     JetInputError: _Jetstream_InputError_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
     JetLabel: _Jetstream_Label_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
     JetSecondaryButton: _Jetstream_SecondaryButton_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
-    JetSectionBorder: _Jetstream_SectionBorder_vue__WEBPACK_IMPORTED_MODULE_12__["default"]
+    JetSectionBorder: _Jetstream_SectionBorder_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
+    Swal: (sweetalert2__WEBPACK_IMPORTED_MODULE_13___default())
   },
   props: ["team", "availableRoles", "userPermissions"],
   data: function data() {
     return {
       addTeamMemberForm: this.$inertia.form({
         email: "",
-        role: null
+        role: 'editor'
       }),
       updateRoleForm: this.$inertia.form({
         role: null
@@ -21905,21 +21909,58 @@ __webpack_require__.r(__webpack_exports__);
     confirmLeavingTeam: function confirmLeavingTeam() {
       this.confirmingLeavingTeam = true;
     },
+    alertLeaveTeam: function alertLeaveTeam() {
+      var _this3 = this;
+
+      sweetalert2__WEBPACK_IMPORTED_MODULE_13___default().fire({
+        title: "توجه!",
+        icon: "warning",
+        text: ' آیا مطمئن هستید که می خواهید این گروه را ترک کنید؟',
+        showCancelButton: true,
+        confirmButtonText: "حذف",
+        cancelButtonText: "لغو",
+        showLoaderOnConfirm: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#6e7d88",
+        preConfirm: function preConfirm() {
+          return _this3.leaveTeam();
+        }
+      });
+    },
     leaveTeam: function leaveTeam() {
       this.leaveTeamForm["delete"](route("team-members.destroy", [this.team, this.$page.props.user]));
     },
     confirmTeamMemberRemoval: function confirmTeamMemberRemoval(teamMember) {
       this.teamMemberBeingRemoved = teamMember;
     },
+    alertRemoveTeamMember: function alertRemoveTeamMember(teamMember) {
+      var _this4 = this;
+
+      this.teamMemberBeingRemoved = teamMember;
+      sweetalert2__WEBPACK_IMPORTED_MODULE_13___default().fire({
+        title: "توجه!",
+        icon: "warning",
+        text: 'آیا مطمئن هستید که می خواهید این فرد را از گروه حذف کنید؟',
+        showCancelButton: true,
+        confirmButtonText: "حذف",
+        cancelButtonText: "لغو",
+        showLoaderOnConfirm: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#6e7d88",
+        preConfirm: function preConfirm() {
+          return _this4.removeTeamMember();
+        }
+      });
+    },
     removeTeamMember: function removeTeamMember() {
-      var _this3 = this;
+      var _this5 = this;
 
       this.removeTeamMemberForm["delete"](route("team-members.destroy", [this.team, this.teamMemberBeingRemoved]), {
         errorBag: "removeTeamMember",
         preserveScroll: true,
         preserveState: true,
         onSuccess: function onSuccess() {
-          return _this3.teamMemberBeingRemoved = null;
+          return _this5.teamMemberBeingRemoved = null;
         }
       });
     },
@@ -26936,143 +26977,51 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_5 = {
   "class": "col-span-6 sm:col-span-4"
 };
-var _hoisted_6 = {
-  key: 0,
-  "class": "col-span-6 lg:col-span-4"
-};
-var _hoisted_7 = {
-  "class": "relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer"
-};
-var _hoisted_8 = ["onClick"];
-var _hoisted_9 = {
-  "class": "flex items-center"
-};
-var _hoisted_10 = {
-  key: 0,
-  "class": "ml-2 h-5 w-5 text-green-400",
-  fill: "none",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "stroke-width": "2",
-  stroke: "currentColor",
-  viewBox: "0 0 24 24"
-};
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  d: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-}, null, -1
-/* HOISTED */
-);
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" افزوده شد. ");
 
-var _hoisted_12 = [_hoisted_11];
-var _hoisted_13 = {
-  "class": "mt-2 text-xs text-gray-600 text-left"
-};
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" افزودن ");
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" افزوده شد. ");
-
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" افزودن ");
-
-var _hoisted_16 = {
+var _hoisted_8 = {
   key: 1
 };
 
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" دعوت‌نامه‌های گروه در انتظار ");
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" دعوت‌نامه‌های گروه در انتظار ");
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" این افراد به گروه شما دعوت شده اند و یک ایمیل دعوت برای آنها ارسال شده است. آنها ممکن است با پذیرش دعوتنامه به گروه ملحق شوند. ");
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" این افراد به گروه شما دعوت شده اند و یک ایمیل دعوت برای آنها ارسال شده است. آنها ممکن است با پذیرش دعوتنامه به گروه ملحق شوند. ");
 
-var _hoisted_19 = {
+var _hoisted_11 = {
   "class": "space-y-6"
 };
-var _hoisted_20 = {
+var _hoisted_12 = {
   "class": "text-gray-600"
 };
-var _hoisted_21 = {
+var _hoisted_13 = {
   "class": "flex items-center"
 };
-var _hoisted_22 = ["onClick"];
-var _hoisted_23 = {
+var _hoisted_14 = ["onClick"];
+var _hoisted_15 = {
   key: 2
 };
 
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" اعضای گروه ");
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" اعضای گروه ");
 
-var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" همه افرادی که در این گروه عضو هستند. ");
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" همه افرادی که در این گروه عضو هستند. ");
 
-var _hoisted_26 = {
+var _hoisted_18 = {
   "class": "space-y-6"
 };
-var _hoisted_27 = {
+var _hoisted_19 = {
   "class": "flex items-center"
 };
-var _hoisted_28 = ["src", "alt"];
-var _hoisted_29 = {
-  "class": "ml-4"
+var _hoisted_20 = ["src", "alt"];
+var _hoisted_21 = {
+  "class": "mr-4"
 };
-var _hoisted_30 = {
+var _hoisted_22 = {
   "class": "flex items-center"
 };
-var _hoisted_31 = ["onClick"];
-var _hoisted_32 = {
-  key: 1,
-  "class": "ml-2 text-sm text-gray-400"
-};
-var _hoisted_33 = ["onClick"];
-
-var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Manage Role ");
-
-var _hoisted_35 = {
-  key: 0
-};
-var _hoisted_36 = {
-  "class": "relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer"
-};
-var _hoisted_37 = ["onClick"];
-var _hoisted_38 = {
-  "class": "flex items-center"
-};
-var _hoisted_39 = {
-  key: 0,
-  "class": "ml-2 h-5 w-5 text-green-400",
-  fill: "none",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "stroke-width": "2",
-  stroke: "currentColor",
-  viewBox: "0 0 24 24"
-};
-
-var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  d: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_41 = [_hoisted_40];
-var _hoisted_42 = {
-  "class": "mt-2 text-xs text-gray-600"
-};
-
-var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" لغو ");
-
-var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" دخیره ");
-
-var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Leave Team ");
-
-var _hoisted_46 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" آیا مطمئن هستید که می خواهید این گروه را ترک کنید؟ ");
-
-var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" لغو ");
-
-var _hoisted_48 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" ترک کردن ");
-
-var _hoisted_49 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" حذف عضو ");
-
-var _hoisted_50 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" آیا مطمئن هستید که می خواهید این فرد را از گروه حذف کنید؟ ");
-
-var _hoisted_51 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" لغو ");
-
-var _hoisted_52 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" حدف ");
-
+var _hoisted_23 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_section_border = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-section-border");
 
@@ -27090,14 +27039,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_jet_action_section = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-action-section");
 
-  var _component_jet_secondary_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-secondary-button");
-
-  var _component_jet_dialog_modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-dialog-modal");
-
-  var _component_jet_danger_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-danger-button");
-
-  var _component_jet_confirmation_modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-confirmation-modal");
-
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [_ctx.userPermissions.canAddTeamMembers ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_section_border), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Add Team Member "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_form_section, {
     onSubmitted: _ctx.addTeamMember
   }, {
@@ -27114,7 +27055,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "email",
         type: "email",
-        "class": "mt-1 block w-full",
+        "class": "block w-full mt-1 text-left",
         modelValue: _ctx.addTeamMemberForm.email,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return _ctx.addTeamMemberForm.email = $event;
@@ -27126,53 +27067,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "mt-2"
       }, null, 8
       /* PROPS */
-      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Role "), _ctx.availableRoles.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-        "for": "roles",
-        value: "نقش"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-        message: _ctx.addTeamMemberForm.errors.role,
-        "class": "mt-2"
-      }, null, 8
-      /* PROPS */
-      , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.availableRoles, function (role, i) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
-          type: "button",
-          "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200", {
-            'border-t border-gray-200 rounded-t-none': i > 0,
-            'rounded-b-none': i != Object.keys(_ctx.availableRoles).length - 1
-          }]),
-          onClick: function onClick($event) {
-            return _ctx.addTeamMemberForm.role = role.key;
-          },
-          key: role.key
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-          "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-            'opacity-50': _ctx.addTeamMemberForm.role && _ctx.addTeamMemberForm.role != role.key
-          })
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Role Name "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-          "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["text-sm text-gray-600", {
-            'font-semibold': _ctx.addTeamMemberForm.role == role.key
-          }])
-        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(role.name), 3
-        /* TEXT, CLASS */
-        ), _ctx.addTeamMemberForm.role == role.key ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_10, _hoisted_12)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Role Description "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(role.description), 1
-        /* TEXT */
-        )], 2
-        /* CLASS */
-        )], 10
-        /* CLASS, PROPS */
-        , _hoisted_8);
-      }), 128
-      /* KEYED_FRAGMENT */
-      ))])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  Role "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div\n            class=\"col-span-6 lg:col-span-4\"\n            v-if=\"availableRoles.length > 0\"\n          >\n            <jet-label for=\"roles\" value=\"نقش\" />\n            <jet-input-error\n              :message=\"addTeamMemberForm.errors.role\"\n              class=\"mt-2\"\n            />\n\n            <div\n              class=\"relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer \"\n            >\n              <button\n                type=\"button\"\n                class=\"relative inline-flex w-full px-4 py-3 rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200\"\n                :class=\"{\n                  'border-t border-gray-200 rounded-t-none': i > 0,\n                  'rounded-b-none': i != Object.keys(availableRoles).length - 1,\n                }\"\n                v-for=\"(role, i) in availableRoles\"\n                :key=\"role.key\"\n              >\n                <div\n                  :class=\"{\n                    'opacity-50':\n                      addTeamMemberForm.role &&\n                      addTeamMemberForm.role != role.key,\n                  }\"\n                >\n                  Role Name\n                  <div class=\"flex items-center\">\n                    <div\n                      class=\"text-sm text-gray-600\"\n                      :class=\"{\n                        'font-semibold': addTeamMemberForm.role == role.key,\n                      }\"\n                    >\n                      {{ role.name }}\n                    </div>\n\n                    <svg\n                      v-if=\"addTeamMemberForm.role == role.key\"\n                      class=\"w-5 h-5 ml-2 text-green-400\"\n                      fill=\"none\"\n                      stroke-linecap=\"round\"\n                      stroke-linejoin=\"round\"\n                      stroke-width=\"2\"\n                      stroke=\"currentColor\"\n                      viewBox=\"0 0 24 24\"\n                    >\n                      <path\n                        d=\"M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z\"\n                      ></path>\n                    </svg>\n                  </div>\n\n                  Role Description\n                  <div class=\"mt-2 text-xs text-left text-gray-600\">\n                    {{ role.description }}\n                  </div>\n                </div>\n              </button>\n            </div>\n          </div> ")];
     }),
     actions: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_action_message, {
         on: _ctx.addTeamMemberForm.recentlySuccessful,
-        "class": "mr-3"
+        "class": "ml-3"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_14];
+          return [_hoisted_6];
         }),
         _: 1
         /* STABLE */
@@ -27186,7 +27089,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         disabled: _ctx.addTeamMemberForm.processing
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_15];
+          return [_hoisted_7];
         }),
         _: 1
         /* STABLE */
@@ -27200,31 +27103,31 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["onSubmitted"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.team.team_invitations.length > 0 && _ctx.userPermissions.canAddTeamMembers ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_section_border), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Team Member Invitations "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_action_section, {
+  , ["onSubmitted"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.team.team_invitations.length > 0 && _ctx.userPermissions.canAddTeamMembers ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_section_border), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Team Member Invitations "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_action_section, {
     "class": "mt-10 sm:mt-0"
   }, {
     title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_17];
+      return [_hoisted_9];
     }),
     description: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_18];
+      return [_hoisted_10];
     }),
     content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.team.team_invitations, function (invitation) {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.team.team_invitations, function (invitation) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           "class": "flex items-center justify-between",
           key: invitation.id
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(invitation.email), 1
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(invitation.email), 1
         /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Cancel Team Invitation "), _ctx.userPermissions.canRemoveTeamMembers ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Cancel Team Invitation "), _ctx.userPermissions.canRemoveTeamMembers ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
           key: 0,
-          "class": "cursor-pointer ml-6 text-sm text-red-500 focus:outline-none",
+          "class": "ml-6 text-sm text-red-500 cursor-pointer focus:outline-none",
           onClick: function onClick($event) {
             return _ctx.cancelTeamInvitation(invitation);
           }
         }, " لغو ", 8
         /* PROPS */
-        , _hoisted_22)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
+        , _hoisted_14)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
       }), 128
       /* KEYED_FRAGMENT */
       ))])];
@@ -27232,53 +27135,43 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.team.users.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_section_border), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Manage Team Members "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_action_section, {
+  })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.team.users.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_section_border), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Manage Team Members "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_action_section, {
     "class": "mt-10 sm:mt-0"
   }, {
     title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_24];
+      return [_hoisted_16];
     }),
     description: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_25];
+      return [_hoisted_17];
     }),
     content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.team.users, function (user) {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.team.users, function (user) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           "class": "flex items-center justify-between",
           key: user.id
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
           "class": "w-8 h-8 rounded-full",
           src: user.profile_photo_url,
           alt: user.name
         }, null, 8
         /* PROPS */
-        , _hoisted_28), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user.name), 1
+        , _hoisted_20), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user.name), 1
         /* TEXT */
-        )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Manage Team Member Role "), _ctx.userPermissions.canAddTeamMembers && _ctx.availableRoles.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+        )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Manage Team Member Role "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button\n                  class=\"ml-2 text-sm text-gray-400 underline\"\n                  @click=\"manageRole(user)\"\n                  v-if=\"\n                    userPermissions.canAddTeamMembers && availableRoles.length\n                  \"\n                >\n                  {{ displayableRole(user.membership.role) }}\n                </button>\n\n                <div\n                  class=\"ml-2 text-sm text-gray-400\"\n                  v-else-if=\"availableRoles.length\"\n                >\n                  {{ displayableRole(user.membership.role) }}\n                </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Leave Team "), _ctx.$page.props.user.id === user.id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
           key: 0,
-          "class": "ml-2 text-sm text-gray-400 underline",
-          onClick: function onClick($event) {
-            return _ctx.manageRole(user);
-          }
-        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.displayableRole(user.membership.role)), 9
-        /* TEXT, PROPS */
-        , _hoisted_31)) : _ctx.availableRoles.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.displayableRole(user.membership.role)), 1
-        /* TEXT */
-        )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Leave Team "), _ctx.$page.props.user.id === user.id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
-          key: 2,
-          "class": "cursor-pointer ml-6 text-sm text-red-500",
+          "class": "ml-6 text-sm text-red-500 cursor-pointer",
           onClick: _cache[1] || (_cache[1] = function () {
-            return _ctx.confirmLeavingTeam && _ctx.confirmLeavingTeam.apply(_ctx, arguments);
+            return _ctx.alertLeaveTeam && _ctx.alertLeaveTeam.apply(_ctx, arguments);
           })
         }, " ترک کردن ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Remove Team Member "), _ctx.userPermissions.canRemoveTeamMembers ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
-          key: 3,
-          "class": "cursor-pointer ml-6 text-sm text-red-500",
+          key: 1,
+          "class": "ml-6 text-sm text-red-500 cursor-pointer",
           onClick: function onClick($event) {
-            return _ctx.confirmTeamMemberRemoval(user);
+            return _ctx.alertRemoveTeamMember(user);
           }
         }, " حذف کردن ", 8
         /* PROPS */
-        , _hoisted_33)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
+        , _hoisted_23)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
       }), 128
       /* KEYED_FRAGMENT */
       ))])];
@@ -27286,175 +27179,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Role Management Modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_dialog_modal, {
-    show: _ctx.currentlyManagingRole,
-    onClose: _cache[3] || (_cache[3] = function ($event) {
-      return _ctx.currentlyManagingRole = false;
-    })
-  }, {
-    title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_34];
-    }),
-    content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_ctx.managingRoleFor ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.availableRoles, function (role, i) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
-          type: "button",
-          "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200", {
-            'border-t border-gray-200 rounded-t-none': i > 0,
-            'rounded-b-none': i !== Object.keys(_ctx.availableRoles).length - 1
-          }]),
-          onClick: function onClick($event) {
-            return _ctx.updateRoleForm.role = role.key;
-          },
-          key: role.key
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-          "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-            'opacity-50': _ctx.updateRoleForm.role && _ctx.updateRoleForm.role !== role.key
-          })
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Role Name "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-          "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["text-sm text-gray-600", {
-            'font-semibold': _ctx.updateRoleForm.role === role.key
-          }])
-        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(role.name), 3
-        /* TEXT, CLASS */
-        ), _ctx.updateRoleForm.role === role.key ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_39, _hoisted_41)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Role Description "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(role.description), 1
-        /* TEXT */
-        )], 2
-        /* CLASS */
-        )], 10
-        /* CLASS, PROPS */
-        , _hoisted_37);
-      }), 128
-      /* KEYED_FRAGMENT */
-      ))])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
-    }),
-    footer: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
-        onClick: _cache[2] || (_cache[2] = function ($event) {
-          return _ctx.currentlyManagingRole = false;
-        })
-      }, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_43];
-        }),
-        _: 1
-        /* STABLE */
-
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_button, {
-        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["ml-2", {
-          'opacity-25': _ctx.updateRoleForm.processing
-        }]),
-        onClick: _ctx.updateRole,
-        disabled: _ctx.updateRoleForm.processing
-      }, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_44];
-        }),
-        _: 1
-        /* STABLE */
-
-      }, 8
-      /* PROPS */
-      , ["onClick", "class", "disabled"])];
-    }),
-    _: 1
-    /* STABLE */
-
-  }, 8
-  /* PROPS */
-  , ["show"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Leave Team Confirmation Modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_confirmation_modal, {
-    show: _ctx.confirmingLeavingTeam,
-    onClose: _cache[5] || (_cache[5] = function ($event) {
-      return _ctx.confirmingLeavingTeam = false;
-    })
-  }, {
-    title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_45];
-    }),
-    content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_46];
-    }),
-    footer: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
-        onClick: _cache[4] || (_cache[4] = function ($event) {
-          return _ctx.confirmingLeavingTeam = false;
-        })
-      }, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_47];
-        }),
-        _: 1
-        /* STABLE */
-
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_danger_button, {
-        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["ml-2", {
-          'opacity-25': _ctx.leaveTeamForm.processing
-        }]),
-        onClick: _ctx.leaveTeam,
-        disabled: _ctx.leaveTeamForm.processing
-      }, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_48];
-        }),
-        _: 1
-        /* STABLE */
-
-      }, 8
-      /* PROPS */
-      , ["onClick", "class", "disabled"])];
-    }),
-    _: 1
-    /* STABLE */
-
-  }, 8
-  /* PROPS */
-  , ["show"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Remove Team Member Confirmation Modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_confirmation_modal, {
-    show: _ctx.teamMemberBeingRemoved,
-    onClose: _cache[7] || (_cache[7] = function ($event) {
-      return _ctx.teamMemberBeingRemoved = null;
-    })
-  }, {
-    title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_49];
-    }),
-    content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_50];
-    }),
-    footer: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
-        onClick: _cache[6] || (_cache[6] = function ($event) {
-          return _ctx.teamMemberBeingRemoved = null;
-        })
-      }, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_51];
-        }),
-        _: 1
-        /* STABLE */
-
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_danger_button, {
-        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["ml-2", {
-          'opacity-25': _ctx.removeTeamMemberForm.processing
-        }]),
-        onClick: _ctx.removeTeamMember,
-        disabled: _ctx.removeTeamMemberForm.processing
-      }, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_52];
-        }),
-        _: 1
-        /* STABLE */
-
-      }, 8
-      /* PROPS */
-      , ["onClick", "class", "disabled"])];
-    }),
-    _: 1
-    /* STABLE */
-
-  }, 8
-  /* PROPS */
-  , ["show"])]);
+  })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Role Management Modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <jet-dialog-modal\n      :show=\"currentlyManagingRole\"\n      @close=\"currentlyManagingRole = false\"\n    >\n      <template #title> Manage Role </template>\n\n      <template #content>\n        <div v-if=\"managingRoleFor\">\n          <div\n            class=\"relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer \"\n          >\n            <button\n              type=\"button\"\n              class=\"relative inline-flex w-full px-4 py-3 rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200\"\n              :class=\"{\n                'border-t border-gray-200 rounded-t-none': i > 0,\n                'rounded-b-none': i !== Object.keys(availableRoles).length - 1,\n              }\"\n              @click=\"updateRoleForm.role = role.key\"\n              v-for=\"(role, i) in availableRoles\"\n              :key=\"role.key\"\n            >\n              <div\n                :class=\"{\n                  'opacity-50':\n                    updateRoleForm.role && updateRoleForm.role !== role.key,\n                }\"\n              >\n                Role Name\n                <div class=\"flex items-center\">\n                  <div\n                    class=\"text-sm text-gray-600\"\n                    :class=\"{\n                      'font-semibold': updateRoleForm.role === role.key,\n                    }\"\n                  >\n                    {{ role.name }}\n                  </div>\n\n                  <svg\n                    v-if=\"updateRoleForm.role === role.key\"\n                    class=\"w-5 h-5 ml-2 text-green-400\"\n                    fill=\"none\"\n                    stroke-linecap=\"round\"\n                    stroke-linejoin=\"round\"\n                    stroke-width=\"2\"\n                    stroke=\"currentColor\"\n                    viewBox=\"0 0 24 24\"\n                  >\n                    <path\n                      d=\"M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z\"\n                    ></path>\n                  </svg>\n                </div>\n\n                Role Description\n                <div class=\"mt-2 text-xs text-gray-600\">\n                  {{ role.description }}\n                </div>\n              </div>\n            </button>\n          </div>\n        </div>\n      </template>\n\n      <template #footer>\n        <jet-secondary-button @click=\"currentlyManagingRole = false\">\n          لغو\n        </jet-secondary-button>\n\n        <jet-button\n          class=\"ml-2\"\n          @click=\"updateRole\"\n          :class=\"{ 'opacity-25': updateRoleForm.processing }\"\n          :disabled=\"updateRoleForm.processing\"\n        >\n          دخیره\n        </jet-button>\n      </template>\n    </jet-dialog-modal> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Leave Team Confirmation Modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <jet-confirmation-modal\n      :show=\"confirmingLeavingTeam\"\n      @close=\"confirmingLeavingTeam = false\"\n    >\n      <template #title> ترک گروه </template>\n\n      <template #content>\n        آیا مطمئن هستید که می خواهید این گروه را ترک کنید؟\n      </template>\n\n      <template #footer>\n        <jet-secondary-button @click=\"confirmingLeavingTeam = false\">\n          لغو\n        </jet-secondary-button>\n\n        <jet-danger-button\n          class=\"ml-2\"\n          @click=\"leaveTeam\"\n          :class=\"{ 'opacity-25': leaveTeamForm.processing }\"\n          :disabled=\"leaveTeamForm.processing\"\n        >\n          ترک کردن\n        </jet-danger-button>\n      </template>\n    </jet-confirmation-modal> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Remove Team Member Confirmation Modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <jet-confirmation-modal\n      :show=\"teamMemberBeingRemoved\"\n      @close=\"teamMemberBeingRemoved = null\"\n    >\n      <template #title> حذف عضو  </template>\n\n      <template #content>\n       آیا مطمئن هستید که می خواهید این فرد را از گروه حذف کنید؟\n      </template>\n\n      <template #footer>\n        <jet-secondary-button @click=\"teamMemberBeingRemoved = null\">\n          لغو\n        </jet-secondary-button>\n\n        <jet-danger-button\n          class=\"ml-2\"\n          @click=\"removeTeamMember\"\n          :class=\"{ 'opacity-25': removeTeamMemberForm.processing }\"\n          :disabled=\"removeTeamMemberForm.processing\"\n        >\n          حدف\n        </jet-danger-button>\n      </template>\n    </jet-confirmation-modal> ")]);
 }
 
 /***/ }),

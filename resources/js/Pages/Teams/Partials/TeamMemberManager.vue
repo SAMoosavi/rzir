@@ -26,7 +26,7 @@
             <jet-input
               id="email"
               type="email"
-              class="mt-1 block w-full"
+              class="block w-full mt-1 text-left"
               v-model="addTeamMemberForm.email"
             />
             <jet-input-error
@@ -35,8 +35,8 @@
             />
           </div>
 
-          <!-- Role -->
-          <div
+          <!--  Role -->
+          <!-- <div
             class="col-span-6 lg:col-span-4"
             v-if="availableRoles.length > 0"
           >
@@ -47,35 +47,15 @@
             />
 
             <div
-              class="
-                relative
-                z-0
-                mt-1
-                border border-gray-200
-                rounded-lg
-                cursor-pointer
-              "
+              class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer "
             >
               <button
                 type="button"
-                class="
-                  relative
-                  px-4
-                  py-3
-                  inline-flex
-                  w-full
-                  rounded-lg
-                  focus:z-10
-                  focus:outline-none
-                  focus:border-blue-300
-                  focus:ring
-                  focus:ring-blue-200
-                "
+                class="relative inline-flex w-full px-4 py-3 rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200"
                 :class="{
                   'border-t border-gray-200 rounded-t-none': i > 0,
                   'rounded-b-none': i != Object.keys(availableRoles).length - 1,
                 }"
-                @click="addTeamMemberForm.role = role.key"
                 v-for="(role, i) in availableRoles"
                 :key="role.key"
               >
@@ -86,7 +66,7 @@
                       addTeamMemberForm.role != role.key,
                   }"
                 >
-                  <!-- Role Name -->
+                  Role Name
                   <div class="flex items-center">
                     <div
                       class="text-sm text-gray-600"
@@ -99,7 +79,7 @@
 
                     <svg
                       v-if="addTeamMemberForm.role == role.key"
-                      class="ml-2 h-5 w-5 text-green-400"
+                      class="w-5 h-5 ml-2 text-green-400"
                       fill="none"
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -113,20 +93,21 @@
                     </svg>
                   </div>
 
-                  <!-- Role Description -->
-                  <div class="mt-2 text-xs text-gray-600 text-left">
+                  Role Description
+                  <div class="mt-2 text-xs text-left text-gray-600">
                     {{ role.description }}
                   </div>
                 </div>
               </button>
             </div>
-          </div>
+          </div> -->
+
         </template>
 
         <template #actions>
           <jet-action-message
             :on="addTeamMemberForm.recentlySuccessful"
-            class="mr-3"
+            class="ml-3"
           >
             افزوده شد.
           </jet-action-message>
@@ -169,12 +150,7 @@
               <div class="flex items-center">
                 <!-- Cancel Team Invitation -->
                 <button
-                  class="
-                    cursor-pointer
-                    ml-6
-                    text-sm text-red-500
-                    focus:outline-none
-                  "
+                  class="ml-6 text-sm text-red-500 cursor-pointer focus:outline-none"
                   @click="cancelTeamInvitation(invitation)"
                   v-if="userPermissions.canRemoveTeamMembers"
                 >
@@ -212,12 +188,12 @@
                   :src="user.profile_photo_url"
                   :alt="user.name"
                 />
-                <div class="ml-4">{{ user.name }}</div>
+                <div class="mr-4">{{ user.name }}</div>
               </div>
 
               <div class="flex items-center">
                 <!-- Manage Team Member Role -->
-                <button
+                <!-- <button
                   class="ml-2 text-sm text-gray-400 underline"
                   @click="manageRole(user)"
                   v-if="
@@ -232,12 +208,12 @@
                   v-else-if="availableRoles.length"
                 >
                   {{ displayableRole(user.membership.role) }}
-                </div>
+                </div> -->
 
                 <!-- Leave Team -->
                 <button
-                  class="cursor-pointer ml-6 text-sm text-red-500"
-                  @click="confirmLeavingTeam"
+                  class="ml-6 text-sm text-red-500 cursor-pointer"
+                  @click="alertLeaveTeam"
                   v-if="$page.props.user.id === user.id"
                 >
                   ترک کردن
@@ -245,8 +221,8 @@
 
                 <!-- Remove Team Member -->
                 <button
-                  class="cursor-pointer ml-6 text-sm text-red-500"
-                  @click="confirmTeamMemberRemoval(user)"
+                  class="ml-6 text-sm text-red-500 cursor-pointer"
+                  @click="alertRemoveTeamMember(user)"
                   v-if="userPermissions.canRemoveTeamMembers"
                 >
                   حذف کردن
@@ -259,7 +235,7 @@
     </div>
 
     <!-- Role Management Modal -->
-    <jet-dialog-modal
+    <!-- <jet-dialog-modal
       :show="currentlyManagingRole"
       @close="currentlyManagingRole = false"
     >
@@ -268,30 +244,11 @@
       <template #content>
         <div v-if="managingRoleFor">
           <div
-            class="
-              relative
-              z-0
-              mt-1
-              border border-gray-200
-              rounded-lg
-              cursor-pointer
-            "
+            class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer "
           >
             <button
               type="button"
-              class="
-                relative
-                px-4
-                py-3
-                inline-flex
-                w-full
-                rounded-lg
-                focus:z-10
-                focus:outline-none
-                focus:border-blue-300
-                focus:ring
-                focus:ring-blue-200
-              "
+              class="relative inline-flex w-full px-4 py-3 rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200"
               :class="{
                 'border-t border-gray-200 rounded-t-none': i > 0,
                 'rounded-b-none': i !== Object.keys(availableRoles).length - 1,
@@ -306,7 +263,7 @@
                     updateRoleForm.role && updateRoleForm.role !== role.key,
                 }"
               >
-                <!-- Role Name -->
+                Role Name
                 <div class="flex items-center">
                   <div
                     class="text-sm text-gray-600"
@@ -319,7 +276,7 @@
 
                   <svg
                     v-if="updateRoleForm.role === role.key"
-                    class="ml-2 h-5 w-5 text-green-400"
+                    class="w-5 h-5 ml-2 text-green-400"
                     fill="none"
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -333,7 +290,7 @@
                   </svg>
                 </div>
 
-                <!-- Role Description -->
+                Role Description
                 <div class="mt-2 text-xs text-gray-600">
                   {{ role.description }}
                 </div>
@@ -357,14 +314,14 @@
           دخیره
         </jet-button>
       </template>
-    </jet-dialog-modal>
+    </jet-dialog-modal> -->
 
     <!-- Leave Team Confirmation Modal -->
-    <jet-confirmation-modal
+    <!-- <jet-confirmation-modal
       :show="confirmingLeavingTeam"
       @close="confirmingLeavingTeam = false"
     >
-      <template #title> Leave Team </template>
+      <template #title> ترک گروه </template>
 
       <template #content>
         آیا مطمئن هستید که می خواهید این گروه را ترک کنید؟
@@ -384,10 +341,10 @@
           ترک کردن
         </jet-danger-button>
       </template>
-    </jet-confirmation-modal>
+    </jet-confirmation-modal> -->
 
     <!-- Remove Team Member Confirmation Modal -->
-    <jet-confirmation-modal
+    <!-- <jet-confirmation-modal
       :show="teamMemberBeingRemoved"
       @close="teamMemberBeingRemoved = null"
     >
@@ -411,7 +368,7 @@
           حدف
         </jet-danger-button>
       </template>
-    </jet-confirmation-modal>
+    </jet-confirmation-modal> -->
   </div>
 </template>
 
@@ -429,6 +386,7 @@ import JetInputError from "@/Jetstream/InputError.vue";
 import JetLabel from "@/Jetstream/Label.vue";
 import JetSecondaryButton from "@/Jetstream/SecondaryButton.vue";
 import JetSectionBorder from "@/Jetstream/SectionBorder.vue";
+import Swal from "sweetalert2";
 
 export default defineComponent({
   components: {
@@ -444,6 +402,7 @@ export default defineComponent({
     JetLabel,
     JetSecondaryButton,
     JetSectionBorder,
+    Swal,
   },
 
   props: ["team", "availableRoles", "userPermissions"],
@@ -452,7 +411,7 @@ export default defineComponent({
     return {
       addTeamMemberForm: this.$inertia.form({
         email: "",
-        role: null,
+        role: 'editor',
       }),
 
       updateRoleForm: this.$inertia.form({
@@ -504,6 +463,23 @@ export default defineComponent({
       this.confirmingLeavingTeam = true;
     },
 
+    alertLeaveTeam(){
+        Swal.fire({
+        title: "توجه!",
+        icon: "warning",
+        text: ' آیا مطمئن هستید که می خواهید این گروه را ترک کنید؟',
+        showCancelButton: true,
+        confirmButtonText: "حذف",
+        cancelButtonText: "لغو",
+        showLoaderOnConfirm: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#6e7d88",
+        preConfirm: () => {
+          return this.leaveTeam();
+        },
+      });
+    },
+
     leaveTeam() {
       this.leaveTeamForm.delete(
         route("team-members.destroy", [this.team, this.$page.props.user])
@@ -514,6 +490,23 @@ export default defineComponent({
       this.teamMemberBeingRemoved = teamMember;
     },
 
+alertRemoveTeamMember(teamMember){
+    this.teamMemberBeingRemoved = teamMember;
+    Swal.fire({
+        title: "توجه!",
+        icon: "warning",
+        text: 'آیا مطمئن هستید که می خواهید این فرد را از گروه حذف کنید؟',
+        showCancelButton: true,
+        confirmButtonText: "حذف",
+        cancelButtonText: "لغو",
+        showLoaderOnConfirm: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#6e7d88",
+        preConfirm: () => {
+          return this.removeTeamMember();
+        },
+      });
+},
     removeTeamMember() {
       this.removeTeamMemberForm.delete(
         route("team-members.destroy", [this.team, this.teamMemberBeingRemoved]),

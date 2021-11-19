@@ -27485,10 +27485,10 @@ var _hoisted_4 = {
 };
 var _hoisted_5 = ["src", "alt"];
 var _hoisted_6 = {
-  "class": "ml-4 leading-tight"
+  "class": "mr-4 leading-tight"
 };
 var _hoisted_7 = {
-  "class": "text-gray-700 text-sm"
+  "class": "text-sm text-gray-700"
 };
 var _hoisted_8 = {
   "class": "col-span-6 sm:col-span-4"
@@ -27524,7 +27524,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Team Owner Information "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         value: "سازنده گروه"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-        "class": "w-12 h-12 rounded-full object-cover",
+        "class": "object-cover w-12 h-12 rounded-full",
         src: _ctx.team.owner.profile_photo_url,
         alt: _ctx.team.owner.name
       }, null, 8
@@ -27539,7 +27539,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "name",
         type: "text",
-        "class": "mt-1 block w-full",
+        "class": "block w-full mt-1",
         modelValue: _ctx.form.name,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return _ctx.form.name = $event;

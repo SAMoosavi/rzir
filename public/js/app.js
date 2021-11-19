@@ -26690,7 +26690,7 @@ var _hoisted_4 = {
 };
 var _hoisted_5 = ["src", "alt"];
 var _hoisted_6 = {
-  "class": "ml-4 leading-tight"
+  "class": "mr-4 leading-tight"
 };
 var _hoisted_7 = {
   "class": "text-sm text-gray-700"

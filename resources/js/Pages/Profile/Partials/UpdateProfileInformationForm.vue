@@ -27,14 +27,14 @@
           <img
             :src="user.profile_photo_url"
             :alt="user.name"
-            class="rounded-full h-20 w-20 object-cover"
+            class="object-cover w-20 h-20 rounded-full"
           />
         </div>
 
         <!-- New Profile Photo Preview -->
         <div class="mt-2" v-show="photoPreview">
           <span
-            class="block rounded-full w-20 h-20 bg-cover bg-no-repeat bg-center"
+            class="block w-20 h-20 bg-center bg-no-repeat bg-cover rounded-full"
             :style="'background-image: url(\'' + photoPreview + '\');'"
           >
           </span>
@@ -66,7 +66,7 @@
         <jet-input
           id="name"
           type="text"
-          class="mt-1 block w-full"
+          class="block w-full mt-1"
           v-model="form.name"
           autocomplete="name"
         />
@@ -79,7 +79,7 @@
         <jet-input
           id="email"
           type="email"
-          class="mt-1 block w-full"
+          class="block w-full mt-1 text-left"
           v-model="form.email"
         />
         <jet-input-error :message="form.errors.email" class="mt-2" />

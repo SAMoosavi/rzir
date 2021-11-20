@@ -1,10 +1,105 @@
 <template>
   <!---------------------Heder-------------------->
   <app-layout title="وسایل">
-    <template #header>
+    <template #header class="fixed">
       <h2 class="text-xl font-semibold leading-tight text-gray-800">وسایل</h2>
     </template>
+    <div class="row">
+      <div
+        v-if="!showLocations"
+        class="flex justify-center w-10 h-10 p-2 mx-auto mt-2 bg-white rounded-full  lg:hidden col-2"
+        @click="showingLoactions"
+      >
+        <i class="text-xl text-center fas fa-chevron-down"></i>
+      </div>
 
+      <div
+        class="p-0 mx-auto mt-2 bg-white shadow-xl  col-9 lg:hidden sm:rounded-b-lg"
+        v-if="showLocations"
+      >
+        <div
+          class="flex content-center bg-gray-100 border-b-2 border-gray-200"
+          id="parent0"
+        >
+          <div @click="getOfThis(0)" class="me-auto">
+            <p class="text-base Pointer">کلیه ی مکان ها</p>
+          </div>
+          <div @click="oppenCreateLocation(null)">
+            <i
+              class="mx-1 my-auto text-lg text-gray-300  fas fa-map-marker-alt Pointer hover:text-green-400"
+            ></i>
+          </div>
+        </div>
+        <div
+          v-for="(location, key) in locations"
+          :key="key"
+          class="border-b-2 border-gray-200"
+          :id="`parent${location.id}`"
+        >
+          <div class="flex">
+            <div @click="getOfThis(location.id)" class="me-auto">
+              <p class="text-base Pointer">
+                <span class="text-red-200">{{ location.level }} </span>
+                {{ location.name }}
+              </p>
+            </div>
+            <div
+              v-if="location.user_id == userId"
+              @click="hiddenLocation(location.id)"
+            >
+              <div v-if="location.hidden == 0">
+                <i
+                  class="text-lg text-gray-300  fas fa-eye Pointer hover:text-blue-500"
+                  :id="`element${location.id}`"
+                ></i>
+              </div>
+              <div v-if="location.hidden == 1">
+                <i
+                  :id="`element${location.id}`"
+                  class="text-gray-300  fas fa-eye-slash Pointer hover:text-blue-500"
+                ></i>
+              </div>
+            </div>
+            <div class="mx-1" @click="oppenCreateDevice(location.id)">
+              <i
+                class="text-lg text-gray-300  fas fa-tshirt Pointer hover:text-yellow-500"
+              ></i>
+            </div>
+            <div class="mx-1" @click="oppenCreateLocation(location.id)">
+              <i
+                class="text-lg text-gray-300  fas fa-map-marker-alt Pointer hover:text-green-400"
+              ></i>
+            </div>
+            <div
+              class="mx-1"
+              @click="alertRenameLocation(location.id, location.name)"
+            >
+              <i
+                class="text-lg text-gray-300  fas fa-pen Pointer hover:text-black"
+              ></i>
+            </div>
+            <div
+              class="mx-1"
+              @click="alertDeleteLocation(location.id, location.name)"
+            >
+              <i
+                class="text-lg text-gray-300  fas fa-trash-alt Pointer hover:text-red-600"
+              ></i>
+            </div>
+          </div>
+          <div class="pr-4" :id="`descendant${location.id}`"></div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div
+          v-if="showLocations"
+          class="flex justify-center w-10 h-10 p-2 mx-auto mt-2 bg-white rounded-full  lg:hidden col-2"
+          @click="showingLoactions"
+        >
+          <i class="text-xl text-center fas fa-chevron-up"></i>
+        </div>
+      </div>
+    </div>
     <!------------------------section---------------------->
     <div class="py-12 ml-0 row g-2">
       <!----------------------Search----------------------->
@@ -23,7 +118,9 @@
         </div>
       </div> -->
       <!----------------------Locations------------------->
-      <div class="py-4 mr-2 bg-white shadow-xl col-2 sm:rounded-lg">
+      <div
+        class="hidden py-4 mr-2 bg-white shadow-xl  lg:inline-block col-2 sm:rounded-lg"
+      >
         <div
           class="flex content-center py-1 bg-gray-100 border-b-2 border-gray-200 "
           id="parent0"
@@ -98,7 +195,7 @@
         </div>
       </div>
       <!---------------------Devices----------------------->
-      <div class="col-9 sm:px-6 lg:px-8">
+      <div class="mx-auto col-9 sm:px-6 md:ml-1 lg:px-8">
         <div class="mx-auto bg-white shadow-xl sm:rounded-lg">
           <div v-if="loaderDevices" class="flex justify-center py-8">
             <svg
@@ -194,12 +291,14 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import { Link } from "@inertiajs/inertia-vue3";
 import Swal from "sweetalert2";
 import axios from "axios";
+import AOS from "aos";
 
 export default defineComponent({
   components: {
     AppLayout,
     Link,
     Swal,
+    AOS,
   },
   props: {
     userId: Number,
@@ -562,8 +661,12 @@ export default defineComponent({
   },
 
   setup(props) {
+    AOS.init();
     const loaderDevices = ref(true);
-
+    const showLocations = ref(false);
+    function showingLoactions() {
+      showLocations.value = !showLocations.value;
+    }
     const userId = props.userId;
     const devices = ref();
 
@@ -701,6 +804,8 @@ export default defineComponent({
       createLocation,
       getOfThis,
       loaderDevices,
+      showLocations,
+      showingLoactions,
       //   searchDevices,
     };
   },

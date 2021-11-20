@@ -5962,6 +5962,9 @@ select {
 .block {
   display: block;
 }
+.inline-block {
+  display: inline-block;
+}
 .flex {
   display: flex;
 }
@@ -6006,6 +6009,9 @@ select {
 }
 .h-screen {
   height: 100vh;
+}
+.h-24 {
+  height: 6rem;
 }
 .min-h-screen {
   min-height: 100vh;
@@ -6054,6 +6060,12 @@ select {
 }
 .w-96 {
   width: 24rem;
+}
+.w-screen {
+  width: 100vw;
+}
+.w-24 {
+  width: 6rem;
 }
 .min-w-0 {
   min-width: 0px;
@@ -6245,6 +6257,10 @@ select {
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
 }
+.rounded-b-full {
+  border-bottom-right-radius: 9999px;
+  border-bottom-left-radius: 9999px;
+}
 .border {
   border-width: 1px;
 }
@@ -6344,6 +6360,10 @@ select {
 .bg-black {
   --tw-bg-opacity: 1;
   background-color: rgba(0, 0, 0, var(--tw-bg-opacity));
+}
+.bg-red-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(239, 68, 68, var(--tw-bg-opacity));
 }
 .bg-opacity-25 {
   --tw-bg-opacity: 0.25;
@@ -6511,6 +6531,10 @@ select {
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
+}
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
 }
 .font-medium {
   font-weight: 500;
@@ -7102,6 +7126,10 @@ body{
   .sm\:rounded-md {
     border-radius: 0.375rem;
   }
+  .sm\:rounded-b-lg {
+    border-bottom-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+  }
   .sm\:rounded-tl-md {
     border-top-left-radius: 0.375rem;
   }
@@ -7146,17 +7174,27 @@ body{
   .md\:col-span-1 {
     grid-column: span 1 / span 1;
   }
+  .md\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
   .md\:mt-0 {
     margin-top: 0px;
   }
   .md\:mr-4 {
     margin-right: 1rem;
   }
+  .md\:ml-1 {
+    margin-left: 0.25rem;
+  }
   .md\:inline-block {
     display: inline-block;
   }
   .md\:grid {
     display: grid;
+  }
+  .md\:hidden {
+    display: none;
   }
   .md\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -7180,6 +7218,12 @@ body{
 @media (min-width: 1024px) {
   .lg\:col-span-4 {
     grid-column: span 4 / span 4;
+  }
+  .lg\:inline-block {
+    display: inline-block;
+  }
+  .lg\:hidden {
+    display: none;
   }
   .lg\:px-8 {
     padding-left: 2rem;

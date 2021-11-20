@@ -27348,10 +27348,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_team_member_manager = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("team-member-manager");
 
-  var _component_jet_section_border = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-section-border");
-
-  var _component_delete_team_form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("delete-team-form");
-
   var _component_app_layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("app-layout");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_app_layout, {
@@ -27373,16 +27369,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "user-permissions": _ctx.permissions
       }, null, 8
       /* PROPS */
-      , ["team", "available-roles", "user-permissions"]), _ctx.permissions.canDeleteTeam && _ctx.team.owner.id == _ctx.user.id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-        key: 0
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_section_border), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_delete_team_form, {
-        "class": "mt-10 sm:mt-0",
-        team: _ctx.team
-      }, null, 8
-      /* PROPS */
-      , ["team"])], 64
-      /* STABLE_FRAGMENT */
-      )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])];
+      , ["team", "available-roles", "user-permissions"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <template v-if=\"permissions.canDeleteTeam && team.owner.id == user.id \">\n\n          <jet-section-border />\n\n          <delete-team-form class=\"mt-10 sm:mt-0\" :team=\"team\" />\n        </template> ")])])];
     }),
     _: 1
     /* STABLE */

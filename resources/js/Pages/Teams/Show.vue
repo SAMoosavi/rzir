@@ -16,13 +16,13 @@
           :available-roles="availableRoles"
           :user-permissions="permissions"
         />
-        
-        <template v-if="permissions.canDeleteTeam && team.owner.id == user.id ">
+
+        <!-- <template v-if="permissions.canDeleteTeam && team.owner.id == user.id ">
 
           <jet-section-border />
 
           <delete-team-form class="mt-10 sm:mt-0" :team="team" />
-        </template>
+        </template> -->
       </div>
     </div>
   </app-layout>
@@ -37,7 +37,7 @@ import TeamMemberManager from "@/Pages/Teams/Partials/TeamMemberManager.vue";
 import UpdateTeamNameForm from "@/Pages/Teams/Partials/UpdateTeamNameForm.vue";
 
 export default defineComponent({
-  props: ["team", "availableRoles", "permissions","user"],
+  props: ["team", "availableRoles", "permissions", "user"],
 
   components: {
     AppLayout,

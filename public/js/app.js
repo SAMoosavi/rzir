@@ -22052,7 +22052,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
-  props: ["team", "availableRoles", "permissions"],
+  props: ["team", "availableRoles", "permissions", "user"],
   components: {
     AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     DeleteTeamForm: _Pages_Teams_Partials_DeleteTeamForm_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -27335,13 +27335,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
-  "class": "font-semibold text-xl text-gray-800 leading-tight"
+  "class": "text-xl font-semibold leading-tight text-gray-800"
 }, " تنظیمات گروه ", -1
 /* HOISTED */
 );
 
 var _hoisted_2 = {
-  "class": "max-w-7xl mx-auto py-10 sm:px-6 lg:px-8"
+  "class": "py-10 mx-auto max-w-7xl sm:px-6 lg:px-8"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_update_team_name_form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("update-team-name-form");
@@ -27373,7 +27373,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "user-permissions": _ctx.permissions
       }, null, 8
       /* PROPS */
-      , ["team", "available-roles", "user-permissions"]), _ctx.permissions.canDeleteTeam && !_ctx.team.personal_team ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+      , ["team", "available-roles", "user-permissions"]), _ctx.permissions.canDeleteTeam && _ctx.team.owner.id == _ctx.user.id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         key: 0
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_section_border), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_delete_team_form, {
         "class": "mt-10 sm:mt-0",

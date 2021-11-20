@@ -1,13 +1,13 @@
 <template>
   <app-layout title="تنظیمات گروه">
     <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+      <h2 class="text-xl font-semibold leading-tight text-gray-800">
         تنظیمات گروه
       </h2>
     </template>
 
     <div>
-      <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+      <div class="py-10 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <update-team-name-form :team="team" :permissions="permissions" />
 
         <team-member-manager
@@ -16,8 +16,9 @@
           :available-roles="availableRoles"
           :user-permissions="permissions"
         />
+        
+        <template v-if="permissions.canDeleteTeam && team.owner.id == user.id ">
 
-        <template v-if="permissions.canDeleteTeam && !team.personal_team">
           <jet-section-border />
 
           <delete-team-form class="mt-10 sm:mt-0" :team="team" />
@@ -36,7 +37,7 @@ import TeamMemberManager from "@/Pages/Teams/Partials/TeamMemberManager.vue";
 import UpdateTeamNameForm from "@/Pages/Teams/Partials/UpdateTeamNameForm.vue";
 
 export default defineComponent({
-  props: ["team", "availableRoles", "permissions"],
+  props: ["team", "availableRoles", "permissions","user"],
 
   components: {
     AppLayout,

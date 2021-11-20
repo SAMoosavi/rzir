@@ -8,7 +8,7 @@
     <!------------------------section---------------------->
     <div class="py-12 ml-0 row g-2">
       <!----------------------Search----------------------->
-      <div class="col-12">
+      <!-- <div class="col-12">
         <div class="flex justify-start mr-2 col-2">
           <span class="p-2 m-0 text-center text-white bg-black rounded-r-lg"
             ><i class="fas fa-search"></i
@@ -18,10 +18,10 @@
             name="searchDevices"
             id="searchDevices"
             v-model="searchDevices"
-            class="m-0 bg-white border-2 border-black rounded-l-lg  w-96 focus:border-black focus:border-2"
+            class="m-0 bg-white border-2 border-black rounded-l-lg w-96 focus:border-black focus:border-2"
           />
         </div>
-      </div>
+      </div> -->
       <!----------------------Locations------------------->
       <div class="py-4 mr-2 bg-white shadow-xl col-2 sm:rounded-lg">
         <div class="flex bg-gray-100 border-b-2 border-gray-200" id="parent0">
@@ -30,7 +30,7 @@
           </div>
           <div @click="oppenCreateLocation(null)">
             <i
-              class="mx-1 text-gray-300  fas fa-map-marker-alt Pointer hover:text-green-400"
+              class="mx-1 text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
             ></i>
           </div>
         </div>
@@ -57,19 +57,20 @@
               <div v-if="location.hidden == 1">
                 <i
                   :id="`element${location.id}`"
-                  class="text-gray-300  fas fa-eye-slash Pointer hover:text-blue-500"
+                  class="text-gray-300 fas fa-eye-slash Pointer hover:text-blue-500"
                 ></i>
               </div>
             </div>
             <div class="mx-1" @click="oppenCreateDevice(location.id)">
               <i
-                class="text-gray-300  fas fa-tshirt Pointer hover:text-yellow-500"
+                class="text-gray-300 fas fa-tshirt Pointer hover:text-yellow-500"
               ></i>
             </div>
             <div class="mx-1" @click="oppenCreateLocation(location.id)">
               <i
-                class="text-gray-300  fas fa-map-marker-alt Pointer hover:text-green-400"
+                class="text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
               ></i>
+
             </div>
             <div
               class="mx-1"
@@ -82,7 +83,7 @@
               @click="alertDeleteLocation(location.id, location.name)"
             >
               <i
-                class="text-gray-300  fas fa-trash-alt Pointer hover:text-red-600"
+                class="text-gray-300 fas fa-trash-alt Pointer hover:text-red-600"
               ></i>
             </div>
           </div>
@@ -135,14 +136,14 @@
                   >
                     <div v-if="device.hidden == 0">
                       <i
-                        class="text-gray-300  fas fa-eye Pointer hover:text-blue-500"
+                        class="text-gray-300 fas fa-eye Pointer hover:text-blue-500"
                         :id="`deviceElement${device.id}`"
                       ></i>
                     </div>
                     <div v-if="device.hidden == 1">
                       <i
                         :id="`deviceElement${device.id}`"
-                        class="text-gray-300  fas fa-eye-slash Pointer hover:text-blue-500"
+                        class="text-gray-300 fas fa-eye-slash Pointer hover:text-blue-500"
                       ></i>
                     </div>
                   </div>
@@ -165,7 +166,7 @@
                     "
                   >
                     <i
-                      class="text-gray-300  fas fa-trash-alt Pointer hover:text-red-600"
+                      class="text-gray-300 fas fa-trash-alt Pointer hover:text-red-600"
                     ></i>
                   </div>
                 </div>
@@ -558,22 +559,24 @@ export default defineComponent({
     const devices = ref();
 
     //------------------search Device------------
-    const searchDevices = ref();
-
-    watch(searchDevices, () => {
-      loaderDevices.value = true;
-      axios
-        .get(`/search-devices/${searchDevices.value}`)
-        .then(function (response) {
-          devices.value = response.data.devices;
-        })
-        .catch(function (response) {
-          console.log(response);
-        })
-        .then(() => {
-          loaderDevices.value = false;
-        });
-    });
+    /*
+    |const searchDevices = ref();
+    |
+    |watch(searchDevices, () => {
+    |   loaderDevices.value = true;
+    |   axios
+    |     .get(`/search-devices/${searchDevices.value}`)
+    |     .then(function (response) {
+    |       devices.value = response.data.devices;
+    |     })
+    |     .catch(function (response) {
+    |       console.log(response);
+    |     })
+    |     .then(() => {
+    |       loaderDevices.value = false;
+    |     });
+    |});
+*/
     // ------------------Location----------------------
 
     const locations = ref();
@@ -689,7 +692,7 @@ export default defineComponent({
       createLocation,
       getOfThis,
       loaderDevices,
-      searchDevices,
+      //   searchDevices,
     };
   },
 });

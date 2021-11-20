@@ -24,25 +24,31 @@
       </div> -->
       <!----------------------Locations------------------->
       <div class="py-4 mr-2 bg-white shadow-xl col-2 sm:rounded-lg">
-        <div class="flex bg-gray-100 border-b-2 border-gray-200" id="parent0">
-          <div @click="getOfThis(0)" class="me-auto Pointer">
-            <p class="Pointer">کلیه ی مکان ها</p>
+        <div
+          class="flex content-center py-1 bg-gray-100 border-b-2 border-gray-200 "
+          id="parent0"
+        >
+          <div @click="getOfThis(0)" class="me-auto">
+            <p class="text-base Pointer">کلیه ی مکان ها</p>
           </div>
           <div @click="oppenCreateLocation(null)">
             <i
-              class="mx-1 text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
+              class="mx-1 my-auto text-lg text-gray-300  fas fa-map-marker-alt Pointer hover:text-green-400"
             ></i>
           </div>
         </div>
         <div
           v-for="(location, key) in locations"
           :key="key"
-          class="border-b-2 border-gray-200"
+          class="py-1 border-b-2 border-gray-200"
           :id="`parent${location.id}`"
         >
           <div class="flex">
-            <div @click="getOfThis(location.id)" class="me-auto Pointer">
-              <p class="Pointer">{{ location.level }} {{ location.name }}</p>
+            <div @click="getOfThis(location.id)" class="me-auto">
+              <p class="text-base Pointer">
+                <span class="text-red-200">{{ location.level }} </span>
+                {{ location.name }}
+              </p>
             </div>
             <div
               v-if="location.user_id == userId"
@@ -50,40 +56,41 @@
             >
               <div v-if="location.hidden == 0">
                 <i
-                  class="text-gray-300 fas fa-eye Pointer hover:text-blue-500"
+                  class="text-lg text-gray-300  fas fa-eye Pointer hover:text-blue-500"
                   :id="`element${location.id}`"
                 ></i>
               </div>
               <div v-if="location.hidden == 1">
                 <i
                   :id="`element${location.id}`"
-                  class="text-gray-300 fas fa-eye-slash Pointer hover:text-blue-500"
+                  class="text-gray-300  fas fa-eye-slash Pointer hover:text-blue-500"
                 ></i>
               </div>
             </div>
             <div class="mx-1" @click="oppenCreateDevice(location.id)">
               <i
-                class="text-gray-300 fas fa-tshirt Pointer hover:text-yellow-500"
+                class="text-lg text-gray-300  fas fa-tshirt Pointer hover:text-yellow-500"
               ></i>
             </div>
             <div class="mx-1" @click="oppenCreateLocation(location.id)">
               <i
-                class="text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
+                class="text-lg text-gray-300  fas fa-map-marker-alt Pointer hover:text-green-400"
               ></i>
-
             </div>
             <div
               class="mx-1"
               @click="alertRenameLocation(location.id, location.name)"
             >
-              <i class="text-gray-300 fas fa-pen Pointer hover:text-black"></i>
+              <i
+                class="text-lg text-gray-300  fas fa-pen Pointer hover:text-black"
+              ></i>
             </div>
             <div
               class="mx-1"
               @click="alertDeleteLocation(location.id, location.name)"
             >
               <i
-                class="text-gray-300 fas fa-trash-alt Pointer hover:text-red-600"
+                class="text-lg text-gray-300  fas fa-trash-alt Pointer hover:text-red-600"
               ></i>
             </div>
           </div>
@@ -125,10 +132,12 @@
               <div
                 v-for="device in devices"
                 :key="device.id"
-                class="border-b-2 border-gray-200 row"
+                class="py-2 border-b-2 border-gray-200 row"
               >
-                <p class="col-4" :id="`name${device.id}`">{{ device.name }}</p>
-                <p class="col-4">{{ device.location }}</p>
+                <p class="text-base col-4" :id="`name${device.id}`">
+                  {{ device.name }}
+                </p>
+                <p class="text-base col-4">{{ device.location }}</p>
                 <div class="flex justify-end col-4">
                   <div
                     v-if="device.user_id == userId"
@@ -136,14 +145,14 @@
                   >
                     <div v-if="device.hidden == 0">
                       <i
-                        class="text-gray-300 fas fa-eye Pointer hover:text-blue-500"
+                        class="text-lg text-gray-300  fas fa-eye Pointer hover:text-blue-500"
                         :id="`deviceElement${device.id}`"
                       ></i>
                     </div>
                     <div v-if="device.hidden == 1">
                       <i
                         :id="`deviceElement${device.id}`"
-                        class="text-gray-300 fas fa-eye-slash Pointer hover:text-blue-500"
+                        class="text-lg text-gray-300  fas fa-eye-slash Pointer hover:text-blue-500"
                       ></i>
                     </div>
                   </div>
@@ -152,7 +161,7 @@
                     @click="alertRenameDevice(device.id, device.name)"
                   >
                     <i
-                      class="text-gray-300 fas fa-pen Pointer hover:text-black"
+                      class="text-lg text-gray-300  fas fa-pen Pointer hover:text-black"
                     ></i>
                   </div>
                   <div
@@ -166,7 +175,7 @@
                     "
                   >
                     <i
-                      class="text-gray-300 fas fa-trash-alt Pointer hover:text-red-600"
+                      class="text-lg text-gray-300  fas fa-trash-alt Pointer hover:text-red-600"
                     ></i>
                   </div>
                 </div>

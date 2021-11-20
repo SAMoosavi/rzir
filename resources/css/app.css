@@ -2,6 +2,7 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@import "./font.css";
 
 
 
@@ -11,4 +12,8 @@
 
 .Pointer{
     cursor: Pointer;
+}
+
+body{
+    font-family: IRANSans !important;
 }

@@ -12,8 +12,10 @@ window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 
 require("./all.min.js");
 require("./bootstrap.bundle.min.js");
-const Swal = require('sweetalert2')
-import 'aos/dist/aos.css';
+const Swal = require("sweetalert2");
+import "aos/dist/aos.css";
+
+window.$ = require("jquery");
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

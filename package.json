@@ -33,6 +33,7 @@
         "@fortawesome/vue-fontawesome": "^3.0.0-5",
         "aos": "^3.0.0-beta.6",
         "bootstrap-icons": "^1.7.0",
+        "jquery": "^3.6.0",
         "vue-sweetalert2": "^5.0.2"
     }
 }

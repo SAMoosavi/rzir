@@ -4,18 +4,10 @@
     <template #header class="fixed">
       <h2 class="text-xl font-semibold leading-tight text-gray-800">وسایل</h2>
     </template>
-    <div class="row">
+    <div class="m-0 row">
       <div
-        v-if="!showLocations"
-        class="flex justify-center w-10 h-10 p-2 mx-auto mt-2 bg-white rounded-full  lg:hidden col-2"
-        @click="showingLoactions"
-      >
-        <i class="text-xl text-center fas fa-chevron-down"></i>
-      </div>
-
-      <div
-        class="p-0 mx-auto mt-2 bg-white shadow-xl  col-9 lg:hidden sm:rounded-b-lg"
-        v-if="showLocations"
+        class="p-0 mx-auto mt-2 bg-white shadow-xl col-12 col-md-9 sm:px-6 md:ml-1 lg:px-8 lg:hidden sm:rounded-b-lg"
+        id="locations"
       >
         <div
           class="flex content-center bg-gray-100 border-b-2 border-gray-200"
@@ -26,7 +18,7 @@
           </div>
           <div @click="oppenCreateLocation(null)">
             <i
-              class="mx-1 my-auto text-lg text-gray-300  fas fa-map-marker-alt Pointer hover:text-green-400"
+              class="mx-1 my-auto text-lg text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
             ></i>
           </div>
         </div>
@@ -49,25 +41,25 @@
             >
               <div v-if="location.hidden == 0">
                 <i
-                  class="text-lg text-gray-300  fas fa-eye Pointer hover:text-blue-500"
+                  class="text-lg text-gray-300 fas fa-eye Pointer hover:text-blue-500"
                   :id="`element${location.id}`"
                 ></i>
               </div>
               <div v-if="location.hidden == 1">
                 <i
                   :id="`element${location.id}`"
-                  class="text-gray-300  fas fa-eye-slash Pointer hover:text-blue-500"
+                  class="text-gray-300 fas fa-eye-slash Pointer hover:text-blue-500"
                 ></i>
               </div>
             </div>
             <div class="mx-1" @click="oppenCreateDevice(location.id)">
               <i
-                class="text-lg text-gray-300  fas fa-tshirt Pointer hover:text-yellow-500"
+                class="text-lg text-gray-300 fas fa-tshirt Pointer hover:text-yellow-500"
               ></i>
             </div>
             <div class="mx-1" @click="oppenCreateLocation(location.id)">
               <i
-                class="text-lg text-gray-300  fas fa-map-marker-alt Pointer hover:text-green-400"
+                class="text-lg text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
               ></i>
             </div>
             <div
@@ -75,7 +67,7 @@
               @click="alertRenameLocation(location.id, location.name)"
             >
               <i
-                class="text-lg text-gray-300  fas fa-pen Pointer hover:text-black"
+                class="text-lg text-gray-300 fas fa-pen Pointer hover:text-black"
               ></i>
             </div>
             <div
@@ -83,21 +75,31 @@
               @click="alertDeleteLocation(location.id, location.name)"
             >
               <i
-                class="text-lg text-gray-300  fas fa-trash-alt Pointer hover:text-red-600"
+                class="text-lg text-gray-300 fas fa-trash-alt Pointer hover:text-red-600"
               ></i>
             </div>
           </div>
           <div class="pr-4" :id="`descendant${location.id}`"></div>
         </div>
       </div>
-      <div class="col-12">
+
+      <div class="mx-auto col-12 row">
         <div
-          v-if="showLocations"
-          class="flex justify-center w-10 h-10 p-2 mx-auto mt-2 bg-white rounded-full  lg:hidden col-2"
+          class="flex justify-center w-10 h-10 p-2 mx-auto mt-2 bg-white rounded-full lg:hidden col-2"
           @click="showingLoactions"
+          id="slide"
+          v-if="showLocations"
         >
           <i class="text-xl text-center fas fa-chevron-up"></i>
         </div>
+      </div>
+      <div
+        class="flex justify-center w-10 h-10 p-2 mx-auto mt-2 bg-white rounded-full lg:hidden col-2"
+        @click="showingLoactions"
+        v-if="!showLocations"
+        id="slide"
+      >
+        <i class="text-xl text-center fas fa-chevron-down"></i>
       </div>
     </div>
     <!------------------------section---------------------->
@@ -119,7 +121,7 @@
       </div> -->
       <!----------------------Locations------------------->
       <div
-        class="hidden py-4 mr-2 bg-white shadow-xl  lg:inline-block col-2 sm:rounded-lg"
+        class="hidden py-4 mr-2 bg-white shadow-xl lg:inline-block col-2 sm:rounded-lg"
       >
         <div
           class="flex content-center py-1 bg-gray-100 border-b-2 border-gray-200 "
@@ -130,7 +132,7 @@
           </div>
           <div @click="oppenCreateLocation(null)">
             <i
-              class="mx-1 my-auto text-lg text-gray-300  fas fa-map-marker-alt Pointer hover:text-green-400"
+              class="mx-1 my-auto text-lg text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
             ></i>
           </div>
         </div>
@@ -153,25 +155,25 @@
             >
               <div v-if="location.hidden == 0">
                 <i
-                  class="text-lg text-gray-300  fas fa-eye Pointer hover:text-blue-500"
-                  :id="`element${location.id}`"
+                  class="text-lg text-gray-300 fas fa-eye Pointer hover:text-blue-500"
+                  :id="`elementa${location.id}`"
                 ></i>
               </div>
               <div v-if="location.hidden == 1">
                 <i
-                  :id="`element${location.id}`"
-                  class="text-gray-300  fas fa-eye-slash Pointer hover:text-blue-500"
+                  :id="`elementa${location.id}`"
+                  class="text-gray-300 fas fa-eye-slash Pointer hover:text-blue-500"
                 ></i>
               </div>
             </div>
             <div class="mx-1" @click="oppenCreateDevice(location.id)">
               <i
-                class="text-lg text-gray-300  fas fa-tshirt Pointer hover:text-yellow-500"
+                class="text-lg text-gray-300 fas fa-tshirt Pointer hover:text-yellow-500"
               ></i>
             </div>
             <div class="mx-1" @click="oppenCreateLocation(location.id)">
               <i
-                class="text-lg text-gray-300  fas fa-map-marker-alt Pointer hover:text-green-400"
+                class="text-lg text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
               ></i>
             </div>
             <div
@@ -179,7 +181,7 @@
               @click="alertRenameLocation(location.id, location.name)"
             >
               <i
-                class="text-lg text-gray-300  fas fa-pen Pointer hover:text-black"
+                class="text-lg text-gray-300 fas fa-pen Pointer hover:text-black"
               ></i>
             </div>
             <div
@@ -187,7 +189,7 @@
               @click="alertDeleteLocation(location.id, location.name)"
             >
               <i
-                class="text-lg text-gray-300  fas fa-trash-alt Pointer hover:text-red-600"
+                class="text-lg text-gray-300 fas fa-trash-alt Pointer hover:text-red-600"
               ></i>
             </div>
           </div>
@@ -195,7 +197,7 @@
         </div>
       </div>
       <!---------------------Devices----------------------->
-      <div class="mx-auto col-9 sm:px-6 md:ml-1 lg:px-8">
+      <div class="mx-auto col-12 col-md-9 sm:px-6 md:ml-1 lg:px-8">
         <div class="mx-auto bg-white shadow-xl sm:rounded-lg">
           <div v-if="loaderDevices" class="flex justify-center py-8">
             <svg
@@ -242,14 +244,14 @@
                   >
                     <div v-if="device.hidden == 0">
                       <i
-                        class="text-lg text-gray-300  fas fa-eye Pointer hover:text-blue-500"
+                        class="text-lg text-gray-300 fas fa-eye Pointer hover:text-blue-500"
                         :id="`deviceElement${device.id}`"
                       ></i>
                     </div>
                     <div v-if="device.hidden == 1">
                       <i
                         :id="`deviceElement${device.id}`"
-                        class="text-lg text-gray-300  fas fa-eye-slash Pointer hover:text-blue-500"
+                        class="text-lg text-gray-300 fas fa-eye-slash Pointer hover:text-blue-500"
                       ></i>
                     </div>
                   </div>
@@ -258,7 +260,7 @@
                     @click="alertRenameDevice(device.id, device.name)"
                   >
                     <i
-                      class="text-lg text-gray-300  fas fa-pen Pointer hover:text-black"
+                      class="text-lg text-gray-300 fas fa-pen Pointer hover:text-black"
                     ></i>
                   </div>
                   <div
@@ -272,7 +274,7 @@
                     "
                   >
                     <i
-                      class="text-lg text-gray-300  fas fa-trash-alt Pointer hover:text-red-600"
+                      class="text-lg text-gray-300 fas fa-trash-alt Pointer hover:text-red-600"
                     ></i>
                   </div>
                 </div>
@@ -476,13 +478,18 @@ export default defineComponent({
       });
       hidden.put(this.route("Location.hidden", { id: id }), {
         onSuccess: () => {
+            var elementa = document.getElementById(`elementa${id}`);
           var element = document.getElementById(`element${id}`);
           if (element.classList[1] == "fa-eye") {
             element.classList.toggle("fa-eye-slash");
             element.classList.remove("fa-eye");
+            elementa.classList.toggle("fa-eye-slash");
+            elementa.classList.remove("fa-eye");
           } else {
             element.classList.toggle("fa-eye");
             element.classList.remove("fa-eye-slash");
+            elementa.classList.toggle("fa-eye");
+            elementa.classList.remove("fa-eye-slash");
           }
         },
         onError: (errors) => {
@@ -661,12 +668,24 @@ export default defineComponent({
   },
 
   setup(props) {
-    AOS.init();
     const loaderDevices = ref(true);
     const showLocations = ref(false);
+    $(document).ready(function () {
+      $("#locations").hide();
+    });
     function showingLoactions() {
+      $(document).ready(function () {
+        console.log(showLocations.value);
+        if (showLocations.value) {
+          $("#locations").slideDown("slow");
+          console.log("a");
+        } else {
+          $("#locations").slideUp("slow");
+        }
+      });
       showLocations.value = !showLocations.value;
     }
+
     const userId = props.userId;
     const devices = ref();
 

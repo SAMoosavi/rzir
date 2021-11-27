@@ -9,17 +9,16 @@
         class="p-0 mx-auto mt-2 bg-white shadow-xl col-12 col-md-9 sm:px-6 md:ml-1 lg:px-8 lg:hidden sm:rounded-b-lg"
         id="locations"
       >
-        <div
-          class="flex content-center bg-gray-100 border-b-2 border-gray-200"
-          id="parent0"
-        >
-          <div @click="getOfThis(0)" class="me-auto">
-            <p class="text-base Pointer">کلیه ی مکان ها</p>
-          </div>
-          <div @click="oppenCreateLocation(null)">
-            <i
-              class="mx-1 my-auto text-lg text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
-            ></i>
+        <div class="bg-gray-100 border-b-2 border-gray-200" id="parent0">
+          <div class="flex content-center">
+            <div @click="getOfThis(0)" class="me-auto">
+              <p class="text-base Pointer">کلیه ی مکان ها</p>
+            </div>
+            <div @click="oppenCreateLocation(null)">
+              <i
+                class="mx-1 my-auto text-lg text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
+              ></i>
+            </div>
           </div>
         </div>
         <div
@@ -105,7 +104,7 @@
     <!------------------------section---------------------->
     <div class="py-12 ml-0 row g-2">
       <!----------------------Search----------------------->
-      <!-- <div class="col-12">
+      <div class="col-12">
         <div class="flex justify-start mr-2 col-2">
           <span class="p-2 m-0 text-center text-white bg-black rounded-r-lg"
             ><i class="fas fa-search"></i
@@ -118,7 +117,7 @@
             class="m-0 bg-white border-2 border-black rounded-l-lg w-96 focus:border-black focus:border-2"
           />
         </div>
-      </div> -->
+      </div>
       <!----------------------Locations------------------->
       <div
         class="hidden py-4 mr-2 bg-white shadow-xl lg:inline-block col-2 sm:rounded-lg"
@@ -478,7 +477,7 @@ export default defineComponent({
       });
       hidden.put(this.route("Location.hidden", { id: id }), {
         onSuccess: () => {
-            var elementa = document.getElementById(`elementa${id}`);
+          var elementa = document.getElementById(`elementa${id}`);
           var element = document.getElementById(`element${id}`);
           if (element.classList[1] == "fa-eye") {
             element.classList.toggle("fa-eye-slash");
@@ -673,6 +672,7 @@ export default defineComponent({
     $(document).ready(function () {
       $("#locations").hide();
     });
+
     function showingLoactions() {
       $(document).ready(function () {
         console.log(showLocations.value);
@@ -690,24 +690,37 @@ export default defineComponent({
     const devices = ref();
 
     //------------------search Device------------
-    /*
-    |const searchDevices = ref();
-    |
-    |watch(searchDevices, () => {
-    |   loaderDevices.value = true;
-    |   axios
-    |     .get(`/search-devices/${searchDevices.value}`)
-    |     .then(function (response) {
-    |       devices.value = response.data.devices;
-    |     })
-    |     .catch(function (response) {
-    |       console.log(response);
-    |     })
-    |     .then(() => {
-    |       loaderDevices.value = false;
-    |     });
-    |});
-*/
+
+    const searchDevices = ref();
+
+    watch(searchDevices, () => {
+      loaderDevices.value = true;
+      if (searchDevices.value) {
+        document.getElementById(focus.value).className =
+          "border-b-2 border-gray-200";
+        axios
+          .get(`/search-devices/${searchDevices.value}`)
+          .then(function (response) {
+            devices.value = response.data.devices;
+          })
+          .catch(function (response) {
+            console.log(response);
+          })
+          .then(() => {
+            loaderDevices.value = false;
+          });
+      } else {
+        document.getElementById(`parent${id}`).className =
+          "bg-gray-100 border-b-2 border-gray-200";
+        let a = focus.value;
+        let id = "";
+        for (let i = 6; i < a.length; i++) {
+          id += a.charAt(i);
+        }
+        getDeviceOf(id);
+      }
+    });
+
     // ------------------Location----------------------
 
     const locations = ref();
@@ -802,8 +815,10 @@ export default defineComponent({
     let focus = ref("parent0");
 
     function getOfThis(id) {
-      document.getElementById(focus.value).classList.remove("bg-gray-100");
-      document.getElementById(`parent${id}`).classList.toggle("bg-gray-100");
+      document.getElementById(focus.value).className =
+        "border-b-2 border-gray-200";
+      document.getElementById(`parent${id}`).className =
+        "bg-gray-100 border-b-2 border-gray-200";
       getDescendantOf(id);
       getDeviceOf(id);
       focus.value = `parent${id}`;
@@ -825,7 +840,7 @@ export default defineComponent({
       loaderDevices,
       showLocations,
       showingLoactions,
-      //   searchDevices,
+      searchDevices,
     };
   },
 });

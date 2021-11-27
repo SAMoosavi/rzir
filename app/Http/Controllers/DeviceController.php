@@ -145,15 +145,33 @@ class DeviceController extends Controller
 
     public function searchDevices($q)
     {
+        //ok $q for apple
         $q= str_replace('ي','ی',$q);
         $q= str_replace('ك','ک',$q);
         $q = explode(' ',$q);
 
-        $devices = Device::where(array_map(function($i){
-            return ['name','like',"% $i $"];
-        },
-        $q));
+        //get locations of team
+        $user = Auth::user();
+        $teamId = $user->current_team_id;
+        $locations = Team::find($teamId)->locations;
 
+        //get devices of team
+        $devices = collect([]);
+        foreach ($locations as $location) {
+            $d = Device::where('location_id','=',$location->id)
+            ->where(array_map(
+                function($i){
+                return ['name','like','%'.$i.'%'];
+            },
+            $q))
+            ->get();
+
+            if ($d->count() != 0) {
+                foreach ($this->showDevice($d) as $de) {
+                    $devices->push($de);
+                }
+            }
+        }
         return response()->json(['devices' => $devices], 200);
 
     }

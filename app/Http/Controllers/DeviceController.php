@@ -142,4 +142,19 @@ class DeviceController extends Controller
 
         return redirect('/');
     }
+
+    public function searchDevices($q)
+    {
+        $q= str_replace('ي','ی',$q);
+        $q= str_replace('ك','ک',$q);
+        $q = explode(' ',$q);
+
+        $devices = Device::where(array_map(function($i){
+            return ['name','like',"% $i $"];
+        },
+        $q));
+
+        return response()->json(['devices' => $devices], 200);
+
+    }
 }

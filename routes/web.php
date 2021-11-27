@@ -46,7 +46,7 @@ Route::delete('/location/delete/{id}', [LocationController::class, 'delete'])->n
 Route::put('/location/rename/{id}', [LocationController::class, 'rename'])->name('Location.rename');
 Route::put('/location/hidden/{id}', [LocationController::class, 'hidden'])->name('Location.hidden');
 
-Route::get('/search-devices/{searchDevices}',[SearchController::class,'searchDevices'])->name('searchDevices');
+Route::get('/search-devices/{q}',[SearchController::class,'searchDevices'])->name('searchDevices');
 
 
 // Artisan

@@ -6052,9 +6052,6 @@ select {
 .w-20 {
   width: 5rem;
 }
-.w-96 {
-  width: 24rem;
-}
 .min-w-0 {
   min-width: 0px;
 }
@@ -7159,11 +7156,17 @@ body{
   .md\:ml-1 {
     margin-left: 0.25rem;
   }
+  .md\:mr-2 {
+    margin-right: 0.5rem;
+  }
   .md\:inline-block {
     display: inline-block;
   }
   .md\:grid {
     display: grid;
+  }
+  .md\:w-96 {
+    width: 24rem;
   }
   .md\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));

@@ -105,7 +105,7 @@
     <div class="py-12 ml-0 row g-2">
       <!----------------------Search----------------------->
       <div class="col-12">
-        <div class="flex justify-start mr-2 col-2">
+        <div class="flex justify-start md:mr-2 col-md-2 col-12">
           <span class="p-2 m-0 text-center text-white bg-black rounded-r-lg"
             ><i class="fas fa-search"></i
           ></span>
@@ -114,7 +114,7 @@
             name="searchDevices"
             id="searchDevices"
             v-model="searchDevices"
-            class="m-0 bg-white border-2 border-black rounded-l-lg w-96 focus:border-black focus:border-2"
+            class="w-full m-0 bg-white border-2 border-black rounded-l-lg md:w-96 focus:border-black focus:border-2"
           />
         </div>
       </div>
@@ -122,24 +122,23 @@
       <div
         class="hidden py-4 mr-2 bg-white shadow-xl lg:inline-block col-2 sm:rounded-lg"
       >
-        <div
-          class="flex content-center py-1 bg-gray-100 border-b-2 border-gray-200 "
-          id="parent0"
-        >
-          <div @click="getOfThis(0)" class="me-auto">
-            <p class="text-base Pointer">کلیه ی مکان ها</p>
-          </div>
-          <div @click="oppenCreateLocation(null)">
-            <i
-              class="mx-1 my-auto text-lg text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
-            ></i>
+        <div class="bg-gray-100 border-b-2 border-gray-200" id="parentdm0">
+          <div class="flex content-center py-1">
+            <div @click="getOfThis(0)" class="me-auto">
+              <p class="text-base Pointer">کلیه ی مکان ها</p>
+            </div>
+            <div @click="oppenCreateLocation(null)">
+              <i
+                class="mx-1 my-auto text-lg text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
+              ></i>
+            </div>
           </div>
         </div>
         <div
           v-for="(location, key) in locations"
           :key="key"
           class="py-1 border-b-2 border-gray-200"
-          :id="`parent${location.id}`"
+          :id="`parentdm${location.id}`"
         >
           <div class="flex">
             <div @click="getOfThis(location.id)" class="me-auto">
@@ -675,10 +674,8 @@ export default defineComponent({
 
     function showingLoactions() {
       $(document).ready(function () {
-        console.log(showLocations.value);
         if (showLocations.value) {
           $("#locations").slideDown("slow");
-          console.log("a");
         } else {
           $("#locations").slideUp("slow");
         }
@@ -696,8 +693,9 @@ export default defineComponent({
     watch(searchDevices, () => {
       loaderDevices.value = true;
       if (searchDevices.value) {
-        document.getElementById(focus.value).className =
-          "border-b-2 border-gray-200";
+        document.getElementById(`parent${focus.value}`).classList.remove("bg-gray-100")
+        document.getElementById(`parentdm${focus.value}`).classList.remove("bg-gray-100")
+        
         axios
           .get(`/search-devices/${searchDevices.value}`)
           .then(function (response) {
@@ -710,14 +708,9 @@ export default defineComponent({
             loaderDevices.value = false;
           });
       } else {
-        document.getElementById(`parent${id}`).className =
-          "bg-gray-100 border-b-2 border-gray-200";
-        let a = focus.value;
-        let id = "";
-        for (let i = 6; i < a.length; i++) {
-          id += a.charAt(i);
-        }
-        getDeviceOf(id);
+        document.getElementById(`parent${focus.value}`).classList.add("bg-gray-100")
+        document.getElementById(`parentdm${focus.value}`).classList.add("bg-gray-100")
+        getDeviceOf(focus.value);
       }
     });
 
@@ -812,16 +805,18 @@ export default defineComponent({
         });
     }
 
-    let focus = ref("parent0");
+    let focus = ref("0");
 
     function getOfThis(id) {
-      document.getElementById(focus.value).className =
-        "border-b-2 border-gray-200";
-      document.getElementById(`parent${id}`).className =
-        "bg-gray-100 border-b-2 border-gray-200";
+      document.getElementById(`parent${focus.value}`).classList.remove("bg-gray-100");
+      document.getElementById(`parentdm${focus.value}`).classList.remove("bg-gray-100");
+
+        document.getElementById(`parent${id}`).classList.add("bg-gray-100");
+        document.getElementById(`parentdm${id}`).classList.add("bg-gray-100")
+
       getDescendantOf(id);
       getDeviceOf(id);
-      focus.value = `parent${id}`;
+      focus.value = id;
     }
 
     getDescendantOf(0);

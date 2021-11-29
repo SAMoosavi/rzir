@@ -18,7 +18,7 @@
         <jet-input
           id="email"
           type="email"
-          class="block w-full mt-1 text-left"
+          classItem="block w-full mt-1 text-left"
           v-model="form.email"
           required
           autofocus
@@ -30,7 +30,7 @@
         <jet-input
           id="password"
           type="password"
-          class="block w-full mt-1 text-left"
+          classItem="block w-full mt-1 text-left"
           v-model="form.password"
           required
           autocomplete="new-password"
@@ -42,7 +42,7 @@
         <jet-input
           id="password_confirmation"
           type="password"
-          class="block w-full mt-1 text-left"
+          classItem="block w-full mt-1 text-left"
           v-model="form.password_confirmation"
           required
           autocomplete="new-password"

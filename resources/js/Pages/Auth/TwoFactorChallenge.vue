@@ -6,7 +6,7 @@
             <jet-authentication-card-logo />
         </template>
 
-        <div class="mb-4 text-sm text-gray-600">
+        <div class="mb-4 text-sm text-gray-600 dark:text-white">
             <template v-if="! recovery">
                 لطفاً با وارد کردن کد احراز هویت ارائه شده توسط برنامه احراز هویت خود، دسترسی به حساب خود را تأیید کنید.
             </template>
@@ -21,16 +21,16 @@
         <form @submit.prevent="submit">
             <div v-if="! recovery">
                 <jet-label for="code" value="کد" />
-                <jet-input ref="code" id="code" type="text" inputmode="numeric" class="mt-1 block w-full" v-model="form.code" autofocus autocomplete="one-time-code" />
+                <jet-input ref="code" id="code" type="text" inputmode="numeric" classItem="block w-full mt-1" v-model="form.code" autofocus autocomplete="one-time-code" />
             </div>
 
             <div v-else>
                 <jet-label for="recovery_code" value="کد بازیابی" />
-                <jet-input ref="recovery_code" id="recovery_code" type="text" class="mt-1 block w-full" v-model="form.recovery_code" autocomplete="one-time-code" />
+                <jet-input ref="recovery_code" id="recovery_code" type="text" classItem="block w-full mt-1" v-model="form.recovery_code" autocomplete="one-time-code" />
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <button type="button" class="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer" @click.prevent="toggleRecovery">
+            <div class="flex items-center justify-end mt-4 dark:text-white">
+                <button type="button" classItem="text-sm text-gray-600 underline cursor-pointer hover:text-gray-900" @click.prevent="toggleRecovery">
                     <template v-if="! recovery">
                         از کد بازیابی استفاده کنید
                     </template>

@@ -3,9 +3,8 @@
     <Head :title="title" />
 
     <jet-banner />
-
-    <div class="min-h-screen bg-gray-100">
-      <nav class="bg-white border-b border-gray-100">
+    <div class="min-h-screen dark:bg-gray-800">
+      <nav class="bg-gray-200 border-b border-gray-400 dark:bg-gray-600 dark:border-gray-300">
         <!-- Primary Navigation Menu -->
         <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div class="flex justify-between h-16">
@@ -40,7 +39,7 @@
                     <span class="inline-flex rounded-md">
                       <button
                         type="button"
-                        class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition bg-white border border-transparent rounded-md hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50"
+                        class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition bg-transparent border border-transparent rounded-md hover:text-gray-800 focus:text-gray-800 focus:outline-none dark:text-gray-300 dark:hover:text-gray-100 dark:focus:text-gray-100 "
                       >
                         {{ $page.props.user.current_team.name }}
                         <svg
@@ -60,10 +59,10 @@
                   </template>
 
                   <template #content>
-                    <div class="w-60">
+                    <div class="w-60 ">
                       <!-- Team Management -->
                       <template v-if="$page.props.jetstream.hasTeamFeatures">
-                        <div class="block px-4 py-2 text-xs text-gray-400">
+                        <div class="block px-4 py-2 text-xs text-gray-400 dark:text-gray-200">
                           مدیریت گروه
                         </div>
 
@@ -83,10 +82,10 @@
                           ساخت گروه جدید
                         </jet-dropdown-link>
 
-                        <div class="border-t border-gray-100"></div>
+                        <div class="border-t border-gray-100 dark:border-gray-500"></div>
 
                         <!-- Team Switcher -->
-                        <div class="block px-4 py-2 text-xs text-gray-400">
+                        <div class="block px-4 py-2 text-xs text-gray-400 dark:text-gray-200">
                           تعویض گروه
                         </div>
 
@@ -101,7 +100,7 @@
                                   v-if="
                                     team.id == $page.props.user.current_team_id
                                   "
-                                  class="w-5 h-5 mr-2 text-green-400"
+                                  class="w-5 h-5 ml-2 text-green-400 dark:text-green-600"
                                   fill="none"
                                   stroke-linecap="round"
                                   stroke-linejoin="round"
@@ -164,7 +163,7 @@
 
                   <template #content>
                     <!-- Account Management -->
-                    <div class="block px-4 py-2 text-xs text-gray-400">
+                    <div class="block px-4 py-2 text-xs text-gray-400 dark:text-gray-200">
                       مدیریت حساب
                     </div>
 
@@ -179,11 +178,11 @@
                       API Tokens
                     </jet-dropdown-link>
 
-                    <div class="border-t border-gray-100"></div>
+                    <div class="border-t border-gray-100 dark:border-gray-500"></div>
 
                     <!-- Authentication -->
                     <form @submit.prevent="logout">
-                      <jet-dropdown-link as="button"> خروج </jet-dropdown-link>
+                      <jet-dropdown-link as="button"><i class="text-red-500 dark:text-red-700 fas fa-sign-out-alt" ></i> خروج </jet-dropdown-link>
                     </form>
                   </template>
                 </jet-dropdown>
@@ -250,11 +249,11 @@
           </div>
 
           <!-- Responsive Settings Options -->
-          <div class="pt-4 pb-1 border-t border-gray-200">
+          <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-500">
             <div class="flex items-center px-4">
               <div
                 v-if="$page.props.jetstream.managesProfilePhotos"
-                class="flex-shrink-0 mr-3"
+                class="flex-shrink-0 ml-3"
               >
                 <img
                   class="object-cover w-10 h-10 rounded-full"
@@ -264,10 +263,10 @@
               </div>
 
               <div>
-                <div class="text-base font-medium text-gray-800">
+                <div class="text-base font-medium text-gray-800 dark:text-gray-500">
                   {{ $page.props.user.name }}
                 </div>
-                <div class="text-sm font-medium text-gray-500">
+                <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
                   {{ $page.props.user.email }}
                 </div>
               </div>
@@ -292,13 +291,14 @@
               <!-- Authentication -->
               <form method="POST" @submit.prevent="logout">
                 <jet-responsive-nav-link as="button">
+                    <i class="text-red-500 dark:text-red-700 fas fa-sign-out-alt" ></i>
                   خروج
                 </jet-responsive-nav-link>
               </form>
 
               <!-- Team Management -->
               <template v-if="$page.props.jetstream.hasTeamFeatures">
-                <div class="border-t border-gray-200"></div>
+                <div class="border-t border-gray-200 dark:border-gray-500"></div>
 
                 <div class="block px-4 py-2 text-xs text-gray-400">
                   مدیریت گروه
@@ -320,7 +320,7 @@
                   ساخت گروه جدید
                 </jet-responsive-nav-link>
 
-                <div class="border-t border-gray-200"></div>
+                <div class="border-t border-gray-200 dark:border-gray-500"></div>
 
                 <!-- Team Switcher -->
                 <div class="block px-4 py-2 text-xs text-gray-400">
@@ -336,7 +336,7 @@
                       <div class="flex items-center">
                         <svg
                           v-if="team.id == $page.props.user.current_team_id"
-                          class="w-5 h-5 mr-2 text-green-400"
+                          class="w-5 h-5 ml-2 text-green-400 dark:text-green-600"
                           fill="none"
                           stroke-linecap="round"
                           stroke-linejoin="round"
@@ -360,7 +360,7 @@
       </nav>
 
       <!-- Page Heading -->
-      <header class="bg-white shadow" v-if="$slots.header">
+      <header class="bg-gray-100 shadow dark:bg-gray-500" v-if="$slots.header">
         <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <slot name="header"></slot>
         </div>

@@ -4,8 +4,13 @@
   <jet-authentication-card>
     <template #image>
       <img
-        :src="'../image/register.png'"
-        class="h-screen p-0 m-0"
+        :src="'../image/register-light.png'"
+        class="block h-screen p-0 m-0 dark:hidden"
+        alt="تصویر صفحه ثبتنام"
+      />
+       <img
+        :src="'../image/register-dark.png'"
+        class="hidden h-screen p-0 m-0 dark:block"
         alt="تصویر صفحه ثبتنام"
       />
     </template>

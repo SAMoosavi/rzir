@@ -32,7 +32,7 @@
         <jet-input
           id="password"
           type="password"
-          class="block w-full mt-1 text-left"
+          classItem="block w-full mt-1 text-left"
           v-model="form.password"
           autocomplete="current-password"
         />

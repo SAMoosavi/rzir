@@ -18,7 +18,7 @@
         <jet-input
           id="name"
           type="text"
-          class="block w-full mt-1"
+          classItem="block w-full mt-1"
           v-model="form.name"
           autocomplete="name"
         />
@@ -29,7 +29,7 @@
         <jet-input
           id="email"
           type="email"
-          class="block w-full mt-1 text-left"
+          classItem="block w-full mt-1 text-left"
           v-model="form.email"
         />
       </div>
@@ -39,7 +39,7 @@
         <jet-input
           id="password"
           type="password"
-          class="block w-full mt-1 text-left"
+          classItem="block w-full mt-1 text-left"
           v-model="form.password"
           autocomplete="new-password"
         />
@@ -50,7 +50,7 @@
         <jet-input
           id="password_confirmation"
           type="password"
-          class="block w-full mt-1 text-left"
+          classItem="block w-full mt-1 text-left"
           v-model="form.password_confirmation"
           autocomplete="new-password"
         />
@@ -76,7 +76,7 @@
                 class="text-sm text-gray-600 underline hover:text-gray-900"
                 >شرایط استفاده از خدمات</a
               >
-              and
+              و
               <a
                 target="_blank"
                 :href="route('policy.show')"
@@ -91,7 +91,7 @@
       <div class="flex items-center justify-end mt-4">
         <Link
           :href="route('login')"
-          class="ml-auto text-sm text-gray-500 underline hover:text-black"
+          class="ml-auto text-sm text-gray-500 underline hover:text-black dark:text-gray-400 dark:hover:text-white"
         >
           قبلا ثبت نام کرده ام
         </Link>

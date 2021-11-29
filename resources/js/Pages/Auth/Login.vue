@@ -3,7 +3,11 @@
 
   <jet-authentication-card>
     <template #image>
-      <img :src="'../image/login.png'" class="h-screen p-0 m-0" alt="تصویر صفحه ورود" />
+      <img
+        :src="'../image/login.png'"
+        class="h-screen p-0 m-0"
+        alt="تصویر صفحه ورود"
+      />
     </template>
 
     <jet-validation-errors class="mb-4" />
@@ -18,7 +22,7 @@
         <jet-input
           id="email"
           type="email"
-          class="block w-full mt-1 text-left "
+          class="block w-full mt-1 text-left"
           v-model="form.email"
         />
       </div>
@@ -36,7 +40,7 @@
 
       <div class="block mt-4">
         <label class="flex items-center">
-          <jet-checkbox name="remember"  @checked="form.remember" />
+          <jet-checkbox name="remember" @checked="form.remember" />
           <span class="mx-2 text-sm text-gray-600">من را به خاطر بسپار</span>
         </label>
       </div>
@@ -55,6 +59,16 @@
           :disabled="form.processing"
         >
           ورود
+        </jet-button>
+      </div>
+      <div>
+        <jet-button
+          :class="{ 'opacity-25': form.processing }"
+          :disabled="form.processing"
+        >
+          <Link :href="route('social.oauth', 'google')">
+            ورود با حساب گوگل
+          </Link>
         </jet-button>
       </div>
       <div>

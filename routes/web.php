@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Artisan;
 
 /*
@@ -31,6 +32,12 @@ Route::get('/dashboard', function () {
 //         'phpVersion' => PHP_VERSION,
 //     ]);
 // });
+
+
+Route::get('auth/social', [LoginController::class,'show'])->name('social.login');
+Route::get('oauth/{driver}', [LoginController::class,'redirectToProvider'])->name('social.oauth');
+Route::get('oauth/{driver}/callback', [LoginController::class,'handleProviderCallback'])->name('social.callback');
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/', [DeviceController::class, 'index'])->name('dashboard');
 

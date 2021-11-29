@@ -6,7 +6,6 @@
       ref="input"
       :id="id"
       :type="type"
-      class="bg-indigo-200 dark:bg-indigo-800"
       :class="classItem"
     />
   </label>

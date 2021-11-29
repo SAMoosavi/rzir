@@ -104,6 +104,10 @@
           ثبتنام
         </jet-button>
       </div>
+      <hr class="my-3" />
+      <div>
+        <Login-google />
+      </div>
     </form>
   </jet-authentication-card>
 </template>
@@ -118,6 +122,7 @@ import JetCheckbox from "@/Jetstream/Checkbox.vue";
 import JetLabel from "@/Jetstream/Label.vue";
 import JetValidationErrors from "@/Jetstream/ValidationErrors.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
+import LoginGoogle from "@/Jetstream/LoginGoogle.vue";
 
 export default defineComponent({
   components: {
@@ -130,6 +135,7 @@ export default defineComponent({
     JetLabel,
     JetValidationErrors,
     Link,
+    LoginGoogle,
   },
 
   data() {

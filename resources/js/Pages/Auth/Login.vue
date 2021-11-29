@@ -62,22 +62,16 @@
         </jet-button>
       </div>
       <div>
-        <jet-button
-          :class="{ 'opacity-25': form.processing }"
-          :disabled="form.processing"
-        >
-          <Link :href="route('social.oauth', 'google')">
-            ورود با حساب گوگل
-          </Link>
-        </jet-button>
-      </div>
-      <div>
         <Link
           :href="route('register')"
           class="text-sm text-gray-500 underline hover:text-black"
         >
           ساخت حساب جدید
         </Link>
+      </div>
+       <hr class="my-3">
+        <div>
+            <Login-google/>
       </div>
     </form>
   </jet-authentication-card>
@@ -93,6 +87,7 @@ import JetCheckbox from "@/Jetstream/Checkbox.vue";
 import JetLabel from "@/Jetstream/Label.vue";
 import JetValidationErrors from "@/Jetstream/ValidationErrors.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
+import LoginGoogle from "@/Jetstream/LoginGoogle.vue"
 
 export default defineComponent({
   components: {
@@ -105,6 +100,7 @@ export default defineComponent({
     JetLabel,
     JetValidationErrors,
     Link,
+    LoginGoogle,
   },
 
   props: {

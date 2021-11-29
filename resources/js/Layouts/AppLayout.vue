@@ -43,7 +43,6 @@
                         class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition bg-white border border-transparent rounded-md hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50"
                       >
                         {{ $page.props.user.current_team.name }}
-
                         <svg
                           class="ml-2 -mr-0.5 h-4 w-4"
                           xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +64,7 @@
                       <!-- Team Management -->
                       <template v-if="$page.props.jetstream.hasTeamFeatures">
                         <div class="block px-4 py-2 text-xs text-gray-400">
-                          ندیریت گروه
+                          مدیریت گروه
                         </div>
 
                         <!-- Team Settings -->
@@ -189,6 +188,7 @@
                   </template>
                 </jet-dropdown>
               </div>
+              <toggle-dark-mode/>
             </div>
 
             <!-- Hamburger -->
@@ -244,6 +244,9 @@
             >
               وسایل
             </jet-responsive-nav-link>
+            <div class="flex pl-4">
+              <toggle-dark-mode classItem="mr-auto"/>
+            </div>
           </div>
 
           <!-- Responsive Settings Options -->
@@ -380,6 +383,7 @@ import JetDropdownLink from "@/Jetstream/DropdownLink.vue";
 import JetNavLink from "@/Jetstream/NavLink.vue";
 import JetResponsiveNavLink from "@/Jetstream/ResponsiveNavLink.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
+import ToggleDarkMode from '@/Jetstream/ToggleDarkMode.vue'
 
 export default defineComponent({
   props: {
@@ -395,6 +399,7 @@ export default defineComponent({
     JetNavLink,
     JetResponsiveNavLink,
     Link,
+    ToggleDarkMode
   },
 
   data() {

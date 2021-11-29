@@ -1,6 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
+    darkMode: 'class',
     mode: 'jit',
     purge: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
@@ -17,6 +18,11 @@ module.exports = {
             },
         },
     },
+    variants: {
+        extend: {
+          display: ['dark']
+        }
+      },
 
     plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 };

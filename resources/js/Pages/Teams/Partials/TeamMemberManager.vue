@@ -8,13 +8,12 @@
         <template #title> افزودن عضو </template>
 
         <template #description>
-          عضوی جدید از گروه را به گروه خود اضافه کنید و به وی اجازه دهید با شما
-          همکاری کند.
+          عضوی جدید از گروه را به گروه خود اضافه کنید و به وی اجازه دهید به وسایل لیست دسترسی داشته باشد
         </template>
 
         <template #form>
           <div class="col-span-6">
-            <div class="max-w-xl text-sm text-gray-600">
+            <div class="max-w-xl text-sm text-gray-600 dark:text-gray-400">
               لطفاً آدرس ایمیل شخصی را که می خواهید به این گروه اضافه کنید ،
               وارد کنید.
             </div>
@@ -26,7 +25,7 @@
             <jet-input
               id="email"
               type="email"
-              class="block w-full mt-1 text-left"
+              classItem="block w-full mt-1 text-left"
               v-model="addTeamMemberForm.email"
             />
             <jet-input-error
@@ -34,74 +33,6 @@
               class="mt-2"
             />
           </div>
-
-          <!--  Role -->
-          <!-- <div
-            class="col-span-6 lg:col-span-4"
-            v-if="availableRoles.length > 0"
-          >
-            <jet-label for="roles" value="نقش" />
-            <jet-input-error
-              :message="addTeamMemberForm.errors.role"
-              class="mt-2"
-            />
-
-            <div
-              class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer "
-            >
-              <button
-                type="button"
-                class="relative inline-flex w-full px-4 py-3 rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200"
-                :class="{
-                  'border-t border-gray-200 rounded-t-none': i > 0,
-                  'rounded-b-none': i != Object.keys(availableRoles).length - 1,
-                }"
-                v-for="(role, i) in availableRoles"
-                :key="role.key"
-              >
-                <div
-                  :class="{
-                    'opacity-50':
-                      addTeamMemberForm.role &&
-                      addTeamMemberForm.role != role.key,
-                  }"
-                >
-                  Role Name
-                  <div class="flex items-center">
-                    <div
-                      class="text-sm text-gray-600"
-                      :class="{
-                        'font-semibold': addTeamMemberForm.role == role.key,
-                      }"
-                    >
-                      {{ role.name }}
-                    </div>
-
-                    <svg
-                      v-if="addTeamMemberForm.role == role.key"
-                      class="w-5 h-5 ml-2 text-green-400"
-                      fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      ></path>
-                    </svg>
-                  </div>
-
-                  Role Description
-                  <div class="mt-2 text-xs text-left text-gray-600">
-                    {{ role.description }}
-                  </div>
-                </div>
-              </button>
-            </div>
-          </div> -->
-
         </template>
 
         <template #actions>
@@ -145,12 +76,12 @@
               v-for="invitation in team.team_invitations"
               :key="invitation.id"
             >
-              <div class="text-gray-600">{{ invitation.email }}</div>
+              <div class="text-gray-600 dark:text-gray-300">{{ invitation.email }}</div>
 
               <div class="flex items-center">
                 <!-- Cancel Team Invitation -->
                 <button
-                  class="ml-6 text-sm text-red-500 cursor-pointer focus:outline-none"
+                  class="ml-6 text-lg text-red-500 cursor-pointer focus:outline-none dark:text-red-700"
                   @click="cancelTeamInvitation(invitation)"
                   v-if="userPermissions.canRemoveTeamMembers"
                 >
@@ -192,41 +123,23 @@
               </div>
 
               <div class="flex items-center">
-                <!-- Manage Team Member Role -->
-                <!-- <button
-                  class="ml-2 text-sm text-gray-400 underline"
-                  @click="manageRole(user)"
-                  v-if="
-                    userPermissions.canAddTeamMembers && availableRoles.length
-                  "
-                >
-                  {{ displayableRole(user.membership.role) }}
-                </button>
-
-                <div
-                  class="ml-2 text-sm text-gray-400"
-                  v-else-if="availableRoles.length"
-                >
-                  {{ displayableRole(user.membership.role) }}
-                </div> -->
-
                 <!-- Leave Team -->
-                <button
-                  class="ml-6 text-sm text-red-500 cursor-pointer"
+                <Jet-danger-button
+                    class="mr-6 cursor-pointer"
                   @click="alertLeaveTeam"
                   v-if="$page.props.user.id === user.id"
                 >
                   ترک کردن
-                </button>
+                </Jet-danger-button>
 
                 <!-- Remove Team Member -->
-                <button
-                  class="ml-6 text-sm text-red-500 cursor-pointer"
+                <Jet-danger-button
+                  class="mr-6 cursor-pointer"
                   @click="alertRemoveTeamMember(user)"
                   v-if="userPermissions.canRemoveTeamMembers"
                 >
                   حذف کردن
-                </button>
+                </Jet-danger-button>
               </div>
             </div>
           </div>
@@ -377,8 +290,8 @@ import { defineComponent } from "vue";
 import JetActionMessage from "@/Jetstream/ActionMessage.vue";
 import JetActionSection from "@/Jetstream/ActionSection.vue";
 import JetButton from "@/Jetstream/Button.vue";
+import JetDangerButton from "@/Jetstream/DangerButton.vue"
 import JetConfirmationModal from "@/Jetstream/ConfirmationModal.vue";
-import JetDangerButton from "@/Jetstream/DangerButton.vue";
 import JetDialogModal from "@/Jetstream/DialogModal.vue";
 import JetFormSection from "@/Jetstream/FormSection.vue";
 import JetInput from "@/Jetstream/Input.vue";
@@ -393,8 +306,8 @@ export default defineComponent({
     JetActionMessage,
     JetActionSection,
     JetButton,
-    JetConfirmationModal,
     JetDangerButton,
+    JetConfirmationModal,
     JetDialogModal,
     JetFormSection,
     JetInput,

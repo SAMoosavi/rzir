@@ -241,7 +241,13 @@ export default defineComponent({
     },
 
     alertLeaveTeam(){
-        Swal.fire({
+       Swal.mixin({
+        customClass: {
+          cancelButton: "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-300 rounded-md shadow-sm hover:bg-yellow-100 dark:bg-yellow-400 dark:hover:bg-yellow-600 dark:focus:bg-yellow-600 hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 mx-2",
+          confirmButton: "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-red-500 rounded-md shadow-sm hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 hover:bg-red-400 dark:bg-red-600 dark:hover:bg-red-800",
+        },
+        buttonsStyling: false,
+      }).fire({
         title: "توجه!",
         icon: "warning",
         text: ' آیا مطمئن هستید که می خواهید این گروه را ترک کنید؟',
@@ -269,7 +275,13 @@ export default defineComponent({
 
 alertRemoveTeamMember(teamMember){
     this.teamMemberBeingRemoved = teamMember;
-    Swal.fire({
+    Swal.mixin({
+        customClass: {
+          cancelButton: "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-300 rounded-md shadow-sm hover:bg-yellow-100 dark:bg-yellow-400 dark:hover:bg-yellow-600 dark:focus:bg-yellow-600 hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 mx-2",
+          confirmButton: "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-red-500 rounded-md shadow-sm hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 hover:bg-red-400 dark:bg-red-600 dark:hover:bg-red-800",
+        },
+        buttonsStyling: false,
+      }).fire({
         title: "توجه!",
         icon: "warning",
         text: 'آیا مطمئن هستید که می خواهید این فرد را از گروه حذف کنید؟',
@@ -277,8 +289,6 @@ alertRemoveTeamMember(teamMember){
         confirmButtonText: "حذف",
         cancelButtonText: "لغو",
         showLoaderOnConfirm: true,
-        confirmButtonColor: "#d33",
-        cancelButtonColor: "#6e7d88",
         preConfirm: () => {
           return this.removeTeamMember();
         },

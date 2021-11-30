@@ -360,8 +360,8 @@
       </nav>
 
       <!-- Page Heading -->
-      <header class="bg-gray-100 shadow dark:bg-gray-500" v-if="$slots.header">
-        <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <header class="bg-gray-100 rounded-b-lg drop-shadow-lg dark:bg-gray-500" v-if="$slots.header">
+        <div class="px-4 py-6 mx-auto rounded-b-lg drop-shadow-lg max-w-7xl sm:px-6 lg:px-8">
           <slot name="header"></slot>
         </div>
       </header>

@@ -1,7 +1,7 @@
 <template>
   <app-layout title="تنظیمات گروه">
     <template #header>
-      <h2 class="text-xl font-semibold leading-tight text-gray-800">
+      <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-100">
         تنظیمات گروه
       </h2>
     </template>

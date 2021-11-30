@@ -48,14 +48,14 @@
           یک عکس جدید را انتخاب کنید
         </jet-secondary-button>
 
-        <jet-secondary-button
+        <Jet-danger-button
           type="button"
-          class="mt-2 bg-red-500 hover:bg-red-400 dark:bg-red-600 dark:hover:bg-red-800"
+          class="mt-2 "
           @click.prevent="deletePhoto"
           v-if="user.profile_photo_path"
         >
           حذف عکس
-        </jet-secondary-button>
+        </Jet-danger-button>
 
         <jet-input-error :message="form.errors.photo" class="mt-2" />
       </div>
@@ -110,6 +110,8 @@ import JetInputError from "@/Jetstream/InputError.vue";
 import JetLabel from "@/Jetstream/Label.vue";
 import JetActionMessage from "@/Jetstream/ActionMessage.vue";
 import JetSecondaryButton from "@/Jetstream/SecondaryButton.vue";
+import JetDangerButton from "@/Jetstream/DangerButton.vue"
+
 
 export default defineComponent({
   components: {
@@ -120,6 +122,7 @@ export default defineComponent({
     JetInputError,
     JetLabel,
     JetSecondaryButton,
+    JetDangerButton,
   },
 
   props: ["user"],

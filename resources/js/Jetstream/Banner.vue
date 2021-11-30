@@ -14,8 +14,8 @@
                             </svg>
                         </span>
 
-                        <p class="ml-3 text-sm font-medium text-white truncate">
-                            با موفقیت به تیم {{$page.props.team.name}}افزوده شدید
+                        <p class="mr-3 text-sm font-medium text-white truncate">
+                            با موفقیت به تیم افزوده شدید
                         </p>
                     </div>
 
@@ -54,7 +54,6 @@
             style() {
                 return this.$page.props.jetstream.flash?.bannerStyle || 'success'
             },
-
             message() {
                 return this.$page.props.jetstream.flash?.banner || ''
             },

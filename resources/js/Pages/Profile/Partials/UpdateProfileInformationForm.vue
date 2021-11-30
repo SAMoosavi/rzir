@@ -41,7 +41,7 @@
         </div>
 
         <jet-secondary-button
-          class="mt-2 mr-2"
+          class="mt-2 ml-2"
           type="button"
           @click.prevent="selectNewPhoto"
         >
@@ -50,7 +50,7 @@
 
         <jet-secondary-button
           type="button"
-          class="mt-2"
+          class="mt-2 bg-red-500 hover:bg-red-400 dark:bg-red-600 dark:hover:bg-red-800"
           @click.prevent="deletePhoto"
           v-if="user.profile_photo_path"
         >
@@ -66,7 +66,7 @@
         <jet-input
           id="name"
           type="text"
-          class="block w-full mt-1"
+          classItem="block w-full mt-1"
           v-model="form.name"
           autocomplete="name"
         />
@@ -79,7 +79,7 @@
         <jet-input
           id="email"
           type="email"
-          class="block w-full mt-1 text-left"
+          classItem="block w-full mt-1 text-left"
           v-model="form.email"
         />
         <jet-input-error :message="form.errors.email" class="mt-2" />
@@ -87,7 +87,7 @@
     </template>
 
     <template #actions>
-      <jet-action-message :on="form.recentlySuccessful" class="mr-3">
+      <jet-action-message :on="form.recentlySuccessful" class="ml-3">
         ذخیره شد.
       </jet-action-message>
 

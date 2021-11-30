@@ -20,7 +20,7 @@
                     :class="[widthClass, alignmentClasses]"
                     style="display: none;"
                     @click="open = false">
-                <div class="rounded-md ring-1 ring-black ring-opacity-5 dark:bg-gray-400" :class="contentClasses">
+                <div class="bg-indigo-100 rounded-md ring-1 ring-black ring-opacity-5 dark:bg-indigo-500" :class="contentClasses">
                     <slot name="content"></slot>
                 </div>
             </div>

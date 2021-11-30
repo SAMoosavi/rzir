@@ -146,6 +146,7 @@
         </template>
       </jet-action-section>
     </div>
+  </div>
 </template>
 
 <script>

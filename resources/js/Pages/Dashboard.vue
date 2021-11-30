@@ -2,21 +2,30 @@
   <!---------------------Heder-------------------->
   <app-layout title="وسایل">
     <template #header class="fixed">
-      <h2 class="text-xl font-semibold leading-tight text-gray-800">وسایل</h2>
+      <h2
+        class="text-xl font-semibold leading-tight text-gray-800  dark:text-gray-100"
+      >
+        وسایل
+      </h2>
     </template>
+
+    <!-------------------Location response----------------->
     <div class="m-0 row">
       <div
-        class="p-0 mx-auto mt-2 bg-white shadow-xl col-12 col-md-9 sm:px-6 md:ml-1 lg:px-8 lg:hidden sm:rounded-b-lg"
+        class="p-0 mx-auto mt-2 bg-indigo-200 shadow-xl  dark:bg-indigo-800 col-12 col-md-9 sm:px-6 md:ml-1 lg:px-8 lg:hidden sm:rounded-b-lg"
         id="locations"
       >
-        <div class="bg-gray-100 border-b-2 border-gray-200" id="parent0">
-          <div class="flex content-center">
+        <div
+          class="bg-indigo-400 border-b-2 border-indigo-300  dark:border-indigo-900 dark:bg-indigo-700"
+          id="parent0"
+        >
+          <div class="flex content-center p-2">
             <div @click="getOfThis(0)" class="me-auto">
-              <p class="text-base Pointer">کلیه ی مکان ها</p>
+              <p class="text-base Pointer dark:text-gray-100">کلیه ی مکان ها</p>
             </div>
             <div @click="oppenCreateLocation(null)">
               <i
-                class="mx-1 my-auto text-lg text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
+                class="mx-1 my-auto text-lg text-gray-500  dark:hover:text-green-300 dark:text-gray-400 fas fa-map-marker-alt Pointer hover:text-green-400"
               ></i>
             </div>
           </div>
@@ -24,13 +33,13 @@
         <div
           v-for="(location, key) in locations"
           :key="key"
-          class="border-b-2 border-gray-200"
+          class="p-2 border-b-2 border-indigo-300 dark:border-indigo-900"
           :id="`parent${location.id}`"
         >
           <div class="flex">
             <div @click="getOfThis(location.id)" class="me-auto">
-              <p class="text-base Pointer">
-                <span class="text-red-200">{{ location.level }} </span>
+              <p class="text-base Pointer dark:text-gray-100">
+                <span class="text-red-300">{{ location.level }} </span>
                 {{ location.name }}
               </p>
             </div>
@@ -40,25 +49,25 @@
             >
               <div v-if="location.hidden == 0">
                 <i
-                  class="text-lg text-gray-300 fas fa-eye Pointer hover:text-blue-500"
+                  class="text-lg text-gray-500  dark:text-gray-400 fas fa-eye Pointer hover:text-blue-500 dark:hover:text-blue-300"
                   :id="`element${location.id}`"
                 ></i>
               </div>
               <div v-if="location.hidden == 1">
                 <i
                   :id="`element${location.id}`"
-                  class="text-gray-300 fas fa-eye-slash Pointer hover:text-blue-500"
+                  class="text-gray-500  darktext-gray-400 dark:text-gray-400 fas fa-eye-slash Pointer hover:text-blue-500 dark:hover:text-blue-300"
                 ></i>
               </div>
             </div>
             <div class="mx-1" @click="oppenCreateDevice(location.id)">
               <i
-                class="text-lg text-gray-300 fas fa-tshirt Pointer hover:text-yellow-500"
+                class="text-lg text-gray-500  dark:text-gray-400 fas fa-tshirt Pointer hover:text-yellow-500 dark:hover:text-yellow-400"
               ></i>
             </div>
             <div class="mx-1" @click="oppenCreateLocation(location.id)">
               <i
-                class="text-lg text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
+                class="text-lg text-gray-500  dark:text-gray-400 fas dark:hover:text-green-300 fa-map-marker-alt Pointer hover:text-green-400"
               ></i>
             </div>
             <div
@@ -66,7 +75,7 @@
               @click="alertRenameLocation(location.id, location.name)"
             >
               <i
-                class="text-lg text-gray-300 fas fa-pen Pointer hover:text-black"
+                class="text-lg text-gray-500  dark:text-gray-400 fas fa-pen Pointer hover:text-black dark:hover:text-white"
               ></i>
             </div>
             <div
@@ -74,7 +83,7 @@
               @click="alertDeleteLocation(location.id, location.name)"
             >
               <i
-                class="text-lg text-gray-300 fas fa-trash-alt Pointer hover:text-red-600"
+                class="text-lg text-gray-500  dark:text-gray-400 fas fa-trash-alt Pointer hover:text-red-600 dark:hover:text-red-400"
               ></i>
             </div>
           </div>
@@ -84,21 +93,21 @@
 
       <div class="mx-auto col-12 row">
         <div
-          class="flex justify-center w-10 h-10 p-2 mx-auto mt-2 bg-white rounded-full lg:hidden col-2"
+          class="flex justify-center w-10 h-10 p-2 mx-auto mt-2 bg-transparent rounded-full  lg:hidden col-2"
           @click="showingLoactions"
           id="slide"
           v-if="showLocations"
         >
-          <i class="text-xl text-center fas fa-chevron-up"></i>
+          <i class="text-xl text-center text-indigo-500 fas fa-chevron-up"></i>
         </div>
       </div>
       <div
-        class="flex justify-center w-10 h-10 p-2 mx-auto mt-2 bg-white rounded-full lg:hidden col-2"
+        class="flex justify-center w-10 h-10 p-2 mx-auto mt-2 bg-transparent rounded-full  lg:hidden col-2"
         @click="showingLoactions"
         v-if="!showLocations"
         id="slide"
       >
-        <i class="text-xl text-center fas fa-chevron-down"></i>
+        <i class="text-xl text-center text-indigo-500 fas fa-chevron-down"></i>
       </div>
     </div>
     <!------------------------section---------------------->
@@ -106,30 +115,34 @@
       <!----------------------Search----------------------->
       <div class="col-12">
         <div class="flex justify-start md:mr-2 col-md-2 col-12">
-          <span class="p-2 m-0 text-center text-white bg-black rounded-r-lg"
-            ><i class="fas fa-search"></i
+          <span
+            class="m-0 text-center text-white bg-indigo-400 rounded-r-lg  dark:bg-indigo-800 span-r"
+            ><i class="text-gray-600 fas fa-search dark:text-gray-100"></i
           ></span>
           <input
             type="search"
             name="searchDevices"
             id="searchDevices"
             v-model="searchDevices"
-            class="w-full m-0 bg-white border-2 border-black rounded-l-lg md:w-96 focus:border-black focus:border-2"
+            class="w-full m-0 bg-white border-2 border-indigo-400 rounded-l-lg  input-l dark:border-indigo-800 dark:focus:border-indigo-800 md:w-96 focus:border-indigo-400 focus:border-2"
           />
         </div>
       </div>
       <!----------------------Locations------------------->
       <div
-        class="hidden py-4 mr-2 bg-white shadow-xl lg:inline-block col-2 sm:rounded-lg"
+        class="hidden py-4 mr-2 bg-white bg-indigo-200 shadow-xl  lg:inline-block col-2 sm:rounded-lg dark:bg-indigo-800"
       >
-        <div class="bg-gray-100 border-b-2 border-gray-200" id="parentdm0">
+        <div
+          class="bg-indigo-400 border-b-2 border-indigo-300  dark:border-indigo-900 dark:bg-indigo-700"
+          id="parentdm0"
+        >
           <div class="flex content-center py-1">
             <div @click="getOfThis(0)" class="me-auto">
-              <p class="text-base Pointer">کلیه ی مکان ها</p>
+              <p class="text-base Pointer dark:text-gray-100">کلیه ی مکان ها</p>
             </div>
             <div @click="oppenCreateLocation(null)">
               <i
-                class="mx-1 my-auto text-lg text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
+                class="mx-1 my-auto text-lg text-gray-500  dark:hover:text-green-300 dark:text-gray-400 fas fa-map-marker-alt Pointer hover:text-green-400"
               ></i>
             </div>
           </div>
@@ -137,13 +150,13 @@
         <div
           v-for="(location, key) in locations"
           :key="key"
-          class="py-1 border-b-2 border-gray-200"
+          class="py-1 border-b-2 border-indigo-300 dark:border-indigo-900"
           :id="`parentdm${location.id}`"
         >
           <div class="flex">
             <div @click="getOfThis(location.id)" class="me-auto">
-              <p class="text-base Pointer">
-                <span class="text-red-200">{{ location.level }} </span>
+              <p class="text-base Pointer dark:text-gray-100">
+                <span class="text-red-300">{{ location.level }} </span>
                 {{ location.name }}
               </p>
             </div>
@@ -153,25 +166,25 @@
             >
               <div v-if="location.hidden == 0">
                 <i
-                  class="text-lg text-gray-300 fas fa-eye Pointer hover:text-blue-500"
+                  class="text-lg text-gray-500  dark:text-gray-400 fas fa-eye Pointer hover:text-blue-500 dark:hover:text-blue-300"
                   :id="`elementa${location.id}`"
                 ></i>
               </div>
               <div v-if="location.hidden == 1">
                 <i
                   :id="`elementa${location.id}`"
-                  class="text-gray-300 fas fa-eye-slash Pointer hover:text-blue-500"
+                  class="text-gray-500  dark:text-gray-400 fas fa-eye-slash Pointer hover:text-blue-500 dark:hover:text-blue-300"
                 ></i>
               </div>
             </div>
             <div class="mx-1" @click="oppenCreateDevice(location.id)">
               <i
-                class="text-lg text-gray-300 fas fa-tshirt Pointer hover:text-yellow-500"
+                class="text-lg text-gray-500  dark:text-gray-400 fas fa-tshirt Pointer hover:text-yellow-500 dark:hover:text-yellow-400"
               ></i>
             </div>
             <div class="mx-1" @click="oppenCreateLocation(location.id)">
               <i
-                class="text-lg text-gray-300 fas fa-map-marker-alt Pointer hover:text-green-400"
+                class="text-lg text-gray-500  dark:text-gray-400 fas dark:hover:text-green-300 fa-map-marker-alt Pointer hover:text-green-400"
               ></i>
             </div>
             <div
@@ -179,7 +192,7 @@
               @click="alertRenameLocation(location.id, location.name)"
             >
               <i
-                class="text-lg text-gray-300 fas fa-pen Pointer hover:text-black"
+                class="text-lg text-gray-500  dark:text-gray-400 fas fa-pen Pointer hover:text-black dark:hover:text-white"
               ></i>
             </div>
             <div
@@ -187,7 +200,7 @@
               @click="alertDeleteLocation(location.id, location.name)"
             >
               <i
-                class="text-lg text-gray-300 fas fa-trash-alt Pointer hover:text-red-600"
+                class="text-lg text-gray-500  dark:text-gray-400 fas fa-trash-alt Pointer hover:text-red-600 dark:hover:text-red-400"
               ></i>
             </div>
           </div>
@@ -196,7 +209,9 @@
       </div>
       <!---------------------Devices----------------------->
       <div class="mx-auto col-12 col-md-9 sm:px-6 md:ml-1 lg:px-8">
-        <div class="mx-auto bg-white shadow-xl sm:rounded-lg">
+        <div
+          class="mx-auto bg-indigo-200 shadow-xl  dark:bg-indigo-800 sm:rounded-lg"
+        >
           <div v-if="loaderDevices" class="flex justify-center py-8">
             <svg
               class="w-5 h-5 mr-3 text-gray-900 animate-spin"
@@ -221,7 +236,7 @@
           </div>
           <div v-if="!loaderDevices">
             <div v-if="devices.length == 0" class="py-8">
-              <h3 class="text-3xl text-center text-black">
+              <h3 class="text-3xl text-center text-black dark:text-white">
                 وسیله ای وجود ندارد
               </h3>
             </div>
@@ -229,12 +244,17 @@
               <div
                 v-for="device in devices"
                 :key="device.id"
-                class="py-2 border-b-2 border-gray-200 row"
+                class="py-2 border-b-2 border-indigo-300  dark:border-indigo-900 row"
               >
-                <p class="text-base col-4" :id="`name${device.id}`">
+                <p
+                  class="text-base col-4 dark:text-gray-100"
+                  :id="`name${device.id}`"
+                >
                   {{ device.name }}
                 </p>
-                <p class="text-base col-4">{{ device.location }}</p>
+                <p class="text-base text-gray-700 col-4 dark:text-gray-300">
+                  {{ device.location }}
+                </p>
                 <div class="flex justify-end col-4">
                   <div
                     v-if="device.user_id == userId"
@@ -242,14 +262,14 @@
                   >
                     <div v-if="device.hidden == 0">
                       <i
-                        class="text-lg text-gray-300 fas fa-eye Pointer hover:text-blue-500"
+                        class="text-gray-500  dark:text-gray-400 fas fa-eye Pointer hover:text-blue-500 dark:hover:text-blue-300"
                         :id="`deviceElement${device.id}`"
                       ></i>
                     </div>
                     <div v-if="device.hidden == 1">
                       <i
                         :id="`deviceElement${device.id}`"
-                        class="text-lg text-gray-300 fas fa-eye-slash Pointer hover:text-blue-500"
+                        class="text-lg text-gray-500  dark:text-gray-400 fas fa-eye-slash Pointer hover:text-blue-500 dark:hover:text-blue-300"
                       ></i>
                     </div>
                   </div>
@@ -258,7 +278,7 @@
                     @click="alertRenameDevice(device.id, device.name)"
                   >
                     <i
-                      class="text-lg text-gray-300 fas fa-pen Pointer hover:text-black"
+                      class="text-lg text-gray-500  dark:text-gray-400 fas fa-pen Pointer hover:text-black dark:hover:text-white"
                     ></i>
                   </div>
                   <div
@@ -272,7 +292,7 @@
                     "
                   >
                     <i
-                      class="text-lg text-gray-300 fas fa-trash-alt Pointer hover:text-red-600"
+                      class="text-lg text-gray-500  dark:text-gray-400 fas fa-trash-alt Pointer hover:text-red-600 dark:hover:text-red-400"
                     ></i>
                   </div>
                 </div>
@@ -325,7 +345,15 @@ export default defineComponent({
   methods: {
     // -----------------Creat Loction-----------
     alertCreateLocation() {
-      Swal.fire({
+      Swal.mixin({
+        customClass: {
+          cancelButton:
+            "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-300 rounded-md shadow-sm hover:bg-yellow-100 dark:bg-yellow-400 dark:hover:bg-yellow-600 dark:focus:bg-yellow-600 hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 mx-2",
+          confirmButton:
+            "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-500 rounded-md shadow-sm hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 hover:bg-yellow-400 dark:bg-yellow-600 dark:hover:bg-yellow-800",
+        },
+        buttonsStyling: false,
+      }).fire({
         title: "نام مکان را وارد کنید",
         input: "text",
         inputAttributes: {
@@ -335,8 +363,6 @@ export default defineComponent({
         confirmButtonText: "افزودن",
         cancelButtonText: "لغو",
         showLoaderOnConfirm: true,
-        confirmButtonColor: "#28a745",
-        cancelButtonColor: "#6e7d88",
         preConfirm: (name) => {
           return this.sendCreatLoction(name);
         },
@@ -347,7 +373,15 @@ export default defineComponent({
       this.formLocation.name = name;
       this.formLocation.post(this.route("Location.create"), {
         onError: (errors) => {
-          Swal.fire({
+          Swal.mixin({
+            customClass: {
+              cancelButton:
+                "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-300 rounded-md shadow-sm hover:bg-yellow-100 dark:bg-yellow-400 dark:hover:bg-yellow-600 dark:focus:bg-yellow-600 hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 mx-2",
+              confirmButton:
+                "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-500 rounded-md shadow-sm hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 hover:bg-yellow-400 dark:bg-yellow-600 dark:hover:bg-yellow-800",
+            },
+            buttonsStyling: false,
+          }).fire({
             icon: "error",
             title: "خطاا!!!",
             text: errors.name,
@@ -355,15 +389,19 @@ export default defineComponent({
             showCancelButton: true,
             cancelButtonText: "باشد",
             confirmButtonText: "برگشت",
-            confirmButtonColor: "#7367f0",
-            cancelButtonColor: "#6e7d88",
             preConfirm: () => {
               return this.alertCreateLocation();
             },
           });
         },
         onSuccess: () => {
-          Swal.fire({
+          Swal.mixin({
+            customClass: {
+              confirmButton:
+                "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-500 rounded-md shadow-sm hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 hover:bg-yellow-400 dark:bg-yellow-600 dark:hover:bg-yellow-800",
+            },
+            buttonsStyling: false,
+          }).fire({
             icon: "success",
             title: "با موفقیت افزوده شد.",
             showConfirmButton: true,
@@ -377,26 +415,49 @@ export default defineComponent({
 
     //-----------------Edite Location----------
     alertRenameLocation(id, name) {
-      Swal.fire({
+      Swal.mixin({
+        customClass: {
+          confirmButton:
+            "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-300 rounded-md shadow-sm hover:bg-yellow-100 dark:bg-yellow-400 dark:hover:bg-yellow-600 dark:focus:bg-yellow-600 hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 mx-2",
+          cancelButton:
+            "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-red-500 rounded-md shadow-sm hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 hover:bg-red-400 dark:bg-red-600 dark:hover:bg-red-800",
+        },
+        buttonsStyling: false,
+      }).fire({
         title: "ویرایش نام",
         input: "text",
         inputValue: name,
         confirmButtonText: "ویرایش",
         cancelButtonText: "لغو",
         showLoaderOnConfirm: true,
-        confirmButtonColor: "#28a745",
-        cancelButtonColor: "#6e7d88",
         preConfirm: (newName) => {
           return this.sendRenameLoction(id, newName);
         },
-        allowOutsideClick: () => !Swal.isLoading(),
+        allowOutsideClick: () =>
+          !Swal.mixin({
+            customClass: {
+              cancelButton:
+                "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-300 rounded-md shadow-sm hover:bg-yellow-100 dark:bg-yellow-400 dark:hover:bg-yellow-600 dark:focus:bg-yellow-600 hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 mx-2",
+              confirmButton:
+                "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-red-500 rounded-md shadow-sm hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 hover:bg-red-400 dark:bg-red-600 dark:hover:bg-red-800",
+            },
+            buttonsStyling: false,
+          }).isLoading(),
       });
     },
     sendRenameLoction(id, newName) {
       let renameLocation = this.$inertia.form({ name: newName });
       renameLocation.put(this.route("Location.rename", { id }), {
         onError: (errors) => {
-          Swal.fire({
+          Swal.mixin({
+            customClass: {
+              cancelButton:
+                "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-300 rounded-md shadow-sm hover:bg-yellow-100 dark:bg-yellow-400 dark:hover:bg-yellow-600 dark:focus:bg-yellow-600 hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 mx-2",
+              confirmButton:
+                "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-500 rounded-md shadow-sm hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 hover:bg-yellow-400 dark:bg-yellow-600 dark:hover:bg-yellow-800",
+            },
+            buttonsStyling: false,
+          }).fire({
             icon: "error",
             title: "خطاا!!!",
             text: errors.name,
@@ -404,20 +465,23 @@ export default defineComponent({
             showCancelButton: true,
             cancelButtonText: "باشد",
             confirmButtonText: "برگشت",
-            confirmButtonColor: "#7367f0",
-            cancelButtonColor: "#6e7d88",
             preConfirm: () => {
               return this.alertEditeLocation(id, newName);
             },
           });
         },
         onSuccess: () => {
-          Swal.fire({
+          Swal.mixin({
+            customClass: {
+              confirmButton:
+                "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-500 rounded-md shadow-sm hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 hover:bg-yellow-400 dark:bg-yellow-600 dark:hover:bg-yellow-800",
+            },
+            buttonsStyling: false,
+          }).fire({
             icon: "success",
             title: "با موفقیت افزوده شد.",
             showConfirmButton: true,
             confirmButtonText: "باشد",
-            confirmButtonColor: "#28a745",
           });
           this.getOfThis(id);
         },
@@ -426,7 +490,15 @@ export default defineComponent({
 
     //-------------------Delete Location----------
     alertDeleteLocation(id, name) {
-      Swal.fire({
+      Swal.mixin({
+        customClass: {
+          cancelButton:
+            "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-300 rounded-md shadow-sm hover:bg-yellow-100 dark:bg-yellow-400 dark:hover:bg-yellow-600 dark:focus:bg-yellow-600 hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 mx-2",
+          confirmButton:
+            "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-red-500 rounded-md shadow-sm hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 hover:bg-red-400 dark:bg-red-600 dark:hover:bg-red-800",
+        },
+        buttonsStyling: false,
+      }).fire({
         title: "توجه!",
         icon: "warning",
         text: `با حذف مکان  ${name}  تمامی زیر شاخه ها و وسایل درون آن ها حذف می شود!`,
@@ -434,8 +506,6 @@ export default defineComponent({
         confirmButtonText: "حذف",
         cancelButtonText: "لغو",
         showLoaderOnConfirm: true,
-        confirmButtonColor: "#d33",
-        cancelButtonColor: "#6e7d88",
         preConfirm: () => {
           return this.sendDeleteLoction(id);
         },
@@ -444,7 +514,15 @@ export default defineComponent({
     sendDeleteLoction(id, name) {
       this.deleteLoocation.delete(this.route("Location.delete", { id }), {
         onError: (errors) => {
-          Swal.fire({
+          Swal.mixin({
+            customClass: {
+              cancelButton:
+                "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-300 rounded-md shadow-sm hover:bg-yellow-100 dark:bg-yellow-400 dark:hover:bg-yellow-600 dark:focus:bg-yellow-600 hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 mx-2",
+              confirmButton:
+                "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-500 rounded-md shadow-sm hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 hover:bg-yellow-400 dark:bg-yellow-600 dark:hover:bg-yellow-800",
+            },
+            buttonsStyling: false,
+          }).fire({
             icon: "error",
             title: "خطاا!!!",
             text: errors.name,
@@ -458,7 +536,13 @@ export default defineComponent({
           });
         },
         onSuccess: () => {
-          Swal.fire({
+          Swal.mixin({
+            customClass: {
+              confirmButton:
+                "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-300 rounded-md shadow-sm hover:bg-yellow-100 dark:bg-yellow-400 dark:hover:bg-yellow-600 dark:focus:bg-yellow-600 hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 mx-2",
+            },
+            buttonsStyling: false,
+          }).fire({
             icon: "success",
             title: "با موفقیت حذف شد.",
             showConfirmButton: true,
@@ -498,7 +582,15 @@ export default defineComponent({
 
     // -----------------Creat Device-----------
     alertCreateDevice() {
-      Swal.fire({
+      Swal.mixin({
+        customClass: {
+          cancelButton:
+            "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-300 rounded-md shadow-sm hover:bg-yellow-100 dark:bg-yellow-400 dark:hover:bg-yellow-600 dark:focus:bg-yellow-600 hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 mx-2",
+          confirmButton:
+            "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-500 rounded-md shadow-sm hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 hover:bg-yellow-400 dark:bg-yellow-600 dark:hover:bg-yellow-800",
+        },
+        buttonsStyling: false,
+      }).fire({
         title: "نام وسیله را وارد کنید",
         input: "text",
         inputAttributes: {
@@ -508,8 +600,6 @@ export default defineComponent({
         confirmButtonText: "افزودن",
         cancelButtonText: "لغو",
         showLoaderOnConfirm: true,
-        confirmButtonColor: "#28a745",
-        cancelButtonColor: "#6e7d88",
         preConfirm: (name) => {
           return this.sendCreatDevice(name);
         },
@@ -520,7 +610,15 @@ export default defineComponent({
       this.formDevice.name = name;
       this.formDevice.post(this.route("Device.create"), {
         onError: (errors) => {
-          Swal.fire({
+          Swal.mixin({
+            customClass: {
+              cancelButton:
+                "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-300 rounded-md shadow-sm hover:bg-yellow-100 dark:bg-yellow-400 dark:hover:bg-yellow-600 dark:focus:bg-yellow-600 hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 mx-2",
+              confirmButton:
+                "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-500 rounded-md shadow-sm hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 hover:bg-yellow-400 dark:bg-yellow-600 dark:hover:bg-yellow-800",
+            },
+            buttonsStyling: false,
+          }).fire({
             icon: "error",
             title: "خطاا!!!",
             text: errors.name,
@@ -528,20 +626,23 @@ export default defineComponent({
             showCancelButton: true,
             cancelButtonText: "باشد",
             confirmButtonText: "برگشت",
-            confirmButtonColor: "#7367f0",
-            cancelButtonColor: "#6e7d88",
             preConfirm: () => {
               return this.alertCreateDevice();
             },
           });
         },
         onSuccess: () => {
-          Swal.fire({
+          Swal.mixin({
+            customClass: {
+              confirmButton:
+                "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-300 rounded-md shadow-sm hover:bg-yellow-100 dark:bg-yellow-400 dark:hover:bg-yellow-600 dark:focus:bg-yellow-600 hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 mx-2",
+            },
+            buttonsStyling: false,
+          }).fire({
             icon: "success",
             title: "با موفقیت افزوده شد.",
             showConfirmButton: true,
             confirmButtonText: "باشد",
-            confirmButtonColor: "#28a745",
           });
           this.getOfThis(this.formDevice.location_id);
         },
@@ -550,15 +651,21 @@ export default defineComponent({
 
     //-----------------Edite Device----------
     alertRenameDevice(id, name) {
-      Swal.fire({
+      Swal.mixin({
+        customClass: {
+          confirmButton:
+            "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-300 rounded-md shadow-sm hover:bg-yellow-100 dark:bg-yellow-400 dark:hover:bg-yellow-600 dark:focus:bg-yellow-600 hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 mx-2",
+          cancelButton:
+            "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-red-500 rounded-md shadow-sm hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 hover:bg-red-400 dark:bg-red-600 dark:hover:bg-red-800",
+        },
+        buttonsStyling: false,
+      }).fire({
         title: "ویرایش نام",
         input: "text",
         inputValue: name,
         confirmButtonText: "ویرایش",
         cancelButtonText: "لغو",
         showLoaderOnConfirm: true,
-        confirmButtonColor: "#28a745",
-        cancelButtonColor: "#6e7d88",
         preConfirm: (newName) => {
           return this.sendRenameDevice(id, newName);
         },
@@ -569,7 +676,15 @@ export default defineComponent({
       let renameDevice = this.$inertia.form({ name: newName });
       renameDevice.put(this.route("Device.rename", { id }), {
         onError: (errors) => {
-          Swal.fire({
+          Swal.mixin({
+            customClass: {
+              cancelButton:
+                "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-300 rounded-md shadow-sm hover:bg-yellow-100 dark:bg-yellow-400 dark:hover:bg-yellow-600 dark:focus:bg-yellow-600 hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 mx-2",
+              confirmButton:
+                "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-500 rounded-md shadow-sm hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 hover:bg-yellow-400 dark:bg-yellow-600 dark:hover:bg-yellow-800",
+            },
+            buttonsStyling: false,
+          }).fire({
             icon: "error",
             title: "خطاا!!!",
             text: errors.name,
@@ -577,20 +692,23 @@ export default defineComponent({
             showCancelButton: true,
             cancelButtonText: "باشد",
             confirmButtonText: "برگشت",
-            confirmButtonColor: "#7367f0",
-            cancelButtonColor: "#6e7d88",
             preConfirm: () => {
               return this.alertRenameDevice(id, newName);
             },
           });
         },
         onSuccess: () => {
-          Swal.fire({
+          Swal.mixin({
+            customClass: {
+              confirmButton:
+                "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-300 rounded-md shadow-sm hover:bg-yellow-100 dark:bg-yellow-400 dark:hover:bg-yellow-600 dark:focus:bg-yellow-600 hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 mx-2",
+            },
+            buttonsStyling: false,
+          }).fire({
             icon: "success",
             title: "با موفقیت افزوده شد.",
             showConfirmButton: true,
             confirmButtonText: "باشد",
-            confirmButtonColor: "#28a745",
           });
           document.getElementById(`name${id}`).textContent = newName;
         },
@@ -599,7 +717,15 @@ export default defineComponent({
 
     //------------------ِDelet Device-------------
     alertDeleteDevice(id, name, location_id) {
-      Swal.fire({
+      Swal.mixin({
+        customClass: {
+          cancelButton:
+            "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-300 rounded-md shadow-sm hover:bg-yellow-100 dark:bg-yellow-400 dark:hover:bg-yellow-600 dark:focus:bg-yellow-600 hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 mx-2",
+          confirmButton:
+            "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-red-500 rounded-md shadow-sm hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 hover:bg-red-400 dark:bg-red-600 dark:hover:bg-red-800",
+        },
+        buttonsStyling: false,
+      }).fire({
         title: "توجه!",
         icon: "warning",
         text: `از حذف ${name} مطمئنید!`,
@@ -607,8 +733,6 @@ export default defineComponent({
         confirmButtonText: "حذف",
         cancelButtonText: "لغو",
         showLoaderOnConfirm: true,
-        confirmButtonColor: "#d33",
-        cancelButtonColor: "#6e7d88",
         preConfirm: () => {
           return this.sendDeleteDevice(id, name, location_id);
         },
@@ -617,7 +741,15 @@ export default defineComponent({
     sendDeleteDevice(id, name, location_id) {
       this.deleteDevice.delete(this.route("Device.delete", { id }), {
         onError: (errors) => {
-          Swal.fire({
+          Swal.mixin({
+            customClass: {
+              cancelButton:
+                "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-300 rounded-md shadow-sm hover:bg-yellow-100 dark:bg-yellow-400 dark:hover:bg-yellow-600 dark:focus:bg-yellow-600 hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 mx-2",
+              confirmButton:
+                "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-500 rounded-md shadow-sm hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 hover:bg-yellow-400 dark:bg-yellow-600 dark:hover:bg-yellow-800",
+            },
+            buttonsStyling: false,
+          }).fire({
             icon: "error",
             title: "خطاا!!!",
             text: errors.name,
@@ -631,7 +763,13 @@ export default defineComponent({
           });
         },
         onSuccess: () => {
-          Swal.fire({
+          Swal.mixin({
+            customClass: {
+              confirmButton:
+                "btn inline-flex items-center text-xs tracking-widest text-gray-700 uppercase transition bg-yellow-300 rounded-md shadow-sm hover:bg-yellow-100 dark:bg-yellow-400 dark:hover:bg-yellow-600 dark:focus:bg-yellow-600 hover:shadow-lg active:text-gray-800 active:bg-yellow-50 disabled:opacity-25 mx-2",
+            },
+            buttonsStyling: false,
+          }).fire({
             icon: "success",
             title: "با موفقیت حذف شد.",
             showConfirmButton: true,
@@ -688,14 +826,24 @@ export default defineComponent({
 
     //------------------search Device------------
 
-    const searchDevices = ref();
+    const searchDevices = ref("");
 
     watch(searchDevices, () => {
       loaderDevices.value = true;
       if (searchDevices.value) {
-        document.getElementById(`parent${focus.value}`).classList.remove("bg-gray-100")
-        document.getElementById(`parentdm${focus.value}`).classList.remove("bg-gray-100")
-        
+        document
+          .getElementById(`parent${focus.value}`)
+          .classList.remove("bg-indigo-400");
+        document
+          .getElementById(`parentdm${focus.value}`)
+          .classList.remove("bg-indigo-400");
+        document
+          .getElementById(`parent${focus.value}`)
+          .classList.remove("dark:bg-indigo-700");
+        document
+          .getElementById(`parentdm${focus.value}`)
+          .classList.remove("dark:bg-indigo-700");
+
         axios
           .get(`/search-devices/${searchDevices.value}`)
           .then(function (response) {
@@ -708,8 +856,16 @@ export default defineComponent({
             loaderDevices.value = false;
           });
       } else {
-        document.getElementById(`parent${focus.value}`).classList.add("bg-gray-100")
-        document.getElementById(`parentdm${focus.value}`).classList.add("bg-gray-100")
+        document
+          .getElementById(`parent${id}`)
+          .classList.add("dark:bg-indigo-700");
+        document.getElementById(`parentdm${id}`).classList.add("bg-indigo-400");
+        document
+          .getElementById(`parent${id}`)
+          .classList.add("dark:bg-indigo-700");
+        document
+          .getElementById(`parentdm${id}`)
+          .classList.add("dark:bg-indigo-700");
         getDeviceOf(focus.value);
       }
     });
@@ -808,11 +964,31 @@ export default defineComponent({
     let focus = ref("0");
 
     function getOfThis(id) {
-      document.getElementById(`parent${focus.value}`).classList.remove("bg-gray-100");
-      document.getElementById(`parentdm${focus.value}`).classList.remove("bg-gray-100");
+      document
+        .getElementById(`parent${focus.value}`)
+        .classList.remove("bg-indigo-400");
+      document
+        .getElementById(`parentdm${focus.value}`)
+        .classList.remove("bg-indigo-400");
 
-        document.getElementById(`parent${id}`).classList.add("bg-gray-100");
-        document.getElementById(`parentdm${id}`).classList.add("bg-gray-100")
+      document
+        .getElementById(`parent${focus.value}`)
+        .classList.remove("dark:bg-indigo-700");
+      document
+        .getElementById(`parentdm${focus.value}`)
+        .classList.remove("dark:bg-indigo-700");
+
+      document
+        .getElementById(`parent${id}`)
+        .classList.add("dark:bg-indigo-700");
+      document.getElementById(`parentdm${id}`).classList.add("bg-indigo-400");
+
+      document
+        .getElementById(`parent${id}`)
+        .classList.add("dark:bg-indigo-700");
+      document
+        .getElementById(`parentdm${id}`)
+        .classList.add("dark:bg-indigo-700");
 
       getDescendantOf(id);
       getDeviceOf(id);
@@ -840,3 +1016,30 @@ export default defineComponent({
   },
 });
 </script>
+<style scoped>
+.input-l {
+  letter-spacing: -0.2px;
+  font-size: 16px;
+  font-size: 16px;
+  border-bottom-left-radius: 320px;
+  border-top-left-radius: 320px;
+  padding: 16px;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.span-r {
+  letter-spacing: -0.2px;
+  font-size: 16px;
+  font-size: 16px;
+  border-bottom-right-radius: 320px;
+  border-top-right-radius: 320px;
+  padding: 16px;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  appearance: none;
+  -webkit-appearance: none;
+}
+</style>

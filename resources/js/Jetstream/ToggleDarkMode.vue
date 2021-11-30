@@ -1,7 +1,7 @@
 <template>
   <div @click="shiftMode" :class="classItem">
-    <i class="hidden text-yellow-400 fas fa-sun dark:block"></i>
-    <i class="block text-gray-900 dark:hidden fas fa-moon"></i>
+    <i class="hidden text-yellow-400 fas fa-sun dark:block dark:hover:text-yellow-100"></i>
+    <i class="block text-gray-700 dark:hidden fas fa-moon hover:text-gray-800"></i>
   </div>
 </template>
 

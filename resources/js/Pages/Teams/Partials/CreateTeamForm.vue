@@ -16,15 +16,15 @@
                     <img class="object-cover w-12 h-12 rounded-full" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name">
 
                     <div class="mr-4 leading-tight">
-                        <div>{{ $page.props.user.name }}</div>
-                        <div class="text-sm text-gray-700">{{ $page.props.user.email }}</div>
+                        <div class="dark:text-gray-200">{{ $page.props.user.name }}</div>
+                        <div class="text-sm text-gray-700 dark:text-gray-400">{{ $page.props.user.email }}</div>
                     </div>
                 </div>
             </div>
 
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="name" value="نام گروه" />
-                <jet-input id="name" type="text" class="block w-full mt-1" v-model="form.name" autofocus />
+                <jet-input id="name" type="text" classItem="block w-full mt-1" v-model="form.name" autofocus />
                 <jet-input-error :message="form.errors.name" class="mt-2" />
             </div>
         </template>

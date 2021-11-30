@@ -6256,6 +6256,10 @@ select {
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
 }
+.rounded-b-3xl {
+  border-bottom-right-radius: 1.5rem;
+  border-bottom-left-radius: 1.5rem;
+}
 .border {
   border-width: 1px;
 }
@@ -6303,6 +6307,10 @@ select {
 .border-black {
   --tw-border-opacity: 1;
   border-color: rgba(0, 0, 0, var(--tw-border-opacity));
+}
+.border-indigo-300 {
+  --tw-border-opacity: 1;
+  border-color: rgba(165, 180, 252, var(--tw-border-opacity));
 }
 .bg-white {
   --tw-bg-opacity: 1;
@@ -6378,6 +6386,10 @@ select {
 .bg-red-400 {
   --tw-bg-opacity: 1;
   background-color: rgba(248, 113, 113, var(--tw-bg-opacity));
+}
+.bg-indigo-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(224, 231, 255, var(--tw-bg-opacity));
 }
 .bg-opacity-25 {
   --tw-bg-opacity: 0.25;
@@ -6898,6 +6910,10 @@ body{
   --tw-bg-opacity: 1;
   background-color: rgba(248, 113, 113, var(--tw-bg-opacity));
 }
+.hover\:bg-indigo-100:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(224, 231, 255, var(--tw-bg-opacity));
+}
 .hover\:text-gray-500:hover {
   --tw-text-opacity: 1;
   color: rgba(107, 114, 128, var(--tw-text-opacity));
@@ -7128,6 +7144,18 @@ body{
   --tw-border-opacity: 1;
   border-color: rgba(220, 38, 38, var(--tw-border-opacity));
 }
+.dark .dark\:border-indigo-300 {
+  --tw-border-opacity: 1;
+  border-color: rgba(165, 180, 252, var(--tw-border-opacity));
+}
+.dark .dark\:border-indigo-700 {
+  --tw-border-opacity: 1;
+  border-color: rgba(67, 56, 202, var(--tw-border-opacity));
+}
+.dark .dark\:border-indigo-400 {
+  --tw-border-opacity: 1;
+  border-color: rgba(129, 140, 248, var(--tw-border-opacity));
+}
 .dark .dark\:bg-gray-900 {
   --tw-bg-opacity: 1;
   background-color: rgba(17, 24, 39, var(--tw-bg-opacity));
@@ -7167,6 +7195,22 @@ body{
 .dark .dark\:bg-red-600 {
   --tw-bg-opacity: 1;
   background-color: rgba(220, 38, 38, var(--tw-bg-opacity));
+}
+.dark .dark\:bg-indigo-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(79, 70, 229, var(--tw-bg-opacity));
+}
+.dark .dark\:bg-indigo-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(129, 140, 248, var(--tw-bg-opacity));
+}
+.dark .dark\:bg-indigo-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(99, 102, 241, var(--tw-bg-opacity));
+}
+.dark .dark\:bg-gray-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(55, 65, 81, var(--tw-bg-opacity));
 }
 .dark .dark\:text-yellow-400 {
   --tw-text-opacity: 1;
@@ -7212,6 +7256,26 @@ body{
   --tw-text-opacity: 1;
   color: rgba(153, 27, 27, var(--tw-text-opacity));
 }
+.dark .dark\:text-indigo-100 {
+  --tw-text-opacity: 1;
+  color: rgba(224, 231, 255, var(--tw-text-opacity));
+}
+.dark .dark\:text-green-900 {
+  --tw-text-opacity: 1;
+  color: rgba(6, 78, 59, var(--tw-text-opacity));
+}
+.dark .dark\:text-green-800 {
+  --tw-text-opacity: 1;
+  color: rgba(6, 95, 70, var(--tw-text-opacity));
+}
+.dark .dark\:text-green-700 {
+  --tw-text-opacity: 1;
+  color: rgba(4, 120, 87, var(--tw-text-opacity));
+}
+.dark .dark\:hover\:border-indigo-300:hover {
+  --tw-border-opacity: 1;
+  border-color: rgba(165, 180, 252, var(--tw-border-opacity));
+}
 .dark .dark\:hover\:bg-yellow-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(217, 119, 6, var(--tw-bg-opacity));
@@ -7227,6 +7291,22 @@ body{
 .dark .dark\:hover\:bg-red-800:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(153, 27, 27, var(--tw-bg-opacity));
+}
+.dark .dark\:hover\:bg-indigo-600:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(79, 70, 229, var(--tw-bg-opacity));
+}
+.dark .dark\:hover\:bg-indigo-50:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(238, 242, 255, var(--tw-bg-opacity));
+}
+.dark .dark\:hover\:bg-indigo-400:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(129, 140, 248, var(--tw-bg-opacity));
+}
+.dark .dark\:hover\:bg-indigo-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(67, 56, 202, var(--tw-bg-opacity));
 }
 .dark .dark\:hover\:text-gray-200:hover {
   --tw-text-opacity: 1;
@@ -7247,6 +7327,10 @@ body{
 .dark .dark\:focus\:bg-yellow-600:focus {
   --tw-bg-opacity: 1;
   background-color: rgba(217, 119, 6, var(--tw-bg-opacity));
+}
+.dark .dark\:focus\:bg-indigo-600:focus {
+  --tw-bg-opacity: 1;
+  background-color: rgba(79, 70, 229, var(--tw-bg-opacity));
 }
 .dark .dark\:focus\:text-gray-100:focus {
   --tw-text-opacity: 1;

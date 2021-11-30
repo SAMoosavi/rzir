@@ -4,7 +4,7 @@
 
     <jet-banner />
     <div class="min-h-screen dark:bg-gray-800">
-      <nav class="bg-gray-200 border-b border-gray-400 dark:bg-gray-600 dark:border-gray-300">
+      <nav class="bg-indigo-200 border-b border-indigo-300 dark:bg-indigo-800 dark:border-indigo-700">
         <!-- Primary Navigation Menu -->
         <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div class="flex justify-between h-16">
@@ -100,7 +100,7 @@
                                   v-if="
                                     team.id == $page.props.user.current_team_id
                                   "
-                                  class="w-5 h-5 ml-2 text-green-400 dark:text-green-600"
+                                  class="w-5 h-5 ml-2 text-green-400 dark:text-green-800"
                                   fill="none"
                                   stroke-linecap="round"
                                   stroke-linejoin="round"
@@ -194,7 +194,7 @@
             <div class="flex items-center -mr-2 sm:hidden">
               <button
                 @click="showingNavigationDropdown = !showingNavigationDropdown"
-                class="inline-flex items-center justify-center p-2 text-gray-400 transition rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500"
+                class="inline-flex items-center justify-center p-2 text-gray-500 transition rounded-md hover:text-gray-700 hover:bg-indigo-100 focus:outline-none focus:bg-indigo-100 focus:text-gray-500 dark:text-gray-300 dark:hover:text-gray-200 dark:hover:bg-indigo-600 dark:focus:bg-indigo-600"
               >
                 <svg
                   class="w-6 h-6"
@@ -336,7 +336,7 @@
                       <div class="flex items-center">
                         <svg
                           v-if="team.id == $page.props.user.current_team_id"
-                          class="w-5 h-5 ml-2 text-green-400 dark:text-green-600"
+                          class="w-5 h-5 ml-2 text-green-400 dark:text-green-700"
                           fill="none"
                           stroke-linecap="round"
                           stroke-linejoin="round"
@@ -360,8 +360,8 @@
       </nav>
 
       <!-- Page Heading -->
-      <header class="bg-gray-100 rounded-b-lg drop-shadow-lg dark:bg-gray-500" v-if="$slots.header">
-        <div class="px-4 py-6 mx-auto rounded-b-lg drop-shadow-lg max-w-7xl sm:px-6 lg:px-8">
+      <header class="bg-indigo-300 rounded-b-3xl drop-shadow-lg dark:bg-indigo-700" v-if="$slots.header">
+        <div class="px-4 py-6 mx-auto rounded-b-3xl drop-shadow-lg max-w-7xl sm:px-6 lg:px-8 ">
           <slot name="header"></slot>
         </div>
       </header>

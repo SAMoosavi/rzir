@@ -43,7 +43,6 @@ class LocationController extends Controller
         $list = $traverse($locations, $list);
         $locations = $list;
         return response()->json(['itemDescendant' => $locations], 200);
-        // return response()->json(['itemDescendant' => Location::whereDescendantOf($id->id)->get()], 200);
     }
 
     public function create(Request $request)

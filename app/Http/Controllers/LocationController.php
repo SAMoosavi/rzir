@@ -54,7 +54,9 @@ class LocationController extends Controller
             'name' => "required|string|unique:locations,name,NULL,id,team_id,$user->current_team_id,parent_id,$request->parent_id",
         ]);
         if ($request->parent_id == null) {
-            $locations = Location::where('parent_id', '=', null)->get();
+            $user = Auth::user();
+        $teamId = $user->current_team_id;
+        $locations = Team::find($teamId)->locations->where('parent_id', '=', null)->get();
             foreach ($locations as $location) {
                 if ($location->name == $request->name) {
                     $request->validate([

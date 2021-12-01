@@ -3,7 +3,7 @@
   <app-layout title="وسایل">
     <template #header class="fixed">
       <h2
-        class="text-xl font-semibold leading-tight text-gray-800  dark:text-gray-100"
+        class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-100"
       >
         وسایل
       </h2>
@@ -12,11 +12,11 @@
     <!-------------------Location response----------------->
     <div class="m-0 row">
       <div
-        class="p-0 mx-auto mt-2 bg-indigo-200 shadow-xl  dark:bg-indigo-800 col-12 col-md-9 sm:px-6 md:ml-1 lg:px-8 lg:hidden sm:rounded-b-lg"
+        class="p-0 mx-auto mt-2 bg-indigo-200 shadow-xl dark:bg-indigo-800 col-12 col-md-9 sm:px-6 md:ml-1 lg:px-8 lg:hidden sm:rounded-b-lg"
         id="locations"
       >
         <div
-          class="bg-indigo-400 border-b-2 border-indigo-300  dark:border-indigo-900 dark:bg-indigo-700"
+          class="bg-indigo-400 border-b-2 border-indigo-300 dark:border-indigo-900 dark:bg-indigo-700"
           id="parent0"
         >
           <div class="flex content-center p-2">
@@ -25,7 +25,7 @@
             </div>
             <div @click="oppenCreateLocation(null)">
               <i
-                class="mx-1 my-auto text-lg text-gray-500  dark:hover:text-green-300 dark:text-gray-400 fas fa-map-marker-alt Pointer hover:text-green-400"
+                class="mx-1 my-auto text-lg text-gray-500 dark:hover:text-green-300 dark:text-gray-400 fas fa-map-marker-alt Pointer hover:text-green-400"
               ></i>
             </div>
           </div>
@@ -49,25 +49,25 @@
             >
               <div v-if="location.hidden == 0">
                 <i
-                  class="text-lg text-gray-500  dark:text-gray-400 fas fa-eye Pointer hover:text-blue-500 dark:hover:text-blue-300"
+                  class="text-lg text-gray-500 dark:text-gray-400 fas fa-eye Pointer hover:text-blue-500 dark:hover:text-blue-300"
                   :id="`element${location.id}`"
                 ></i>
               </div>
               <div v-if="location.hidden == 1">
                 <i
                   :id="`element${location.id}`"
-                  class="text-gray-500  darktext-gray-400 dark:text-gray-400 fas fa-eye-slash Pointer hover:text-blue-500 dark:hover:text-blue-300"
+                  class="text-gray-500 darktext-gray-400 dark:text-gray-400 fas fa-eye-slash Pointer hover:text-blue-500 dark:hover:text-blue-300"
                 ></i>
               </div>
             </div>
             <div class="mx-1" @click="oppenCreateDevice(location.id)">
               <i
-                class="text-lg text-gray-500  dark:text-gray-400 fas fa-tshirt Pointer hover:text-yellow-500 dark:hover:text-yellow-400"
+                class="text-lg text-gray-500 dark:text-gray-400 fas fa-tshirt Pointer hover:text-yellow-500 dark:hover:text-yellow-400"
               ></i>
             </div>
             <div class="mx-1" @click="oppenCreateLocation(location.id)">
               <i
-                class="text-lg text-gray-500  dark:text-gray-400 fas dark:hover:text-green-300 fa-map-marker-alt Pointer hover:text-green-400"
+                class="text-lg text-gray-500 dark:text-gray-400 fas dark:hover:text-green-300 fa-map-marker-alt Pointer hover:text-green-400"
               ></i>
             </div>
             <div
@@ -75,7 +75,7 @@
               @click="alertRenameLocation(location.id, location.name)"
             >
               <i
-                class="text-lg text-gray-500  dark:text-gray-400 fas fa-pen Pointer hover:text-black dark:hover:text-white"
+                class="text-lg text-gray-500 dark:text-gray-400 fas fa-pen Pointer hover:text-black dark:hover:text-white"
               ></i>
             </div>
             <div
@@ -83,7 +83,7 @@
               @click="alertDeleteLocation(location.id, location.name)"
             >
               <i
-                class="text-lg text-gray-500  dark:text-gray-400 fas fa-trash-alt Pointer hover:text-red-600 dark:hover:text-red-400"
+                class="text-lg text-gray-500 dark:text-gray-400 fas fa-trash-alt Pointer hover:text-red-600 dark:hover:text-red-400"
               ></i>
             </div>
           </div>
@@ -93,7 +93,7 @@
 
       <div class="mx-auto col-12 row">
         <div
-          class="flex justify-center w-10 h-10 p-2 mx-auto mt-2 bg-transparent rounded-full  lg:hidden col-2"
+          class="flex justify-center w-10 h-10 p-2 mx-auto mt-2 bg-transparent rounded-full lg:hidden col-2"
           @click="showingLoactions"
           id="slide"
           v-if="showLocations"
@@ -102,7 +102,7 @@
         </div>
       </div>
       <div
-        class="flex justify-center w-10 h-10 p-2 mx-auto mt-2 bg-transparent rounded-full  lg:hidden col-2"
+        class="flex justify-center w-10 h-10 p-2 mx-auto mt-2 bg-transparent rounded-full lg:hidden col-2"
         @click="showingLoactions"
         v-if="!showLocations"
         id="slide"
@@ -116,7 +116,7 @@
       <div class="col-12">
         <div class="flex justify-start md:mr-2 col-md-2 col-12">
           <span
-            class="m-0 text-center text-white bg-indigo-400 rounded-r-lg  dark:bg-indigo-800 span-r"
+            class="m-0 text-center text-white bg-indigo-400 rounded-r-lg dark:bg-indigo-800 span-r"
             ><i class="text-gray-600 fas fa-search dark:text-gray-100"></i
           ></span>
           <input
@@ -124,16 +124,16 @@
             name="searchDevices"
             id="searchDevices"
             v-model="searchDevices"
-            class="w-full m-0 bg-white border-2 border-indigo-400 rounded-l-lg  input-l dark:border-indigo-800 dark:focus:border-indigo-800 md:w-96 focus:border-indigo-400 focus:border-2"
+            class="w-full m-0 bg-white border-2 border-indigo-400 rounded-l-lg input-l dark:border-indigo-800 dark:focus:border-indigo-800 md:w-96 focus:border-indigo-400 focus:border-2"
           />
         </div>
       </div>
       <!----------------------Locations------------------->
       <div
-        class="hidden py-4 mr-2 bg-white bg-indigo-200 shadow-xl  lg:inline-block col-2 sm:rounded-lg dark:bg-indigo-800"
+        class="hidden py-4 mr-2 bg-white bg-indigo-200 shadow-xl lg:inline-block col-2 sm:rounded-lg dark:bg-indigo-800"
       >
         <div
-          class="bg-indigo-400 border-b-2 border-indigo-300  dark:border-indigo-900 dark:bg-indigo-700"
+          class="bg-indigo-400 border-b-2 border-indigo-300 dark:border-indigo-900 dark:bg-indigo-700"
           id="parentdm0"
         >
           <div class="flex content-center py-1">
@@ -142,7 +142,7 @@
             </div>
             <div @click="oppenCreateLocation(null)">
               <i
-                class="mx-1 my-auto text-lg text-gray-500  dark:hover:text-green-300 dark:text-gray-400 fas fa-map-marker-alt Pointer hover:text-green-400"
+                class="mx-1 my-auto text-lg text-gray-500 dark:hover:text-green-300 dark:text-gray-400 fas fa-map-marker-alt Pointer hover:text-green-400"
               ></i>
             </div>
           </div>
@@ -166,25 +166,25 @@
             >
               <div v-if="location.hidden == 0">
                 <i
-                  class="text-lg text-gray-500  dark:text-gray-400 fas fa-eye Pointer hover:text-blue-500 dark:hover:text-blue-300"
+                  class="text-lg text-gray-500 dark:text-gray-400 fas fa-eye Pointer hover:text-blue-500 dark:hover:text-blue-300"
                   :id="`elementa${location.id}`"
                 ></i>
               </div>
               <div v-if="location.hidden == 1">
                 <i
                   :id="`elementa${location.id}`"
-                  class="text-gray-500  dark:text-gray-400 fas fa-eye-slash Pointer hover:text-blue-500 dark:hover:text-blue-300"
+                  class="text-gray-500 dark:text-gray-400 fas fa-eye-slash Pointer hover:text-blue-500 dark:hover:text-blue-300"
                 ></i>
               </div>
             </div>
             <div class="mx-1" @click="oppenCreateDevice(location.id)">
               <i
-                class="text-lg text-gray-500  dark:text-gray-400 fas fa-tshirt Pointer hover:text-yellow-500 dark:hover:text-yellow-400"
+                class="text-lg text-gray-500 dark:text-gray-400 fas fa-tshirt Pointer hover:text-yellow-500 dark:hover:text-yellow-400"
               ></i>
             </div>
             <div class="mx-1" @click="oppenCreateLocation(location.id)">
               <i
-                class="text-lg text-gray-500  dark:text-gray-400 fas dark:hover:text-green-300 fa-map-marker-alt Pointer hover:text-green-400"
+                class="text-lg text-gray-500 dark:text-gray-400 fas dark:hover:text-green-300 fa-map-marker-alt Pointer hover:text-green-400"
               ></i>
             </div>
             <div
@@ -192,7 +192,7 @@
               @click="alertRenameLocation(location.id, location.name)"
             >
               <i
-                class="text-lg text-gray-500  dark:text-gray-400 fas fa-pen Pointer hover:text-black dark:hover:text-white"
+                class="text-lg text-gray-500 dark:text-gray-400 fas fa-pen Pointer hover:text-black dark:hover:text-white"
               ></i>
             </div>
             <div
@@ -200,7 +200,7 @@
               @click="alertDeleteLocation(location.id, location.name)"
             >
               <i
-                class="text-lg text-gray-500  dark:text-gray-400 fas fa-trash-alt Pointer hover:text-red-600 dark:hover:text-red-400"
+                class="text-lg text-gray-500 dark:text-gray-400 fas fa-trash-alt Pointer hover:text-red-600 dark:hover:text-red-400"
               ></i>
             </div>
           </div>
@@ -210,7 +210,7 @@
       <!---------------------Devices----------------------->
       <div class="mx-auto col-12 col-md-9 sm:px-6 md:ml-1 lg:px-8">
         <div
-          class="mx-auto bg-indigo-200 shadow-xl  dark:bg-indigo-800 sm:rounded-lg"
+          class="mx-auto bg-indigo-200 shadow-xl dark:bg-indigo-800 sm:rounded-lg"
         >
           <div v-if="loaderDevices" class="flex justify-center py-8">
             <svg
@@ -244,7 +244,7 @@
               <div
                 v-for="device in devices"
                 :key="device.id"
-                class="py-2 border-b-2 border-indigo-300  dark:border-indigo-900 row"
+                class="py-2 border-b-2 border-indigo-300 dark:border-indigo-900 row"
               >
                 <p
                   class="text-base col-4 dark:text-gray-100"
@@ -262,14 +262,14 @@
                   >
                     <div v-if="device.hidden == 0">
                       <i
-                        class="text-gray-500  dark:text-gray-400 fas fa-eye Pointer hover:text-blue-500 dark:hover:text-blue-300"
+                        class="text-gray-500 dark:text-gray-400 fas fa-eye Pointer hover:text-blue-500 dark:hover:text-blue-300"
                         :id="`deviceElement${device.id}`"
                       ></i>
                     </div>
                     <div v-if="device.hidden == 1">
                       <i
                         :id="`deviceElement${device.id}`"
-                        class="text-lg text-gray-500  dark:text-gray-400 fas fa-eye-slash Pointer hover:text-blue-500 dark:hover:text-blue-300"
+                        class="text-lg text-gray-500 dark:text-gray-400 fas fa-eye-slash Pointer hover:text-blue-500 dark:hover:text-blue-300"
                       ></i>
                     </div>
                   </div>
@@ -278,7 +278,7 @@
                     @click="alertRenameDevice(device.id, device.name)"
                   >
                     <i
-                      class="text-lg text-gray-500  dark:text-gray-400 fas fa-pen Pointer hover:text-black dark:hover:text-white"
+                      class="text-lg text-gray-500 dark:text-gray-400 fas fa-pen Pointer hover:text-black dark:hover:text-white"
                     ></i>
                   </div>
                   <div
@@ -292,7 +292,7 @@
                     "
                   >
                     <i
-                      class="text-lg text-gray-500  dark:text-gray-400 fas fa-trash-alt Pointer hover:text-red-600 dark:hover:text-red-400"
+                      class="text-lg text-gray-500 dark:text-gray-400 fas fa-trash-alt Pointer hover:text-red-600 dark:hover:text-red-400"
                     ></i>
                   </div>
                 </div>
@@ -856,6 +856,7 @@ export default defineComponent({
             loaderDevices.value = false;
           });
       } else {
+          const id = focus.value
         document
           .getElementById(`parent${id}`)
           .classList.add("dark:bg-indigo-700");
@@ -866,7 +867,7 @@ export default defineComponent({
         document
           .getElementById(`parentdm${id}`)
           .classList.add("dark:bg-indigo-700");
-        getDeviceOf(focus.value);
+        getDeviceOf(id);
       }
     });
 
@@ -964,6 +965,7 @@ export default defineComponent({
     let focus = ref("0");
 
     function getOfThis(id) {
+        searchDevices.value = "";
       document
         .getElementById(`parent${focus.value}`)
         .classList.remove("bg-indigo-400");
